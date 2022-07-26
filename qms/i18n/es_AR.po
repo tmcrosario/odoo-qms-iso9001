@@ -1836,7 +1836,7 @@ msgstr "Comité de Calidad"
 #. module: qms
 #: model:ir.ui.menu,name:qms.menu_qms_root
 msgid "Quality Management System"
-msgstr "Sistema de Gestión de Calidad"
+msgstr "Gestión de Calidad"
 
 #. module: qms
 #: code:addons/qms/models/indicator.py:0

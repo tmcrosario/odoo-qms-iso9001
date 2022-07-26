@@ -3,24 +3,23 @@
 
     <menuitem id="menu_qms_root"
         name="Quality Management System"
-        sequence="0"
+        sequence="13"
         groups="qms.group_user,qms.group_read_only" />
 
-    <menuitem id="menu_qms_main" 
+    <menuitem id="menu_qms_main"
         name="ISO 9001:2015"
         parent="menu_qms_root"
         sequence="5" />
 
     <menuitem id="menu_qms_context"
-        name="Context" 
-        parent="qms.menu_qms_root" 
+        name="Context"
+        parent="qms.menu_qms_root"
         sequence="10"
         groups="qms.group_manager" />
 
-    <menuitem id="menu_qms_configuration" 
-        name="Configuration" 
-        parent="qms.menu_qms_root" 
-        sequence="15"
-        groups="qms.group_manager" />
+    <menuitem id="qms_config_menu"
+    name="Quality Management System"
+    parent="base.menu_administration"
+    sequence="95"/>
 
 </odoo>

@@ -163,6 +163,6 @@
 
     <!-- MENU -->
     <menuitem id="finding_menu" name="Findings" parent="qms.menu_qms_main" sequence="55" />
-    <menuitem id="finding_menu_config" name="Findings" parent="qms.menu_qms_configuration" sequence="10" />
+    <menuitem id="finding_menu_config" name="Findings" parent="qms.qms_config_menu" sequence="10" />
 
 </odoo>
