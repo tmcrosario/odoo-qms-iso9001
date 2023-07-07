@@ -1,5 +1,6 @@
 from odoo import _, api, fields, models
-
+# from .indicator_measurement import IndicatorMeasurement
+from odoo.addons.qms.models.indicator_measurement import IndicatorMeasurement
 
 class Indicator(models.Model):
 
@@ -62,8 +63,9 @@ class Indicator(models.Model):
         compute="_compute_last_measurement_date"
     )
 
-    last_measurement_result = fields.Char(
-        compute="_compute_last_measurement_result", store=True
+    last_measurement_result = fields.Selection(
+        selection=IndicatorMeasurement._result_,
+        compute="_compute_last_measurement_result",
     )
 
     last_measurement_result_detail = fields.Char(
@@ -81,12 +83,13 @@ class Indicator(models.Model):
             related_measurement = indicator.env[
                 "qms.indicator.measurement"
             ].search(domain)
-            last_measurement = related_measurement.sorted(
-                key=lambda r: r.measurement_date, reverse=True
-            )
-            indicator.last_measurement_date = last_measurement[
-                0
-            ].measurement_date
+            if related_measurement:
+                last_measurement = related_measurement.sorted(
+                    key=lambda r: r.measurement_date, reverse=True
+                )
+                indicator.last_measurement_date = last_measurement[0].measurement_date
+            else:
+                indicator.last_measurement_date = None
 
     @api.depends("measurement_ids")
     def _compute_last_measurement_result(self):
@@ -97,10 +100,14 @@ class Indicator(models.Model):
             related_measurement = indicator.env[
                 "qms.indicator.measurement"
             ].search(domain)
-            last_measurement = related_measurement.sorted(
-                key=lambda r: r.measurement_date, reverse=True
-            )
-            indicator.last_measurement_result = last_measurement[0].result
+            if related_measurement:
+                last_measurement = related_measurement.sorted(
+                    key=lambda r: r.measurement_date, reverse=True
+                )
+                indicator.last_measurement_result = last_measurement[0].result
+                print(indicator.last_measurement_result)
+            else:
+                indicator.last_measurement_result = None
 
     @api.depends("measurement_ids")
     def _compute_last_measurement_result_detail(self):
@@ -111,12 +118,13 @@ class Indicator(models.Model):
             related_measurement = indicator.env[
                 "qms.indicator.measurement"
             ].search(domain)
-            last_measurement = related_measurement.sorted(
-                key=lambda r: r.measurement_date, reverse=True
-            )
-            indicator.last_measurement_result_detail = last_measurement[
-                0
-            ].result_detail
+            if related_measurement:
+                last_measurement = related_measurement.sorted(
+                    key=lambda r: r.measurement_date, reverse=True
+                )
+                indicator.last_measurement_result_detail = last_measurement[0].result_detail
+            else:
+                indicator.last_measurement_result_detail = None
 
     @api.depends("review_ids")
     def _compute_last_review_date(self):
