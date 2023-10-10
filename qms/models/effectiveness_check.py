@@ -15,7 +15,7 @@ class EffectivenessCheck(models.Model):
 
     was_effective = fields.Boolean()
 
-    action_id = fields.Many2one(comodel_name="qms.action", required=True)
+    action_id = fields.Many2one(comodel_name="qms.action")
 
     state = fields.Selection(selection=_states_, default="pending")
 
