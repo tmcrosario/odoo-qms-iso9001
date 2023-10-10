@@ -35,7 +35,7 @@ class Indicator(models.Model):
 
     frequency = fields.Selection(selection=_frequencys_, default="annual")
 
-    process_id = fields.Many2one(comodel_name="qms.process", required=True)
+    process_id = fields.Many2one(comodel_name="qms.process")
 
     measurement_ids = fields.One2many(
         comodel_name="qms.indicator.measurement", inverse_name="indicator_id"
@@ -105,7 +105,6 @@ class Indicator(models.Model):
                     key=lambda r: r.measurement_date, reverse=True
                 )
                 indicator.last_measurement_result = last_measurement[0].result
-                print(indicator.last_measurement_result)
             else:
                 indicator.last_measurement_result = None
 
