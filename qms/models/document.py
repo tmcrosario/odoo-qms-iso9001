@@ -65,10 +65,13 @@ class Document(models.Model):
                 ("document_id", "=", document.id),
             ]
             related_reviews = document.env["qms.review"].search(domain)
-            last_review = related_reviews.sorted(
-                key=lambda r: r.date, reverse=True
-            )
-            document.last_review_date = last_review[0].date
+            if related_reviews:
+                last_review = related_reviews.sorted(
+                    key=lambda r: r.date, reverse=True
+                )
+                document.last_review_date = last_review[0].date
+            else:
+                document.last_review_date = None
 
     @api.depends("version_ids")
     def _compute_last_version(self):

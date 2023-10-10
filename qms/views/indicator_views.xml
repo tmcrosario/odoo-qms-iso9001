@@ -15,6 +15,7 @@
                 <field name="last_measurement_date" />
                 <field name="last_measurement_result" />
                 <field name="last_measurement_result_detail" />
+                <field name="last_review_date" />
             </tree>
         </field>
     </record>
