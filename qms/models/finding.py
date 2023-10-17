@@ -33,7 +33,7 @@ class Finding(models.Model):
         comodel_name="qms.interested_party", required=True
     )
 
-    reference = fields.Char(required=True, readonly=True, default="NEW")
+    reference = fields.Char(required=True, readonly=False, default="NEW")
 
     closing_date = fields.Datetime(readonly=True)
 

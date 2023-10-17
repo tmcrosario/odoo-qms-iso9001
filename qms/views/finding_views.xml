@@ -6,7 +6,6 @@
         <field name="model">qms.finding</field>
         <field name="arch" type="xml">
             <tree name="finding">
-                <field name="id" />
                 <field name="name" />
                 <field name="reference" />
                 <field name="create_date" />
@@ -18,40 +17,6 @@
             </tree>
         </field>
     </record>
-
-    <!-- <record id="view_qms_finding_filter"
-            model="ir.ui.view">
-        <field name="name">qms.finding.filter</field>
-        <field name="model">qms.finding</field>
-        <field name="type">search</field>
-        <field name="arch"
-               type="xml">
-            <search>
-                <group>
-                    <filter name="draft"
-                            domain="[('state', '=', 'draft')]"
-                            string="Draft"
-                            help="Draft/New findings" />
-                    <filter name="pending"
-                            domain="[('state', 'in', ['analysis', 'pending'])]"
-                            string="Analysis"
-                            help="Findings pending review" />
-                    <filter name="current"
-                            domain="[('state', '=', 'open')]"
-                            string="In Progress"
-                            help="Open Findings" />
-                    <filter domain="[('state', '=', 'done')]"
-                            string="Closed"
-                            help="Closed Findings" />
-                    <separator orientation="vertical" />
-                    <field name="name" />
-                    <field name="reference" />
-                    <field name="create_date" />
-                </group>
-                <newline />
-            </search>
-        </field>
-    </record> -->
 
     <!-- KANBAN VIEW -->
     <record id="finding_view_kanban" model="ir.ui.view">
@@ -135,25 +100,6 @@
                             attrs="{'invisible':[('state','in',['draft','analysis','cancel'])]}">
                             <separator string="Action Plan" />
                             <field name="action_ids" />
-                            <!--
-                                <group string="Plan Review">
-                                <group>
-                                    <field name="action_plan_comments"
-                                           attrs="{'readonly':[('state','not in',['pending'])]}"
-                                           nolabel="1"
-                                           placeholder="Action Plan Comments" />
-                                </group>
-                            </group>
-                            <group attrs="{'invisible':[('state','not in',['open','done'])]}"
-                                   string="Effectiveness Review">
-                                <group>
-                                    <field name="evaluation_comments"
-                                           attrs="{'readonly':[('state','not in',['open'])]}"
-                                           nolabel="1"
-                                           placeholder="Evaluation Comments" />
-                                </group>
-                            </group>
-                            -->
                         </page>
                     </notebook>
                 </sheet>

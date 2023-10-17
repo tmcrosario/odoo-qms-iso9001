@@ -80,60 +80,6 @@
         </field>
     </record>
 
-    <!-- KANBAN VIEW -->
-    <!-- <record id="view_qms_hazard_kanban"
-            model="ir.ui.view">
-        <field name="name">qms.hazard.kanban</field>
-        <field name="model">qms.hazard</field>
-        <field name="arch"
-               type="xml">
-            <kanban default_group_by="state"
-                    default_order="evaluation"
-                    class="o_kanban_small_column">
-                <field name="name" />
-                <field name="date" />
-                <field name="evaluation" />
-                <templates>
-                    <t t-name="kanban-box">
-                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
-                            <div class="o_dropdown_kanban dropdown">
-                                <a class="dropdown-toggle btn"
-                                   data-toggle="dropdown"
-                                   href="#">
-                                        <span class="fa fa-bars fa-lg"/>
-                                    </a>
-                                <ul class="dropdown-menu"
-                                    role="menu"
-                                    aria-labelledby="dLabel">
-                                    <t t-if="widget.editable">
-                                        <li>
-                                            <a type="edit">Edit</a>
-                                        </li>
-                                    </t>
-                                </ul>
-                            </div>
-                            <div class="oe_kanban_content">
-                                <div>
-                                    <strong><field name="name"/></strong>
-                                </div>
-                                <div>
-                                    <t t-if="record.evaluation.raw_value and (record.evaluation.raw_value == 'very_high' or record.evaluation.raw_value == 'high')"
-                                       t-set="red">oe_kanban_text_red</t>
-                                    <span t-attf-class="#{red || ''}">
-                                        <field name="evaluation"/>
-                                    </span>
-                                </div>
-                                <div class="text-muted">
-                                    <field name="date" />
-                                </div>
-                            </div>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record> -->
-
     <!-- WINDOW ACTION -->
     <record id="hazard_action_view_tree" model="ir.actions.act_window">
         <field name="name">Hazards</field>
