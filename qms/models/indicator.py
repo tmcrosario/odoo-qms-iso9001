@@ -1,5 +1,4 @@
 from odoo import _, api, fields, models
-# from .indicator_measurement import IndicatorMeasurement
 from odoo.addons.qms.models.indicator_measurement import IndicatorMeasurement
 
 class Indicator(models.Model):
