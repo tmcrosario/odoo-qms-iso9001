@@ -70,13 +70,13 @@ class Action(models.Model):
         required=False,
     )
 
-    observation_id = fields.Many2one(comodel_name="qms.finding")
+    observation_id = fields.Many2one(comodel_name="qms.observation")
 
-    non_conformity_id = fields.Many2one(comodel_name="qms.finding")
+    non_conformity_id = fields.Many2one(comodel_name="qms.non_conformity")
 
-    complaint_id = fields.Many2one(comodel_name="qms.finding")
+    complaint_id = fields.Many2one(comodel_name="qms.complaint")
 
-    opportunity_id = fields.Many2one(comodel_name="qms.finding")
+    opportunity_id = fields.Many2one(comodel_name="qms.opportunity")
 
     hazard_id = fields.Many2one(comodel_name="qms.hazard")
 
@@ -94,7 +94,7 @@ class Action(models.Model):
         return action
 
     @api.model
-    def _stage_groups(self):
+    def _stage_groups(self, stages, domain, order):
         stage_ids = self.env["qms.action.stage"].search([])
         return stage_ids
 

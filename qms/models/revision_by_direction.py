@@ -37,12 +37,6 @@ class RevisionByDirection(models.Model):
         # ondelete="cascade",
     )
 
-    # responsibles_ids = fields.Many2many(
-    #     comodel_name="qms.interested_party",
-    #     relation="audit_auditor_rel",
-    #     ondelete="cascade",
-    # )
-
     state = fields.Selection(selection=_states_, default="open")
 
     def button_close(self):

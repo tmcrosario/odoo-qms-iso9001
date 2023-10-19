@@ -94,16 +94,16 @@ class Hazard(models.Model):
     @api.depends("probability", "impact")
     def _compute_result_and_evaluation(self):
         if self.impact and self.probability:
-            self.result = self.impact * self.probability
+            self.result = int(self.impact) * int(self.probability)
         else:
             self.result = 0
-        if self.result >= 1 and self.result <= 3:
+        if 1 <= self.result <= 3:
             self.evaluation = "low"
-        elif self.result >= 4 and self.result <= 8:
+        elif 4 <= self.result <= 8:
             self.evaluation = "medium"
-        elif self.result >= 9 and self.result <= 14:
+        elif 9 <= self.result <= 14:
             self.evaluation = "high"
-        elif self.result >= 15 and self.result <= 25:
+        elif 15 <= self.result <= 25:
             self.evaluation = "very_high"
         else:
             self.evaluation = False
@@ -157,13 +157,15 @@ class Hazard(models.Model):
         for hazard in self:
             domain = [
                 ("hazard_id", "=", hazard.id),
-                # ('modify_concession', '=', True)
             ]
             related_reviews = hazard.env["qms.review"].search(domain)
-            last_review = related_reviews.sorted(
-                key=lambda r: r.date, reverse=True
-            )
-            hazard.last_review_date = last_review[0].date
+            if related_reviews:
+                last_review = related_reviews.sorted(
+                    key=lambda r: r.date, reverse=True
+                )
+                hazard.last_review_date = last_review[0].date
+            else:
+                hazard.last_review_date = None
 
     _sql_constraints = [
         ("number_uniq", "unique(number)", "Number must be unique")
