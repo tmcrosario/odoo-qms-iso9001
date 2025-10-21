@@ -36,7 +36,8 @@ class Action(models.Model):
 
     date_deadline = fields.Date()
 
-    create_date = fields.Date(readonly=True, default=fields.datetime.now())
+    # create_date = fields.Date(readonly=True, default=fields.datetime.now())
+    create_date = fields.Date()
 
     cancel_date = fields.Date(readonly=True)
 
@@ -56,7 +57,7 @@ class Action(models.Model):
         group_expand="_stage_groups",
     )
 
-    reference = fields.Char(required=False, readonly=True)
+    reference = fields.Char(required=False)
 
     complexity = fields.Selection(selection=_complexity_levels_, required=True)
 

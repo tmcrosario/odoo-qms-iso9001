@@ -602,7 +602,7 @@ msgstr "Descripción"
 #: model:ir.model.fields.selection,name:qms.selection__qms_process__state__disabled
 #, python-format
 msgid "Disabled"
-msgstr "Deshabilidado"
+msgstr "Deshabilitado"
 
 #. module: qms
 #: model:ir.model.fields,field_description:qms.field_qms_action__display_name

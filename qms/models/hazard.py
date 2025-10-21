@@ -76,7 +76,7 @@ class Hazard(models.Model):
         ("i_financial", _("Financial (internal)")),
         ("i_personal", _("Personal (internal)")),
         ("i_technological", _("Technological (internal)")),
-        ("i_strategic", _("Srategic (internal)")),
+        ("i_strategic", _("Strategic (internal)")),
         ("i_communication", _("Communication (internal)")),
         ("i_factors", _("Factors (internal)")),
     ]
