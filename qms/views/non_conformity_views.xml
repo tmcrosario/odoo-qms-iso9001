@@ -19,11 +19,11 @@
         <field name="inherit_id" ref="qms.finding_view_form" />
         <field name="arch" type="xml">
             <page name="actions" position="before">
-                <page string="Causes and Analysis" attrs="{'invisible':[('state','in',['draft','cancel'])]}">
+                <page string="Causes and Analysis" invisible="state in ['draft','cancel']">
                     <separator string="Analysis" />
-                    <field name="analysis" attrs="{'readonly':[('state','not in', ['analysis'])]}" />
+                    <field name="analysis" readonly="state not in ['analysis']" />
                     <separator string="Causes" />
-                    <field name="cause_ids" attrs="{'readonly':[('state','not in', ['analysis'])]}" />
+                    <field name="cause_ids" readonly="state not in ['analysis']" />
                 </page>
             </page>
 

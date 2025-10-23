@@ -21,7 +21,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="button_close" string="Close" states="open" type="object" />
+                    <button name="button_close" string="Close" invisible="state != 'open'" type="object" />
                     <field name="state" widget="statusbar" clickable="True" />
                 </header>
                 <sheet>

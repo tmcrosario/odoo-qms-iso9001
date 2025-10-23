@@ -46,7 +46,7 @@
                     </group>
                     <notebook>
                         <page string="Measurements">
-                            <field name="measurement_ids" nolabel="True" attrs="{'readonly':[('state','=','done')]}" />
+                            <field name="measurement_ids" nolabel="True" readonly="state == 'done'" />
                         </page>
                         <page string="NC" name="non_conformitys">
                             <field name="non_conformity_ids" nolabel="1"
