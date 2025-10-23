@@ -4,7 +4,6 @@
     <record id="resource_view_tree" model="ir.ui.view">
         <field name="name">qms.resource.view.tree</field>
         <field name="model">qms.resource</field>
-        <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />

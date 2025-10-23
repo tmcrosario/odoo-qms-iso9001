@@ -23,7 +23,6 @@
             model="ir.ui.view">
         <field name="name">qms.finding.filter</field>
         <field name="model">qms.finding</field>
-        <field name="type">search</field>
         <field name="arch"
                type="xml">
             <search>
@@ -129,7 +128,7 @@
                             <field name="process_ids" attrs="{'readonly':[('state','not in',['draft','analysis'])]}" />
                         </page>
                         <page string="Related Audits">
-                            <field name="audit_ids" colspan="4" nolabel="1" />
+                            <field name="audit_ids" nolabel="1" />
                         </page>
                         <page name="actions" string="Actions"
                             attrs="{'invisible':[('state','in',['draft','analysis','cancel'])]}">

@@ -4,7 +4,6 @@
     <record id="revision_by_direction_view_tree" model="ir.ui.view">
         <field name="name">qms.revision.by.direction.view.tree</field>
         <field name="model">qms.revision_by_direction</field>
-        <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />

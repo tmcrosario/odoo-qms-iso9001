@@ -4,7 +4,6 @@
     <record id="hazard_view_tree" model="ir.ui.view">
         <field name="name">qms.hazard.tree.view</field>
         <field name="model">qms.hazard</field>
-        <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="number" />

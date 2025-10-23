@@ -4,7 +4,6 @@
     <record id="audit_evaluation_view_tree" model="ir.ui.view">
         <field name="name">qms.audit.evaluation.view.tree</field>
         <field name="model">qms.audit.evaluation</field>
-        <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
@@ -22,7 +21,6 @@
     <record id="audit_evaluation_view_filter" model="ir.ui.view">
         <field name="name">qms.audit.evaluation.view.filter</field>
         <field name="model">qms.audit.evaluation</field>
-        <field name="type">search</field>
         <field name="arch" type="xml">
             <search>
                 <group>
@@ -39,7 +37,6 @@
     <record id="audit_evaluation_view_form" model="ir.ui.view">
         <field name="name">qms.audit.evaluation.view.form</field>
         <field name="model">qms.audit.evaluation</field>
-        <field name="type">form</field>
         <field name="arch" type="xml">
             <form>
                 <group>

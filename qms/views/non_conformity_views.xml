@@ -3,7 +3,6 @@
     <!-- TREE VIEW -->
     <record id="non_conformity_view_tree" model="ir.ui.view">
         <field name="name">qms.non.conformity.view.tree</field>
-        <field name="type">tree</field>
         <field name="model">qms.non_conformity</field>
         <field name="inherit_id" ref="qms.finding_view_tree" />
         <field name="arch" type="xml">
@@ -16,7 +15,6 @@
     <!-- FORM VIEW -->
     <record id="non_conformity_view_form" model="ir.ui.view">
         <field name="name">qms.non.conformity.view.form</field>
-        <field name="type">form</field>
         <field name="model">qms.non_conformity</field>
         <field name="inherit_id" ref="qms.finding_view_form" />
         <field name="arch" type="xml">
@@ -35,7 +33,6 @@
     <!-- KANBAN VIEW -->
     <record id="non_conformity_view_kanban" model="ir.ui.view">
         <field name="name">qms.non.conformity.kanban</field>
-        <field name="type">kanban</field>
         <field name="model">qms.non_conformity</field>
         <field name="inherit_id" ref="qms.finding_view_kanban" />
         <field name="arch" type="xml">

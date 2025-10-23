@@ -4,7 +4,6 @@
     <record id="view_qms_instructive_tree" model="ir.ui.view">
         <field name="name">qms.instructive.tree</field>
         <field name="model">qms.instructive</field>
-        <field name="type">tree</field>
         <field name="inherit_id" ref="qms.document_view_tree" />
         <field name="arch" type="xml">
             <tree name="document" position="attributes">
@@ -16,7 +15,6 @@
     <!-- FORM VIEW -->
     <record id="view_qms_instructive_form" model="ir.ui.view">
         <field name="name">qms.instructive.form</field>
-        <field name="type">form</field>
         <field name="model">qms.instructive</field>
         <field name="inherit_id" ref="qms.document_view_form" />
         <field name="arch" type="xml">

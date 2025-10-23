@@ -4,7 +4,6 @@
     <record id="goal_view_tree" model="ir.ui.view">
         <field name="name">qms.goal.view_tree</field>
         <field name="model">qms.goal</field>
-        <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />

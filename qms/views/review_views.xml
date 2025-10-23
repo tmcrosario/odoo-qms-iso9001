@@ -4,7 +4,6 @@
     <record id="review_view_tree" model="ir.ui.view">
         <field name="name">qms.review.view_tree</field>
         <field name="model">qms.review</field>
-        <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
