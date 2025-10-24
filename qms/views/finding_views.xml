@@ -5,7 +5,7 @@
         <field name="name">qms.finding.view.tree</field>
         <field name="model">qms.finding</field>
         <field name="arch" type="xml">
-            <tree name="finding">
+            <list name="finding">
                 <field name="id" />
                 <field name="name" />
                 <field name="reference" />
@@ -15,7 +15,7 @@
                 <field name="origin_ids" />
                 <field name="closing_date" />
                 <field name="process_ids" />
-            </tree>
+            </list>
         </field>
     </record>
 

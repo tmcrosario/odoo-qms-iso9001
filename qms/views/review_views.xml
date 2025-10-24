@@ -5,12 +5,12 @@
         <field name="name">qms.review.view_tree</field>
         <field name="model">qms.review</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="date" />
                 <field name="responsible_id" />
                 <field name="conclusion" />
-            </tree>
+            </list>
         </field>
     </record>
 

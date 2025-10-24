@@ -5,7 +5,7 @@
         <field name="name">qms.goal.view_tree</field>
         <field name="model">qms.goal</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="date_open" />
                 <field name="cancel_date" />
@@ -16,7 +16,7 @@
                 <!--<field name="last_measurement_date" />
                 <field name="last_measurement_result" />-->
                 <field name="last_review_date" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -83,7 +83,7 @@
     <record id="goal_action_view_tree" model="ir.actions.act_window">
         <field name="name">Goals</field>
         <field name="res_model">qms.goal</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- MENU -->

@@ -5,11 +5,11 @@
         <field name="name">qms.finding.milestone.tree</field>
         <field name="model">qms.finding.milestone</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="description" />
                 <field name="sequence" />
-            </tree>
+            </list>
         </field>
     </record>
 

@@ -5,13 +5,13 @@
         <field name="name">qms.effectiveness.check.view.tree</field>
         <field name="model">qms.effectiveness_check</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="expected_date" />
                 <field name="verification_date" />
                 <field name="was_effective" />
                 <field name="state" />
                 <field name="action_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -60,7 +60,7 @@
     <record id="effectiveness_check_action_view_tree" model="ir.actions.act_window">
         <field name="name">Effectiveness Check</field>
         <field name="res_model">qms.effectiveness_check</field>
-        <field name="view_mode">tree,calendar,form</field>
+        <field name="view_mode">list,calendar,form</field>
     </record>
 
     <!-- MENU -->

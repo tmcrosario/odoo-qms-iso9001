@@ -5,12 +5,12 @@
         <field name="name">qms.revision.by.direction.view.tree</field>
         <field name="model">qms.revision_by_direction</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="date_open" />
                 <field name="date_close" />
                 <field name="state" invisible="False" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -46,7 +46,7 @@
                         <page string="NC" name="non_conformitys">
                             <field name="non_conformity_ids" nolabel="1"
                                 context="{'form_view_ref': 'qms.non_conformity_view_form'}">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="description" />
                                     <field name="reference" />
@@ -54,13 +54,13 @@
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
                                     <field name="closing_date" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="OBS" name="observations">
                             <field name="observation_ids" nolabel="1"
                                 context="{'form_view_ref': 'qms.observation_view_form'}">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="description" />
                                     <field name="reference" />
@@ -68,13 +68,13 @@
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
                                     <field name="closing_date" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="OM" name="opportunitys">
                             <field name="opportunity_ids" nolabel="1"
                                 context="{'form_view_ref': 'qms.opportunity_view_form'}">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="description" />
                                     <field name="reference" />
@@ -82,7 +82,7 @@
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
                                     <field name="closing_date" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Actions">
@@ -98,7 +98,7 @@
     <record id="revision_by_direction_action_view_tree" model="ir.actions.act_window">
         <field name="name">Revisions Direction</field>
         <field name="res_model">qms.revision_by_direction</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- MENU -->
