@@ -41,7 +41,7 @@
         <field name="name">Causes</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">qms.weakness.cause</field>
-        <field name="view_id" eval="weakness_cause_view_tree" />
+        <field name="view_id" ref="weakness_cause_view_tree" />
         <field name="search_view_id" ref="weakness_cause_view_search" />
     </record>
 

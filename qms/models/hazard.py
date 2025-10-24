@@ -126,6 +126,7 @@ class Hazard(models.Model):
         selection=_evaluation_results_,
         compute=_compute_result_and_evaluation,
         readonly=True,
+        store=True,
         compute_sudo=True,
     )
 
@@ -169,5 +170,5 @@ class Hazard(models.Model):
                 hazard.last_review_date = None
 
     _sql_constraints = [
-        ("number_uniq", "unique(number)", "Number must be unique")
+        models.Constraint("unique(number)", "Number must be unique")
     ]

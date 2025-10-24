@@ -41,7 +41,7 @@
         <field name="name">Origins</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">qms.finding.origin</field>
-        <field name="view_id" eval="finding_origin_view_tree" />
+        <field name="view_id" ref="finding_origin_view_tree" />
         <field name="search_view_id" ref="finding_origin_view_search" />
     </record>
 
