@@ -4,9 +4,8 @@
     <record id="action_view_tree" model="ir.ui.view">
         <field name="name">qms.action.tree</field>
         <field name="model">qms.action</field>
-        <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="id" />
                 <field name="reference" />
                 <field name="name" />
@@ -15,7 +14,7 @@
                 <field name="complexity" />
                 <field name="date_deadline" />
                 <field name="stage_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -23,7 +22,6 @@
     <record id="action_view_filter" model="ir.ui.view">
         <field name="name">qms.action.filter</field>
         <field name="model">qms.action</field>
-        <field name="type">search</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
@@ -131,7 +129,7 @@
     <record id="action_action_view_tree" model="ir.actions.act_window">
         <field name="name">Actions</field>
         <field name="res_model">qms.action</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
     </record>
 
     <!-- MENU -->

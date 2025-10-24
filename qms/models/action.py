@@ -36,7 +36,7 @@ class Action(models.Model):
 
     date_deadline = fields.Date()
 
-    create_date = fields.Date(readonly=True, default=fields.datetime.now())
+    create_date = fields.Date(readonly=True, default=fields.Date.today)
 
     cancel_date = fields.Date(readonly=True)
 

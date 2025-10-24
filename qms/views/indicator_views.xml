@@ -4,9 +4,8 @@
     <record id="indicator_view_tree" model="ir.ui.view">
         <field name="name">qms.indicator.view.tree</field>
         <field name="model">qms.indicator</field>
-        <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="number" />
                 <field name="name" />
                 <field name="responsible_id" />
@@ -15,7 +14,7 @@
                 <field name="last_measurement_date" />
                 <field name="last_measurement_result" />
                 <field name="last_measurement_result_detail" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -47,12 +46,12 @@
                     </group>
                     <notebook>
                         <page string="Measurements">
-                            <field name="measurement_ids" nolabel="True" attrs="{'readonly':[('state','=','done')]}" />
+                            <field name="measurement_ids" nolabel="True" readonly="state == 'done'" />
                         </page>
                         <page string="NC" name="non_conformitys">
                             <field name="non_conformity_ids" nolabel="1"
                                 context="{'form_view_ref': 'qms.non_conformity_view_form'}">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="description" />
                                     <field name="reference" />
@@ -60,13 +59,13 @@
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
                                     <field name="closing_date" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="OBS" name="observations">
                             <field name="observation_ids" nolabel="1"
                                 context="{'form_view_ref': 'qms.observation_view_form'}">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="description" />
                                     <field name="reference" />
@@ -74,13 +73,13 @@
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
                                     <field name="closing_date" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="OM" name="opportunitys">
                             <field name="opportunity_ids" nolabel="1"
                                 context="{'form_view_ref': 'qms.opportunity_view_form'}">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="description" />
                                     <field name="reference" />
@@ -88,7 +87,7 @@
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
                                     <field name="closing_date" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Versions">
@@ -107,7 +106,7 @@
     <record id="indicator_action_view_tree" model="ir.actions.act_window">
         <field name="name">Indicators</field>
         <field name="res_model">qms.indicator</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- MENU -->
