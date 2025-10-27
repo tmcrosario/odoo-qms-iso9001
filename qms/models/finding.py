@@ -24,7 +24,7 @@ class Finding(models.Model):
         ].search([("is_starting", "=", True)], limit=1)
 
     @api.model
-    def _stage_groups(self, stages, domain, order):
+    def _stage_groups(self, stages, domain):
         return self.env["qms.finding.stage"].search([])
 
     name = fields.Char()
