@@ -94,8 +94,8 @@ class Action(models.Model):
         return action
 
     @api.model
-    def _stage_groups(self):
-        stage_ids = self.env["qms.action.stage"].search([])
+    def _stage_groups(self, order):
+        stage_ids = self.env["qms.action.stage"].search([], order=order)
         return stage_ids
 
     @api.model

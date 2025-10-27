@@ -12,6 +12,10 @@ class Complaint(models.Model):
     )
 
     @api.model
+    def _stage_groups(self, stages, domain):
+        return self.env["qms.finding.stage"].search([])
+
+    @api.model
     def create(self, vals):
         vals.update(
             {
