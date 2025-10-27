@@ -80,4 +80,6 @@ class InterestedParty(models.Model):
             last_review = related_reviews.sorted(
                 key=lambda r: r.date, reverse=True
             )
-            interested_party.last_review_date = last_review[0].date
+            interested_party.last_review_date = (
+                last_review[0].date if last_review else False
+            )
