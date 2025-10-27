@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Savoir-faire Linux (<http://www.savoirfairelinux.com>).
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class Finding(models.Model):
@@ -10,12 +10,6 @@ class Finding(models.Model):
     _name = "qms.finding"
     _description = "Finding"
     _order = "create_date desc"
-
-    _kanban_states_ = [
-        ("normal", _("In Progress")),
-        ("done", _("Ready For Next Stage")),
-        ("blocked", _("Blocked")),
-    ]
 
     @api.model
     def _default_stage(self):
@@ -51,7 +45,14 @@ class Finding(models.Model):
     state = fields.Selection(related="stage_id.state", store=True)
 
     kanban_state = fields.Selection(
-        selection=_kanban_states_, default="normal", required=True, copy=False
+        selection=[
+            ("normal", "In Progress"),
+            ("done", "Ready For Next Stage"),
+            ("blocked", "Blocked"),
+        ],
+        default="normal",
+        required=True,
+        copy=False,
     )
 
     action_ids = fields.Many2many(comodel_name="qms.action")

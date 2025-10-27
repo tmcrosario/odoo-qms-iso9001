@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Savoir-faire Linux (<http://www.savoirfairelinux.com>).
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class Audit(models.Model):
@@ -11,14 +11,13 @@ class Audit(models.Model):
     _rec_name = "reference"
     _description = "Audit"
 
-    _system_ = [
-        ("iso9001_2015", "ISO 9001:2015"),
-        ("iso9001_2008", "ISO 9001:2008"),
-    ]
-
-    system = fields.Selection(selection=_system_, required=True)
-
-    _states_ = [("open", _("Open")), ("closed", _("Closed"))]
+    system = fields.Selection(
+        selection=[
+            ("iso9001_2015", "ISO 9001:2015"),
+            ("iso9001_2008", "ISO 9001:2008"),
+        ],
+        required=True,
+    )
 
     reference = fields.Char(readonly=False, required=False)
 
@@ -32,7 +31,13 @@ class Audit(models.Model):
 
     strong_points = fields.Html()
 
-    state = fields.Selection(selection=_states_, default="open")
+    state = fields.Selection(
+        selection=[
+            ("open", "Open"),
+            ("closed", "Closed"),
+        ],
+        default="open",
+    )
 
     audited_ids = fields.Many2many(
         comodel_name="qms.interested_party", relation="audit_audited_rel"

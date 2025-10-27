@@ -7,8 +7,6 @@ class EffectivenessCheck(models.Model):
     _name = "qms.effectiveness_check"
     _description = "Effectiveness Check"
 
-    _states_ = [("pending", _("Pending")), ("closed", _("Closed"))]
-
     expected_date = fields.Date()
 
     verification_date = fields.Date()
@@ -17,7 +15,13 @@ class EffectivenessCheck(models.Model):
 
     action_id = fields.Many2one(comodel_name="qms.action", required=True)
 
-    state = fields.Selection(selection=_states_, default="pending")
+    state = fields.Selection(
+        selection=[
+            ("pending", "Pending"),
+            ("closed", "Closed"),
+        ],
+        default="pending",
+    )
 
     observations = fields.Text()
 

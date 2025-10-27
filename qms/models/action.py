@@ -10,21 +10,6 @@ class Action(models.Model):
     _name = "qms.action"
     _description = "Action"
 
-    _response_types_ = [
-        ("improvement", _("Improvement Action")),
-        ("immediate", _("Immediate Action")),
-        ("correction", _("Corrective Action")),
-        ("preventive", _("Action for Risks")),
-    ]
-
-    _complexity_levels_ = [
-        ("very_low", _("Very Low")),
-        ("low", _("Low")),
-        ("medium", _("Medium")),
-        ("high", _("High")),
-        ("very_high", _("Very High")),
-    ]
-
     def _default_stage(self):
         return self.env["qms.action.stage"].search(
             [("is_starting", "=", True)], limit=1
@@ -46,7 +31,15 @@ class Action(models.Model):
 
     description = fields.Html()
 
-    response_type = fields.Selection(selection=_response_types_, required=True)
+    response_type = fields.Selection(
+        selection=[
+            ("improvement", "Improvement Action"),
+            ("immediate", "Immediate Action"),
+            ("correction", "Corrective Action"),
+            ("preventive", "Action for Risks"),
+        ],
+        required=True,
+    )
 
     stage_id = fields.Many2one(
         comodel_name="qms.action.stage",
@@ -58,7 +51,16 @@ class Action(models.Model):
 
     reference = fields.Char(required=False, readonly=True)
 
-    complexity = fields.Selection(selection=_complexity_levels_, required=True)
+    complexity = fields.Selection(
+        selection=[
+            ("very_low", "Very Low"),
+            ("low", "Low"),
+            ("medium", "Medium"),
+            ("high", "High"),
+            ("very_high", "Very High"),
+        ],
+        required=True,
+    )
 
     responsible_id = fields.Many2one(
         comodel_name="qms.interested_party", required=True
@@ -94,9 +96,8 @@ class Action(models.Model):
         return action
 
     @api.model
-    def _stage_groups(self, order):
-        stage_ids = self.env["qms.action.stage"].search([], order=order)
-        return stage_ids
+    def _stage_groups(self, stages, domain):
+        return self.env["qms.action.stage"].search([])
 
     @api.model
     def _get_stage_new(self):
