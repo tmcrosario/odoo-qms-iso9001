@@ -43,10 +43,11 @@ class RevisionByDirection(models.Model):
 
     state = fields.Selection(
         selection=[
+            ("draft", "Draft"),
             ("open", "Open"),
             ("done", "Closed"),
         ],
-        default="open",
+        default="draft",
     )
 
     def button_close(self):

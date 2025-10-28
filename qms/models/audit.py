@@ -33,10 +33,11 @@ class Audit(models.Model):
 
     state = fields.Selection(
         selection=[
+            ("draft", "Draft"),
             ("open", "Open"),
-            ("closed", "Closed"),
+            ("done", "Closed"),
         ],
-        default="open",
+        default="draft",
     )
 
     audited_ids = fields.Many2many(
