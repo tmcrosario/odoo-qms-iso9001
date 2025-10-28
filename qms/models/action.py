@@ -88,12 +88,12 @@ class Action(models.Model):
         comodel_name="qms.revision_by_direction"
     )
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         seq = self.env["ir.sequence"]
-        vals["reference"] = seq.next_by_code("qms.action")
-        action = super(Action, self).create(vals)
-        return action
+        for vals in vals_list:
+            vals["reference"] = seq.next_by_code("qms.action")
+        return super(Action, self).create(vals_list)
 
     @api.model
     def _stage_groups(self, stages, domain):
