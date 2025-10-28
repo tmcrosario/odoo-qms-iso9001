@@ -22,7 +22,7 @@
             <form>
                 <header>
                     <button name="button_close" string="Close" invisible="state != 'open'" type="object" />
-                    <field name="state" widget="statusbar" clickable="True" />
+                    <field name="state" widget="statusbar" options='{"clickable": "1"}' />
                 </header>
                 <sheet>
                     <div class="oe_title">
