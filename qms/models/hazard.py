@@ -48,20 +48,22 @@ class Hazard(models.Model):
 
     @api.depends("probability", "impact")
     def _compute_result_and_evaluation(self):
-        if self.impact and self.probability:
-            self.result = self.impact * self.probability
-        else:
-            self.result = 0
-        if self.result >= 1 and self.result <= 3:
-            self.evaluation = "low"
-        elif self.result >= 4 and self.result <= 8:
-            self.evaluation = "medium"
-        elif self.result >= 9 and self.result <= 14:
-            self.evaluation = "high"
-        elif self.result >= 15 and self.result <= 25:
-            self.evaluation = "very_high"
-        else:
-            self.evaluation = False
+        for hazard in self:
+            if hazard.impact and hazard.probability:
+                hazard.result = int(hazard.impact) * int(hazard.probability)
+            else:
+                hazard.result = 0
+
+            if hazard.result >= 1 and hazard.result <= 3:
+                hazard.evaluation = "low"
+            elif hazard.result >= 4 and hazard.result <= 8:
+                hazard.evaluation = "medium"
+            elif hazard.result >= 9 and hazard.result <= 14:
+                hazard.evaluation = "high"
+            elif hazard.result >= 15 and hazard.result <= 25:
+                hazard.evaluation = "very_high"
+            else:
+                hazard.evaluation = False
 
     name = fields.Char(required=True)
 
