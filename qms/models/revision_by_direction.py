@@ -51,6 +51,7 @@ class RevisionByDirection(models.Model):
     )
 
     def button_close(self):
-        return self.write(
-            {"state": "done", "closing_date": fields.Datetime.now()}
+        self.write(
+            {"state": "done", "date_close": fields.Date.today()}
         )
+        return True
