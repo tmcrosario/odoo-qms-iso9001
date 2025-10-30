@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class Goal(models.Model):
@@ -18,13 +18,6 @@ class Goal(models.Model):
 
     approved = fields.Boolean()
 
-    _state_ = [
-        ("draft", _("Draft")),
-        ("open", _("Open")),
-        ("closed", _("Closed")),
-        ("cancelled", _("Cancelled")),
-    ]
-
     responsible_id = fields.Many2one(
         comodel_name="qms.interested_party", required=True
     )
@@ -41,7 +34,16 @@ class Goal(models.Model):
         comodel_name="qms.action", inverse_name="goal_id"
     )
 
-    state = fields.Selection(selection=_state_, default="draft", required=True)
+    state = fields.Selection(
+        selection=[
+            ("draft", "Draft"),
+            ("open", "Open"),
+            ("closed", "Closed"),
+            ("cancelled", "Cancelled"),
+        ],
+        default="draft",
+        required=True,
+    )
 
     review_ids = fields.One2many(
         comodel_name="qms.review", inverse_name="goal_id"

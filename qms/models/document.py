@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class Document(models.Model):
@@ -10,20 +10,27 @@ class Document(models.Model):
 
     name = fields.Char()
 
-    _format_ = [("paper", ("Paper")), ("electronic", _("Electronic"))]
-
     format = fields.Selection(
-        selection=_format_, default="electronic", required=True
+        selection=[
+            ("paper", "Paper"),
+            ("electronic", "Electronic"),
+        ],
+        default="electronic",
+        required=True,
     )
 
     version_ids = fields.One2many(
         comodel_name="qms.version", inverse_name="document_id"
     )
 
-    _relation_ = [("sgc&tmc", "SGC / TMC"), ("sgc", "SGC"), ("tmc", "TMC")]
-
     relation = fields.Selection(
-        selection=_relation_, default="sgc&tmc", required=True
+        selection=[
+            ("sgc&tmc", "SGC / TMC"),
+            ("sgc", "SGC"),
+            ("tmc", "TMC"),
+        ],
+        default="sgc&tmc",
+        required=True,
     )
 
     holding_time = fields.Char()
@@ -34,10 +41,13 @@ class Document(models.Model):
 
     disposition = fields.Char()
 
-    _type_ = [("internal", _("Internal")), ("external", _("External"))]
-
     type = fields.Selection(
-        selection=_type_, default="internal", required=True
+        selection=[
+            ("internal", "Internal"),
+            ("external", "External"),
+        ],
+        default="internal",
+        required=True,
     )
 
     description = fields.Html()

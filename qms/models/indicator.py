@@ -10,18 +10,6 @@ class Indicator(models.Model):
 
     number = fields.Integer()
 
-    _resource_states_ = [
-        ("enabled", _("Enabled")),
-        ("disabled", _("Disabled")),
-    ]
-
-    _frequencys_ = [
-        ("annual", _("Annual")),
-        ("biannual", _("Biannual")),
-        ("quarterly", _("Quarterly")),
-        ("monthly", _("Monthly")),
-    ]
-
     responsible_id = fields.Many2one(
         comodel_name="qms.interested_party", required=True
     )
@@ -30,9 +18,23 @@ class Indicator(models.Model):
         comodel_name="qms.review", inverse_name="indicator_id"
     )
 
-    state = fields.Selection(selection=_resource_states_, default="enabled")
+    state = fields.Selection(
+        selection=[
+            ("enabled", "Enabled"),
+            ("disabled", "Disabled"),
+        ],
+        default="enabled",
+    )
 
-    frequency = fields.Selection(selection=_frequencys_, default="annual")
+    frequency = fields.Selection(
+        selection=[
+            ("annual", "Annual"),
+            ("biannual", "Biannual"),
+            ("quarterly", "Quarterly"),
+            ("monthly", "Monthly"),
+        ],
+        default="annual",
+    )
 
     process_id = fields.Many2one(comodel_name="qms.process", required=True)
 

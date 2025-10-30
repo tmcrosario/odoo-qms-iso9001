@@ -6,51 +6,53 @@ class InterestedParty(models.Model):
     _name = "qms.interested_party"
     _description = "Interested Party"
 
-    _interested_party_types_ = [
-        ("internal", _("Internal")),
-        ("external", _("External")),
-    ]
+    power = fields.Selection(
+        selection=[
+            ("1", "Low"),
+            ("2", "Medium"),
+            ("3", "High"),
+            ("4", "Very High"),
+        ],
+        required=False,
+    )
 
-    _power_ = [
-        ("1", _("Low")),
-        ("2", _("Medium")),
-        ("3", _("High")),
-        ("4", _("Very High")),
-    ]
+    interest = fields.Selection(
+        selection=[
+            ("1", "Low"),
+            ("2", "Medium"),
+            ("3", "High"),
+            ("4", "Very High"),
+        ],
+        required=False,
+    )
 
-    _interest_ = [
-        ("1", _("Low")),
-        ("2", _("Medium")),
-        ("3", _("High")),
-        ("4", _("Very High")),
-    ]
+    cooperation = fields.Selection(
+        selection=[
+            ("1", "Low"),
+            ("2", "Medium"),
+            ("3", "High"),
+            ("4", "Very High"),
+        ],
+        required=False,
+    )
 
-    _cooperation_ = [
-        ("1", _("Low")),
-        ("2", _("Medium")),
-        ("3", _("High")),
-        ("4", _("Very High")),
-    ]
-
-    _impact_ = [
-        ("1", _("Low")),
-        ("2", _("Medium")),
-        ("3", _("High")),
-        ("4", _("Very High")),
-    ]
-
-    power = fields.Selection(selection=_power_, required=False)
-
-    interest = fields.Selection(selection=_interest_, required=False)
-
-    cooperation = fields.Selection(selection=_cooperation_, required=False)
-
-    impact = fields.Selection(selection=_impact_, required=False)
+    impact = fields.Selection(
+        selection=[
+            ("1", "Low"),
+            ("2", "Medium"),
+            ("3", "High"),
+            ("4", "Very High"),
+        ],
+        required=False,
+    )
 
     name = fields.Char(required=True)
 
     interested_party_type = fields.Selection(
-        selection=_interested_party_types_
+        selection=[
+            ("internal", "Internal"),
+            ("external", "External"),
+        ]
     )
 
     is_organization = fields.Boolean()
@@ -80,4 +82,6 @@ class InterestedParty(models.Model):
             last_review = related_reviews.sorted(
                 key=lambda r: r.date, reverse=True
             )
-            interested_party.last_review_date = last_review[0].date
+            interested_party.last_review_date = (
+                last_review[0].date if last_review else False
+            )

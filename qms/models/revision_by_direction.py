@@ -14,8 +14,6 @@ class RevisionByDirection(models.Model):
 
     date_close = fields.Date()
 
-    _states_ = [("open", "Open"), ("done", "Closed")]
-
     resource_ids = fields.Many2many(comodel_name="qms.resource")
 
     non_conformity_ids = fields.One2many(
@@ -43,9 +41,17 @@ class RevisionByDirection(models.Model):
     #     ondelete="cascade",
     # )
 
-    state = fields.Selection(selection=_states_, default="open")
+    state = fields.Selection(
+        selection=[
+            ("draft", "Draft"),
+            ("open", "Open"),
+            ("done", "Closed"),
+        ],
+        default="draft",
+    )
 
     def button_close(self):
-        return self.write(
-            {"state": "done", "closing_date": fields.Datetime.now()}
+        self.write(
+            {"state": "done", "date_close": fields.Date.today()}
         )
+        return True
