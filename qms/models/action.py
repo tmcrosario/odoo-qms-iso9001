@@ -49,6 +49,8 @@ class Action(models.Model):
         group_expand="_stage_groups",
     )
 
+    color = fields.Integer(related="stage_id.color", store=False)
+
     reference = fields.Char(required=False, readonly=True)
 
     complexity = fields.Selection(
