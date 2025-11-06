@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class Goal(models.Model):
@@ -104,3 +105,12 @@ class Goal(models.Model):
                 
     def toggle_approved(self):
         self.approved = not self.approved
+
+    @api.constrains("date_open", "date_close")
+    def _check_dates(self):
+        for goal in self:
+            if goal.date_close and goal.date_open:
+                if goal.date_close < goal.date_open:
+                    raise ValidationError(
+                        _("Close date must be after open date")
+                    )
