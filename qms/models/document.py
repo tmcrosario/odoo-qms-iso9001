@@ -90,5 +90,5 @@ class Document(models.Model):
             else:
                 document.last_version = False
 
-    def toggle_approved(self):
+    def action_toggle_approved(self):
         self.approved = not self.approved

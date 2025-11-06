@@ -43,5 +43,5 @@ class Policy(models.Model):
             else:
                 policy.last_review_date = False
 
-    def toggle_approved(self):
+    def action_toggle_approved(self):
         self.approved = not self.approved

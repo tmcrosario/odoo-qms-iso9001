@@ -93,7 +93,7 @@ class Goal(models.Model):
             else:
                 goal.last_review_date = False
                 
-    def toggle_approved(self):
+    def action_toggle_approved(self):
         self.approved = not self.approved
 
     @api.constrains("date_open", "date_close")
