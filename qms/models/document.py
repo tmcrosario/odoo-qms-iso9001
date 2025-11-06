@@ -8,7 +8,7 @@ class Document(models.Model):
 
     identification = fields.Char(required=True)
 
-    name = fields.Char()
+    name = fields.Char(required=True)
 
     format = fields.Selection(
         selection=[

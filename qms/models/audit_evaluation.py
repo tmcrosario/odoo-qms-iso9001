@@ -6,7 +6,7 @@ class AuditEvaluation(models.Model):
     _name = "qms.audit.evaluation"
     _description = "Audit Evaluation"
 
-    name = fields.Char()
+    name = fields.Char(required=True)
 
     date = fields.Date()
 

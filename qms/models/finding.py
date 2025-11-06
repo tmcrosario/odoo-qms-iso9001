@@ -21,7 +21,7 @@ class Finding(models.Model):
     def _stage_groups(self, stages, domain):
         return self.env["qms.finding.stage"].search([])
 
-    name = fields.Char()
+    name = fields.Char(required=True)
 
     claimant_id = fields.Many2one(
         comodel_name="qms.interested_party", required=True
