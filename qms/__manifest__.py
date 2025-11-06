@@ -19,6 +19,7 @@
         "data/weakness_cause_data.xml",
         "data/finding_origin_data.xml",
         "data/finding_stage_data.xml",
+        "data/hazard_data.xml",
         "views/qms_menus.xml",
         "views/policy_views.xml",
         "views/review_views.xml",
