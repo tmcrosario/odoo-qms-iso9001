@@ -154,21 +154,16 @@ class Hazard(models.Model):
 
     last_review_date = fields.Date(compute="_compute_last_review_date")
 
-    @api.depends("review_ids")
+    @api.depends("review_ids.date")
     def _compute_last_review_date(self):
         for hazard in self:
-            domain = [
-                ("hazard_id", "=", hazard.id),
-                # ('modify_concession', '=', True)
-            ]
-            related_reviews = hazard.env["qms.review"].search(domain)
-            if related_reviews:
-                last_review = related_reviews.sorted(
+            if hazard.review_ids:
+                last_review = hazard.review_ids.sorted(
                     key=lambda r: r.date, reverse=True
                 )
                 hazard.last_review_date = last_review[0].date
             else:
-                hazard.last_review_date = None
+                hazard.last_review_date = False
 
     @api.model_create_multi
     def create(self, vals_list):

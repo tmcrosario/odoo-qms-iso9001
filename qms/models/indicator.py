@@ -74,68 +74,46 @@ class Indicator(models.Model):
 
     last_review_date = fields.Date(compute="_compute_last_review_date")
 
-    @api.depends("measurement_ids")
+    @api.depends("measurement_ids.measurement_date")
     def _compute_last_measurement_date(self):
         for indicator in self:
-            domain = [
-                ("indicator_id", "=", indicator.id),
-            ]
-            related_measurement = indicator.env[
-                "qms.indicator.measurement"
-            ].search(domain)
-            if related_measurement:
-                last_measurement = related_measurement.sorted(
+            if indicator.measurement_ids:
+                last_measurement = indicator.measurement_ids.sorted(
                     key=lambda r: r.measurement_date, reverse=True
                 )
                 indicator.last_measurement_date = last_measurement[0].measurement_date
             else:
-                indicator.last_measurement_date = None
+                indicator.last_measurement_date = False
 
-    @api.depends("measurement_ids")
+    @api.depends("measurement_ids.measurement_date", "measurement_ids.result")
     def _compute_last_measurement_result(self):
         for indicator in self:
-            domain = [
-                ("indicator_id", "=", indicator.id),
-            ]
-            related_measurement = indicator.env[
-                "qms.indicator.measurement"
-            ].search(domain)
-            if related_measurement:
-                last_measurement = related_measurement.sorted(
+            if indicator.measurement_ids:
+                last_measurement = indicator.measurement_ids.sorted(
                     key=lambda r: r.measurement_date, reverse=True
                 )
                 indicator.last_measurement_result = last_measurement[0].result
             else:
-                indicator.last_measurement_result = None
+                indicator.last_measurement_result = False
 
-    @api.depends("measurement_ids")
+    @api.depends("measurement_ids.measurement_date", "measurement_ids.result_detail")
     def _compute_last_measurement_result_detail(self):
         for indicator in self:
-            domain = [
-                ("indicator_id", "=", indicator.id),
-            ]
-            related_measurement = indicator.env[
-                "qms.indicator.measurement"
-            ].search(domain)
-            if related_measurement:
-                last_measurement = related_measurement.sorted(
+            if indicator.measurement_ids:
+                last_measurement = indicator.measurement_ids.sorted(
                     key=lambda r: r.measurement_date, reverse=True
                 )
                 indicator.last_measurement_result_detail = last_measurement[0].result_detail
             else:
-                indicator.last_measurement_result_detail = None
+                indicator.last_measurement_result_detail = False
 
-    @api.depends("review_ids")
+    @api.depends("review_ids.date")
     def _compute_last_review_date(self):
         for indicator in self:
-            domain = [
-                ("indicator_id", "=", indicator.id),
-            ]
-            related_reviews = indicator.env["qms.review"].search(domain)
-            if related_reviews:
-                last_review = related_reviews.sorted(
+            if indicator.review_ids:
+                last_review = indicator.review_ids.sorted(
                     key=lambda r: r.date, reverse=True
                 )
                 indicator.last_review_date = last_review[0].date
             else:
-                indicator.last_review_date = None
+                indicator.last_review_date = False

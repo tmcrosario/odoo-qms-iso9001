@@ -50,17 +50,13 @@ class Process(models.Model):
 
     last_review_date = fields.Date(compute="_compute_last_review_date")
 
-    @api.depends("review_ids")
+    @api.depends("review_ids.date")
     def _compute_last_review_date(self):
         for process in self:
-            domain = [
-                ("process_id", "=", process.id),
-            ]
-            related_reviews = process.env["qms.review"].search(domain)
-            if related_reviews:
-                last_review = related_reviews.sorted(
+            if process.review_ids:
+                last_review = process.review_ids.sorted(
                     key=lambda r: r.date, reverse=True
                 )
                 process.last_review_date = last_review[0].date
             else:
-                process.last_review_date = None
+                process.last_review_date = False

@@ -60,48 +60,38 @@ class Goal(models.Model):
 
     last_review_date = fields.Date(compute="_compute_last_review_date")
 
-    @api.depends("measurement_ids")
+    @api.depends("measurement_ids.measurement_date")
     def _compute_last_measurement_date(self):
         for goal in self:
-            domain = [
-                ("goal_id", "=", goal.id),
-            ]
-            related_measurement = goal.env["qms.goal.measurement"].search(
-                domain
-            )
-            last_measurement = related_measurement.sorted(
-                key=lambda r: r.measurement_date, reverse=True
-            )
-            goal.last_measurement_date = last_measurement[0].measurement_date
+            if goal.measurement_ids:
+                last_measurement = goal.measurement_ids.sorted(
+                    key=lambda r: r.measurement_date, reverse=True
+                )
+                goal.last_measurement_date = last_measurement[0].measurement_date
+            else:
+                goal.last_measurement_date = False
 
-    @api.depends("measurement_ids")
+    @api.depends("measurement_ids.measurement_date", "measurement_ids.result")
     def _compute_last_measurement_result(self):
         for goal in self:
-            domain = [
-                ("goal_id", "=", goal.id),
-            ]
-            related_measurement = goal.env["qms.goal.measurement"].search(
-                domain
-            )
-            last_measurement = related_measurement.sorted(
-                key=lambda r: r.measurement_date, reverse=True
-            )
-            goal.last_measurement_result = last_measurement[0].result
+            if goal.measurement_ids:
+                last_measurement = goal.measurement_ids.sorted(
+                    key=lambda r: r.measurement_date, reverse=True
+                )
+                goal.last_measurement_result = last_measurement[0].result
+            else:
+                goal.last_measurement_result = False
 
-    @api.depends("review_ids")
+    @api.depends("review_ids.date")
     def _compute_last_review_date(self):
         for goal in self:
-            domain = [
-                ("goal_id", "=", goal.id),
-            ]
-            related_reviews = goal.env["qms.review"].search(domain)
-            if related_reviews:
-                last_review = related_reviews.sorted(
+            if goal.review_ids:
+                last_review = goal.review_ids.sorted(
                     key=lambda r: r.date, reverse=True
                 )
                 goal.last_review_date = last_review[0].date
             else:
-                goal.last_review_date = None
+                goal.last_review_date = False
                 
     def toggle_approved(self):
         self.approved = not self.approved
