@@ -10,21 +10,6 @@ class Action(models.Model):
     _name = "qms.action"
     _description = "Action"
 
-    _response_types_ = [
-        ("improvement", _("Improvement Action")),
-        ("immediate", _("Immediate Action")),
-        ("correction", _("Corrective Action")),
-        ("preventive", _("Action for Risks")),
-    ]
-
-    _complexity_levels_ = [
-        ("very_low", _("Very Low")),
-        ("low", _("Low")),
-        ("medium", _("Medium")),
-        ("high", _("High")),
-        ("very_high", _("Very High")),
-    ]
-
     def _default_stage(self):
         return self.env["qms.action.stage"].search(
             [("is_starting", "=", True)], limit=1
@@ -46,7 +31,15 @@ class Action(models.Model):
 
     description = fields.Html()
 
-    response_type = fields.Selection(selection=_response_types_, required=True)
+    response_type = fields.Selection(
+        selection=[
+            ("improvement", "Improvement Action"),
+            ("immediate", "Immediate Action"),
+            ("correction", "Corrective Action"),
+            ("preventive", "Action for Risks"),
+        ],
+        required=True,
+    )
 
     stage_id = fields.Many2one(
         comodel_name="qms.action.stage",
@@ -58,7 +51,16 @@ class Action(models.Model):
 
     reference = fields.Char(required=False, readonly=True)
 
-    complexity = fields.Selection(selection=_complexity_levels_, required=True)
+    complexity = fields.Selection(
+        selection=[
+            ("very_low", "Very Low"),
+            ("low", "Low"),
+            ("medium", "Medium"),
+            ("high", "High"),
+            ("very_high", "Very High"),
+        ],
+        required=True,
+    )
 
     responsible_id = fields.Many2one(
         comodel_name="qms.interested_party", required=True
@@ -70,13 +72,13 @@ class Action(models.Model):
         required=False,
     )
 
-    observation_id = fields.Many2one(comodel_name="qms.finding")
+    observation_id = fields.Many2one(comodel_name="qms.observation")
 
-    non_conformity_id = fields.Many2one(comodel_name="qms.finding")
+    non_conformity_id = fields.Many2one(comodel_name="qms.non_conformity")
 
-    complaint_id = fields.Many2one(comodel_name="qms.finding")
+    complaint_id = fields.Many2one(comodel_name="qms.complaint")
 
-    opportunity_id = fields.Many2one(comodel_name="qms.finding")
+    opportunity_id = fields.Many2one(comodel_name="qms.opportunity")
 
     hazard_id = fields.Many2one(comodel_name="qms.hazard")
 
@@ -86,17 +88,16 @@ class Action(models.Model):
         comodel_name="qms.revision_by_direction"
     )
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         seq = self.env["ir.sequence"]
-        vals["reference"] = seq.next_by_code("qms.action")
-        action = super(Action, self).create(vals)
-        return action
+        for vals in vals_list:
+            vals["reference"] = seq.next_by_code("qms.action")
+        return super(Action, self).create(vals_list)
 
     @api.model
-    def _stage_groups(self):
-        stage_ids = self.env["qms.action.stage"].search([])
-        return stage_ids
+    def _stage_groups(self, stages, domain):
+        return self.env["qms.action.stage"].search([])
 
     @api.model
     def _get_stage_new(self):

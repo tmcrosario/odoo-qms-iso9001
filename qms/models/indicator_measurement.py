@@ -2,7 +2,7 @@
 # Copyright (C) 2010 Savoir-faire Linux (<http://www.savoirfairelinux.com>).
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class IndicatorMeasurement(models.Model):
@@ -24,12 +24,14 @@ class IndicatorMeasurement(models.Model):
 
     comments = fields.Text()
 
-    _result_ = [
-        ("goal_ok", _("Goal reached")),
-        ("goal_with_obs", _("Goal reached with observations")),
-        ("goal_no_ok", _("Unachieved target")),
-    ]
-
-    result = fields.Selection(selection=_result_, required=False, store=True)
+    result = fields.Selection(
+        selection=[
+            ("goal_ok", "Goal reached"),
+            ("goal_with_obs", "Goal reached with observations"),
+            ("goal_no_ok", "Unachieved target"),
+        ],
+        required=False,
+        store=True,
+    )
 
     result_detail = fields.Char()

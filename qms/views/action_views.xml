@@ -39,7 +39,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="stage_id" widget="statusbar" clickable="True" />
+                    <field name="stage_id" widget="statusbar" options="{'clickable': '1'}" />
                 </header>
                 <sheet>
                     <group>
@@ -85,7 +85,7 @@
                 <field name="date_deadline" />
                 <templates>
                     <field name="date_deadline" />
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_card oe_kanban_global_click">
                             <div class="o_dropdown_kanban dropdown">
                                 <a class="dropdown-toggle btn"

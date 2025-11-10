@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class Process(models.Model):
@@ -7,17 +7,6 @@ class Process(models.Model):
     _description = "Process"
 
     name = fields.Char(required=True)
-
-    _resource_types_ = [
-        ("strategic", _("Strategic")),
-        ("central", _("Central")),
-        ("support", _("Support")),
-    ]
-
-    _resource_states_ = [
-        ("enabled", _("Enabled")),
-        ("disabled", _("Disabled")),
-    ]
 
     responsible_id = fields.Many2one(
         comodel_name="qms.interested_party", required=False
@@ -29,9 +18,21 @@ class Process(models.Model):
 
     resource_ids = fields.Many2many(comodel_name="qms.resource")
 
-    resource_type = fields.Selection(selection=_resource_types_)
+    resource_type = fields.Selection(
+        selection=[
+            ("strategic", "Strategic"),
+            ("central", "Central"),
+            ("support", "Support"),
+        ]
+    )
 
-    state = fields.Selection(selection=_resource_states_, default="enabled")
+    state = fields.Selection(
+        selection=[
+            ("enabled", "Enabled"),
+            ("disabled", "Disabled"),
+        ],
+        default="enabled",
+    )
 
     indicator_ids = fields.One2many(
         comodel_name="qms.indicator", inverse_name="process_id", required=False
