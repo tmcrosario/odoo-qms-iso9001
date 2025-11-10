@@ -66,6 +66,9 @@ class Audit(models.Model):
 
     process_ids = fields.Many2many(comodel_name="qms.process", required=True)
 
+    def action_open(self):
+        return self.write({"state": "open"})
+
     def button_close(self):
         return self.write(
             {"state": "done", "closing_date": fields.Datetime.now()}

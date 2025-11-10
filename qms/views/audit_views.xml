@@ -37,6 +37,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="action_open" string="Open" invisible="state != 'draft'" type="object" />
                     <button name="button_close" string="Close" invisible="state != 'open'" type="object" />
                     <field name="state" widget="statusbar" options='{"clickable": "1"}' />
                 </header>
