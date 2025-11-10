@@ -20,12 +20,35 @@
         </field>
     </record>
 
+    <!-- SEARCH VIEW -->
+    <record id="goal_view_search" model="ir.ui.view">
+        <field name="name">qms.goal.view.search</field>
+        <field name="model">qms.goal</field>
+        <field name="arch" type="xml">
+            <search>
+                <group>
+                    <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Open" name="open" domain="[('state', '=', 'open')]"/>
+                    <filter string="Closed" name="closed" domain="[('state', '=', 'closed')]"/>
+                    <filter string="Cancelled" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <filter string="Approved" name="approved" domain="[('approved', '=', True)]"/>
+                    <filter string="Not Approved" name="not_approved" domain="[('approved', '=', False)]"/>
+                    <field name="name"/>
+                    <field name="responsible_id"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <!-- FORM VIEW -->
     <record id="goal_view_form" model="ir.ui.view">
         <field name="name">qms.goal.view.form</field>
         <field name="model">qms.goal</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="action_toggle_approved" type="object" class="oe_stat_button" icon="fa-check-square-o" invisible="approved">
@@ -53,11 +76,6 @@
                         <group>
                             <field name="cancel_date" />
                             <field name="date_close" />
-                        </group>
-                    </group>
-                    <group>
-                        <group>
-                            <field name="state" />
                         </group>
                     </group>
                     <notebook>

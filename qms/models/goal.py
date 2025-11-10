@@ -96,6 +96,24 @@ class Goal(models.Model):
     def action_toggle_approved(self):
         self.approved = not self.approved
 
+    def action_draft(self):
+        self.state = "draft"
+
+    def action_open(self):
+        self.state = "open"
+        if not self.date_open:
+            self.date_open = fields.Date.today()
+
+    def action_close(self):
+        self.state = "closed"
+        if not self.date_close:
+            self.date_close = fields.Date.today()
+
+    def action_cancel(self):
+        self.state = "cancelled"
+        if not self.cancel_date:
+            self.cancel_date = fields.Date.today()
+
     @api.constrains("date_open", "date_close")
     def _check_dates(self):
         for goal in self:
