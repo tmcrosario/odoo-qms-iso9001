@@ -51,14 +51,14 @@ class Goal(models.Model):
     )
 
     last_measurement_date = fields.Date(
-        compute="_compute_last_measurement_date"
+        compute="_compute_last_measurement_date", store=True
     )
 
     last_measurement_result = fields.Char(
-        compute="_compute_last_measurement_result"
+        compute="_compute_last_measurement_result", store=True
     )
 
-    last_review_date = fields.Date(compute="_compute_last_review_date")
+    last_review_date = fields.Date(compute="_compute_last_review_date", store=True)
 
     @api.depends("measurement_ids.measurement_date")
     def _compute_last_measurement_date(self):

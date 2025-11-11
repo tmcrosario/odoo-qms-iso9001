@@ -61,7 +61,7 @@ class Indicator(models.Model):
     description = fields.Html(string="Objetive")
 
     last_measurement_date = fields.Date(
-        compute="_compute_last_measurement_date"
+        compute="_compute_last_measurement_date", store=True
     )
 
     last_measurement_result = fields.Char(
@@ -69,7 +69,7 @@ class Indicator(models.Model):
     )
 
     last_measurement_result_detail = fields.Char(
-        compute="_compute_last_measurement_result_detail"
+        compute="_compute_last_measurement_result_detail", store=True
     )
 
     last_review_date = fields.Date(compute="_compute_last_review_date")

@@ -64,9 +64,9 @@ class Document(models.Model):
 
     approved = fields.Boolean()
 
-    last_review_date = fields.Date(compute="_compute_last_review_date")
+    last_review_date = fields.Date(compute="_compute_last_review_date", store=True)
 
-    last_version = fields.Char(compute="_compute_last_version")
+    last_version = fields.Char(compute="_compute_last_version", store=True)
 
     @api.depends("review_ids.date")
     def _compute_last_review_date(self):
