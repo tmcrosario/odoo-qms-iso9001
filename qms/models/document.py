@@ -8,7 +8,7 @@ class Document(models.Model):
 
     identification = fields.Char(required=True)
 
-    name = fields.Char()
+    name = fields.Char(required=True)
 
     format = fields.Selection(
         selection=[
@@ -68,29 +68,27 @@ class Document(models.Model):
 
     last_version = fields.Char(compute="_compute_last_version")
 
-    @api.depends("review_ids")
+    @api.depends("review_ids.date")
     def _compute_last_review_date(self):
         for document in self:
-            domain = [
-                ("document_id", "=", document.id),
-            ]
-            related_reviews = document.env["qms.review"].search(domain)
-            last_review = related_reviews.sorted(
-                key=lambda r: r.date, reverse=True
-            )
-            document.last_review_date = last_review[0].date
+            if document.review_ids:
+                last_review = document.review_ids.sorted(
+                    key=lambda r: r.date, reverse=True
+                )
+                document.last_review_date = last_review[0].date
+            else:
+                document.last_review_date = False
 
-    @api.depends("version_ids")
+    @api.depends("version_ids.date_open", "version_ids.version")
     def _compute_last_version(self):
         for document in self:
-            domain = [
-                ("document_id", "=", document.id),
-            ]
-            related_versions = document.env["qms.version"].search(domain)
-            last_version = related_versions.sorted(
-                key=lambda r: r.date_open, reverse=True
-            )
-            document.last_version = last_version[0].version
+            if document.version_ids:
+                last_version = document.version_ids.sorted(
+                    key=lambda r: r.date_open, reverse=True
+                )
+                document.last_version = last_version[0].version
+            else:
+                document.last_version = False
 
-    def toggle_approved(self):
+    def action_toggle_approved(self):
         self.approved = not self.approved

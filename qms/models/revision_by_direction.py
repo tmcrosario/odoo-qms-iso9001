@@ -1,4 +1,5 @@
-from odoo import fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class RevisionByDirection(models.Model):
@@ -55,3 +56,12 @@ class RevisionByDirection(models.Model):
             {"state": "done", "date_close": fields.Date.today()}
         )
         return True
+
+    @api.constrains("date_open", "date_close")
+    def _check_dates(self):
+        for revision in self:
+            if revision.date_close and revision.date_open:
+                if revision.date_close < revision.date_open:
+                    raise ValidationError(
+                        _("Close date must be after open date")
+                    )

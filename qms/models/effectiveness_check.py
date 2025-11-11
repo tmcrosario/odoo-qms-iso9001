@@ -38,3 +38,12 @@ class EffectivenessCheck(models.Model):
                         effectiveness_check 'closed'"
                     )
                 )
+
+    @api.constrains("expected_date", "verification_date")
+    def _check_dates(self):
+        for check in self:
+            if check.verification_date and check.expected_date:
+                if check.verification_date < check.expected_date:
+                    raise ValidationError(
+                        _("Verification date must be after expected date")
+                    )

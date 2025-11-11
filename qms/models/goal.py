@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class Goal(models.Model):
@@ -59,48 +60,65 @@ class Goal(models.Model):
 
     last_review_date = fields.Date(compute="_compute_last_review_date")
 
-    @api.depends("measurement_ids")
+    @api.depends("measurement_ids.measurement_date")
     def _compute_last_measurement_date(self):
         for goal in self:
-            domain = [
-                ("goal_id", "=", goal.id),
-            ]
-            related_measurement = goal.env["qms.goal.measurement"].search(
-                domain
-            )
-            last_measurement = related_measurement.sorted(
-                key=lambda r: r.measurement_date, reverse=True
-            )
-            goal.last_measurement_date = last_measurement[0].measurement_date
+            if goal.measurement_ids:
+                last_measurement = goal.measurement_ids.sorted(
+                    key=lambda r: r.measurement_date, reverse=True
+                )
+                goal.last_measurement_date = last_measurement[0].measurement_date
+            else:
+                goal.last_measurement_date = False
 
-    @api.depends("measurement_ids")
+    @api.depends("measurement_ids.measurement_date", "measurement_ids.result")
     def _compute_last_measurement_result(self):
         for goal in self:
-            domain = [
-                ("goal_id", "=", goal.id),
-            ]
-            related_measurement = goal.env["qms.goal.measurement"].search(
-                domain
-            )
-            last_measurement = related_measurement.sorted(
-                key=lambda r: r.measurement_date, reverse=True
-            )
-            goal.last_measurement_result = last_measurement[0].result
+            if goal.measurement_ids:
+                last_measurement = goal.measurement_ids.sorted(
+                    key=lambda r: r.measurement_date, reverse=True
+                )
+                goal.last_measurement_result = last_measurement[0].result
+            else:
+                goal.last_measurement_result = False
 
-    @api.depends("review_ids")
+    @api.depends("review_ids.date")
     def _compute_last_review_date(self):
         for goal in self:
-            domain = [
-                ("goal_id", "=", goal.id),
-            ]
-            related_reviews = goal.env["qms.review"].search(domain)
-            if related_reviews:
-                last_review = related_reviews.sorted(
+            if goal.review_ids:
+                last_review = goal.review_ids.sorted(
                     key=lambda r: r.date, reverse=True
                 )
                 goal.last_review_date = last_review[0].date
             else:
-                goal.last_review_date = None
+                goal.last_review_date = False
                 
-    def toggle_approved(self):
+    def action_toggle_approved(self):
         self.approved = not self.approved
+
+    def action_draft(self):
+        self.state = "draft"
+
+    def action_open(self):
+        self.state = "open"
+        if not self.date_open:
+            self.date_open = fields.Date.today()
+
+    def action_close(self):
+        self.state = "closed"
+        if not self.date_close:
+            self.date_close = fields.Date.today()
+
+    def action_cancel(self):
+        self.state = "cancelled"
+        if not self.cancel_date:
+            self.cancel_date = fields.Date.today()
+
+    @api.constrains("date_open", "date_close")
+    def _check_dates(self):
+        for goal in self:
+            if goal.date_close and goal.date_open:
+                if goal.date_close < goal.date_open:
+                    raise ValidationError(
+                        _("Close date must be after open date")
+                    )

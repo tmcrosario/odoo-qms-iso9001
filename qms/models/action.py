@@ -1,8 +1,5 @@
-# This model is based in some code used in OCA Management System Addons Project
-# Copyright (C) 2010 Savoir-faire Linux (<http://www.savoirfairelinux.com>).
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class Action(models.Model):
@@ -48,6 +45,8 @@ class Action(models.Model):
         default=_default_stage,
         group_expand="_stage_groups",
     )
+
+    color = fields.Integer(related="stage_id.color", store=False)
 
     reference = fields.Char(required=False, readonly=True)
 
@@ -102,3 +101,12 @@ class Action(models.Model):
     @api.model
     def _get_stage_new(self):
         return self.env["qms.action.stage"].search([])
+
+    @api.constrains("opening_date", "date_closed")
+    def _check_dates(self):
+        for action in self:
+            if action.date_closed and action.opening_date:
+                if action.date_closed < action.opening_date:
+                    raise ValidationError(
+                        _("Close date must be after opening date")
+                    )
