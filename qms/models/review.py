@@ -24,8 +24,6 @@ class Review(models.Model):
 
     indicator_id = fields.Many2one(comodel_name="qms.indicator")
 
-    interested_party_id = fields.Many2one(comodel_name="qms.interested_party")
-
     responsible_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=False
+        comodel_name="qms.interested_party", required=True
     )

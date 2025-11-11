@@ -9,7 +9,7 @@ class Process(models.Model):
     name = fields.Char(required=True)
 
     responsible_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=False
+        comodel_name="qms.interested_party", required=True
     )
 
     review_ids = fields.One2many(
