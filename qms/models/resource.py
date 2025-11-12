@@ -7,7 +7,7 @@ class Resource(models.Model):
     _description = "Resource"
 
     responsible_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     name = fields.Char(required=True)

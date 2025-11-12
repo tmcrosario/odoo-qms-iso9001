@@ -24,7 +24,7 @@ class Finding(models.Model):
     name = fields.Char(required=True)
 
     claimant_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     reference = fields.Char(required=True, readonly=True, default="NEW")
@@ -40,6 +40,7 @@ class Finding(models.Model):
         copy=False,
         default=_default_stage,
         group_expand="_stage_groups",
+        ondelete="restrict",
     )
 
     state = fields.Selection(related="stage_id.state", store=True)
@@ -60,7 +61,7 @@ class Finding(models.Model):
     description = fields.Html(required=True)
 
     interested_party_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     process_ids = fields.Many2many(comodel_name="qms.process", required=True)

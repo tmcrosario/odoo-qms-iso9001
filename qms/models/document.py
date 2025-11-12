@@ -53,7 +53,7 @@ class Document(models.Model):
     description = fields.Html()
 
     responsible_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     process_ids = fields.Many2many(comodel_name="qms.process", required=True)

@@ -11,7 +11,7 @@ class Indicator(models.Model):
     number = fields.Integer()
 
     responsible_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     review_ids = fields.One2many(
@@ -36,7 +36,7 @@ class Indicator(models.Model):
         default="annual",
     )
 
-    process_id = fields.Many2one(comodel_name="qms.process", required=True)
+    process_id = fields.Many2one(comodel_name="qms.process", required=True, ondelete="restrict")
 
     measurement_ids = fields.One2many(
         comodel_name="qms.indicator.measurement", inverse_name="indicator_id"

@@ -44,6 +44,7 @@ class Action(models.Model):
         index=True,
         default=_default_stage,
         group_expand="_stage_groups",
+        ondelete="restrict",
     )
 
     color = fields.Integer(related="stage_id.color", store=False)
@@ -62,7 +63,7 @@ class Action(models.Model):
     )
 
     responsible_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     effectiveness_check_ids = fields.One2many(
@@ -71,20 +72,20 @@ class Action(models.Model):
         required=False,
     )
 
-    observation_id = fields.Many2one(comodel_name="qms.observation")
+    observation_id = fields.Many2one(comodel_name="qms.observation", ondelete="set null")
 
-    non_conformity_id = fields.Many2one(comodel_name="qms.non_conformity")
+    non_conformity_id = fields.Many2one(comodel_name="qms.non_conformity", ondelete="set null")
 
-    complaint_id = fields.Many2one(comodel_name="qms.complaint")
+    complaint_id = fields.Many2one(comodel_name="qms.complaint", ondelete="set null")
 
-    opportunity_id = fields.Many2one(comodel_name="qms.opportunity")
+    opportunity_id = fields.Many2one(comodel_name="qms.opportunity", ondelete="set null")
 
-    hazard_id = fields.Many2one(comodel_name="qms.hazard")
+    hazard_id = fields.Many2one(comodel_name="qms.hazard", ondelete="set null")
 
-    goal_id = fields.Many2one(comodel_name="qms.goal")
+    goal_id = fields.Many2one(comodel_name="qms.goal", ondelete="set null")
 
     revision_by_direction_id = fields.Many2one(
-        comodel_name="qms.revision_by_direction"
+        comodel_name="qms.revision_by_direction", ondelete="set null"
     )
 
     @api.model_create_multi

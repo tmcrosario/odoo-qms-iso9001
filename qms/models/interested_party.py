@@ -60,6 +60,7 @@ class InterestedParty(models.Model):
     organization_id = fields.Many2one(
         comodel_name="qms.interested_party",
         domain=[("is_organization", "=", True)],
+        ondelete="set null",
     )
 
     requeriments_interested_party = fields.Html()

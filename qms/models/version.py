@@ -36,7 +36,7 @@ class Version(models.Model):
     )
 
     responsible_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     @api.constrains(
