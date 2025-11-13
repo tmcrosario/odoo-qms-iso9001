@@ -2,7 +2,9 @@
 # Copyright (C) 2010 Savoir-faire Linux (<http://www.savoirfairelinux.com>).
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
+from odoo.exceptions import ValidationError
+from odoo.tools.translate import _
 
 
 class Audit(models.Model):
@@ -73,3 +75,13 @@ class Audit(models.Model):
         return self.write(
             {"state": "done", "closing_date": fields.Datetime.now()}
         )
+
+    @api.constrains("date", "closing_date")
+    def _check_dates(self):
+        for audit in self:
+            if audit.closing_date and audit.date:
+                closing_date_only = audit.closing_date.date()
+                if closing_date_only < audit.date:
+                    raise ValidationError(
+                        _("Closing date cannot be earlier than audit date")
+                    )
