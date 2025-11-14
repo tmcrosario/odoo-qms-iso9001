@@ -68,6 +68,57 @@ class Audit(models.Model):
 
     process_ids = fields.Many2many(comodel_name="qms.process", required=True)
 
+    nc_count = fields.Integer(
+        string="Non-Conformities",
+        compute="_compute_finding_counts",
+        store=True,
+    )
+
+    observation_count = fields.Integer(
+        string="Observations",
+        compute="_compute_finding_counts",
+        store=True,
+    )
+
+    opportunity_count = fields.Integer(
+        string="Opportunities",
+        compute="_compute_finding_counts",
+        store=True,
+    )
+
+    open_findings_count = fields.Integer(
+        string="Open Findings",
+        compute="_compute_finding_counts",
+        store=True,
+    )
+
+    @api.depends(
+        "non_conformity_ids",
+        "observation_ids",
+        "opportunity_ids",
+        "non_conformity_ids.state",
+        "observation_ids.state",
+        "opportunity_ids.state",
+    )
+    def _compute_finding_counts(self):
+        for audit in self:
+            audit.nc_count = len(audit.non_conformity_ids)
+            audit.observation_count = len(audit.observation_ids)
+            audit.opportunity_count = len(audit.opportunity_ids)
+
+            # Count open findings (not in 'done' or 'cancel')
+            audit.open_findings_count = sum([
+                len(audit.non_conformity_ids.filtered(
+                    lambda x: x.state not in ("done", "cancel")
+                )),
+                len(audit.observation_ids.filtered(
+                    lambda x: x.state not in ("done", "cancel")
+                )),
+                len(audit.opportunity_ids.filtered(
+                    lambda x: x.state not in ("done", "cancel")
+                )),
+            ])
+
     def action_open(self):
         return self.write({"state": "open"})
 

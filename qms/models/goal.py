@@ -60,6 +60,12 @@ class Goal(models.Model):
 
     last_review_date = fields.Date(compute="_compute_last_review_date", store=True)
 
+    action_count = fields.Integer(
+        string="Actions",
+        compute="_compute_action_count",
+        store=True,
+    )
+
     @api.depends("measurement_ids.measurement_date")
     def _compute_last_measurement_date(self):
         for goal in self:
@@ -92,7 +98,12 @@ class Goal(models.Model):
                 goal.last_review_date = last_review[0].date
             else:
                 goal.last_review_date = False
-                
+
+    @api.depends("action_ids")
+    def _compute_action_count(self):
+        for goal in self:
+            goal.action_count = len(goal.action_ids)
+
     def action_toggle_approved(self):
         self.approved = not self.approved
 

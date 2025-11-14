@@ -50,6 +50,12 @@ class Process(models.Model):
 
     last_review_date = fields.Date(compute="_compute_last_review_date", store=True)
 
+    indicator_count = fields.Integer(
+        string="Indicators",
+        compute="_compute_indicator_count",
+        store=True,
+    )
+
     @api.depends("review_ids.date")
     def _compute_last_review_date(self):
         for process in self:
@@ -60,3 +66,8 @@ class Process(models.Model):
                 process.last_review_date = last_review[0].date
             else:
                 process.last_review_date = False
+
+    @api.depends("indicator_ids")
+    def _compute_indicator_count(self):
+        for process in self:
+            process.indicator_count = len(process.indicator_ids)
