@@ -12,17 +12,23 @@ class Review(models.Model):
 
     conclusion = fields.Html()
 
-    policy_id = fields.Many2one(comodel_name="qms.policy", ondelete="set null")
+    policy_id = fields.Many2one(comodel_name="qms.policy", ondelete="cascade")
 
-    document_id = fields.Many2one(comodel_name="qms.document", ondelete="set null")
+    document_id = fields.Many2one(comodel_name="qms.document", ondelete="cascade")
 
-    goal_id = fields.Many2one(comodel_name="qms.goal", ondelete="set null")
+    procedure_id = fields.Many2one(comodel_name="qms.procedure", ondelete="cascade")
 
-    process_id = fields.Many2one(comodel_name="qms.process", ondelete="set null")
+    instructive_id = fields.Many2one(comodel_name="qms.instructive", ondelete="cascade")
 
-    hazard_id = fields.Many2one(comodel_name="qms.hazard", ondelete="set null")
+    registry_id = fields.Many2one(comodel_name="qms.registry", ondelete="cascade")
 
-    indicator_id = fields.Many2one(comodel_name="qms.indicator", ondelete="set null")
+    goal_id = fields.Many2one(comodel_name="qms.goal", ondelete="cascade")
+
+    process_id = fields.Many2one(comodel_name="qms.process", ondelete="cascade")
+
+    hazard_id = fields.Many2one(comodel_name="qms.hazard", ondelete="cascade")
+
+    indicator_id = fields.Many2one(comodel_name="qms.indicator", ondelete="cascade")
 
     responsible_id = fields.Many2one(
         comodel_name="qms.interested_party", required=True, ondelete="restrict"
