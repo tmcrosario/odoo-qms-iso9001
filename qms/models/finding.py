@@ -58,7 +58,7 @@ class Finding(models.Model):
 
     action_ids = fields.Many2many(comodel_name="qms.action")
 
-    description = fields.Html(required=True)
+    description = fields.Html()
 
     interested_party_id = fields.Many2one(
         comodel_name="qms.interested_party", required=True, ondelete="restrict"
