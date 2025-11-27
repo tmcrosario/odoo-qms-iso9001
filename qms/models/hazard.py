@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 
 
 class Hazard(models.Model):
@@ -6,7 +6,11 @@ class Hazard(models.Model):
     _name = "qms.hazard"
     _description = "Hazard"
 
-    number = fields.Integer()
+    number = fields.Char(
+        string="Risk Number",
+        copy=False,
+        readonly=True,
+    )
 
     description = fields.Html()
 
@@ -148,24 +152,26 @@ class Hazard(models.Model):
         comodel_name="qms.review", inverse_name="hazard_id"
     )
 
-    last_review_date = fields.Date(compute="_compute_last_review_date")
+    last_review_date = fields.Date(compute="_compute_last_review_date", store=True)
 
-    @api.depends("review_ids")
+    @api.depends("review_ids.date")
     def _compute_last_review_date(self):
         for hazard in self:
-            domain = [
-                ("hazard_id", "=", hazard.id),
-                # ('modify_concession', '=', True)
-            ]
-            related_reviews = hazard.env["qms.review"].search(domain)
-            if related_reviews:
-                last_review = related_reviews.sorted(
+            if hazard.review_ids:
+                last_review = hazard.review_ids.sorted(
                     key=lambda r: r.date, reverse=True
                 )
                 hazard.last_review_date = last_review[0].date
             else:
-                hazard.last_review_date = None
+                hazard.last_review_date = False
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get("number"):
+                vals["number"] = self.env["ir.sequence"].next_by_code("qms.hazard")
+        return super(Hazard, self).create(vals_list)
 
     _sql_constraints = [
-        models.Constraint("unique(number)", "Number must be unique")
+        ("unique_number", "UNIQUE(number)", "Number must be unique")
     ]

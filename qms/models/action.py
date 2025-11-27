@@ -1,8 +1,5 @@
-# This model is based in some code used in OCA Management System Addons Project
-# Copyright (C) 2010 Savoir-faire Linux (<http://www.savoirfairelinux.com>).
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class Action(models.Model):
@@ -47,7 +44,10 @@ class Action(models.Model):
         index=True,
         default=_default_stage,
         group_expand="_stage_groups",
+        ondelete="restrict",
     )
+
+    color = fields.Integer(related="stage_id.color", store=False)
 
     reference = fields.Char(required=False, readonly=True)
 
@@ -63,7 +63,7 @@ class Action(models.Model):
     )
 
     responsible_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     effectiveness_check_ids = fields.One2many(
@@ -72,20 +72,20 @@ class Action(models.Model):
         required=False,
     )
 
-    observation_id = fields.Many2one(comodel_name="qms.observation")
+    observation_id = fields.Many2one(comodel_name="qms.observation", ondelete="set null")
 
-    non_conformity_id = fields.Many2one(comodel_name="qms.non_conformity")
+    non_conformity_id = fields.Many2one(comodel_name="qms.non_conformity", ondelete="set null")
 
-    complaint_id = fields.Many2one(comodel_name="qms.complaint")
+    complaint_id = fields.Many2one(comodel_name="qms.complaint", ondelete="set null")
 
-    opportunity_id = fields.Many2one(comodel_name="qms.opportunity")
+    opportunity_id = fields.Many2one(comodel_name="qms.opportunity", ondelete="set null")
 
-    hazard_id = fields.Many2one(comodel_name="qms.hazard")
+    hazard_id = fields.Many2one(comodel_name="qms.hazard", ondelete="set null")
 
-    goal_id = fields.Many2one(comodel_name="qms.goal")
+    goal_id = fields.Many2one(comodel_name="qms.goal", ondelete="set null")
 
     revision_by_direction_id = fields.Many2one(
-        comodel_name="qms.revision_by_direction"
+        comodel_name="qms.revision_by_direction", ondelete="set null"
     )
 
     @api.model_create_multi
@@ -102,3 +102,12 @@ class Action(models.Model):
     @api.model
     def _get_stage_new(self):
         return self.env["qms.action.stage"].search([])
+
+    @api.constrains("opening_date", "date_closed")
+    def _check_dates(self):
+        for action in self:
+            if action.date_closed and action.opening_date:
+                if action.date_closed < action.opening_date:
+                    raise ValidationError(
+                        _("Close date must be after opening date")
+                    )

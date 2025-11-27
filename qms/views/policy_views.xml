@@ -22,22 +22,25 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <widget name="web_ribbon" text="Approved" bg_color="text-bg-success" invisible="not approved"/>
                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_approved" type="object" class="oe_stat_button" icon="fa-check-square-o" invisible="approved">
-                            <div class="o_field_widget o_stat_info">
-                                <span class="o_stat_text">Not Approved</span>
+                        <button name="action_toggle_approved" type="object" class="oe_stat_button" invisible="approved">
+                            <i class="fa fa-check-square-o" title="Not Approved" style="color: #ff8c42; font-size: 22px; margin-top: 2px;"/>
+                            <div class="o_field_widget o_stat_info" style="margin-left: 7px;">
+                                <span class="o_stat_text" style="color: #212529;">Not Approved</span>
                             </div>
                         </button>
-                        <button name="toggle_approved" type="object" class="oe_stat_button" icon="fa-check-square-o" invisible="not approved">
-                            <div class="o_field_widget o_stat_info">
-                                <span class="o_stat_text">Approved</span>
+                        <button name="action_toggle_approved" type="object" class="oe_stat_button" invisible="not approved">
+                            <i class="fa fa-check-square-o" title="Approved" style="color: #5cb85c; font-size: 22px; margin-top: 2px;"/>
+                            <div class="o_field_widget o_stat_info" style="margin-left: 7px;">
+                                <span class="o_stat_text" style="color: #212529;">Approved</span>
                             </div>
                         </button>
                         <field name="approved" invisible="1"/>
                     </div>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" />
+                            <field name="name" placeholder="e.g. Quality Policy 2025"/>
                         </h1>
                     </div>
                     <group>

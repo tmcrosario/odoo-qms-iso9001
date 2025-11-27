@@ -6,7 +6,7 @@ class AuditEvaluation(models.Model):
     _name = "qms.audit.evaluation"
     _description = "Audit Evaluation"
 
-    name = fields.Char()
+    name = fields.Char(required=True)
 
     date = fields.Date()
 
@@ -17,7 +17,7 @@ class AuditEvaluation(models.Model):
     competent = fields.Char()
 
     responsible_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     type = fields.Selection(
@@ -33,7 +33,7 @@ class AuditEvaluation(models.Model):
         comodel_name="qms.interested_party",
     )
 
-    audit_id = fields.Many2one(comodel_name="qms.audit")
+    audit_id = fields.Many2one(comodel_name="qms.audit", ondelete="cascade")
 
     understanding = fields.Selection(
         selection=[
