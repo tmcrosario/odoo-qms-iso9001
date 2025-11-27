@@ -13,9 +13,9 @@ class Goal(models.Model):
 
     cancel_date = fields.Date(readonly=True)
 
-    date_open = fields.Date()
+    date_open = fields.Datetime()
 
-    date_close = fields.Date()
+    date_close = fields.Datetime()
 
     approved = fields.Boolean()
 
@@ -113,12 +113,12 @@ class Goal(models.Model):
     def action_open(self):
         self.state = "open"
         if not self.date_open:
-            self.date_open = fields.Date.today()
+            self.date_open = fields.Datetime.now()
 
     def action_close(self):
         self.state = "closed"
         if not self.date_close:
-            self.date_close = fields.Date.today()
+            self.date_close = fields.Datetime.now()
 
     def action_cancel(self):
         self.state = "cancelled"

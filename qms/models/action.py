@@ -22,9 +22,9 @@ class Action(models.Model):
 
     cancel_date = fields.Date(readonly=True)
 
-    opening_date = fields.Date(readonly=False)
+    opening_date = fields.Datetime(readonly=False)
 
-    date_closed = fields.Date(readonly=False)
+    date_closed = fields.Datetime(readonly=False)
 
     description = fields.Html()
 
