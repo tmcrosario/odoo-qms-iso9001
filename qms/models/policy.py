@@ -12,7 +12,7 @@ class Policy(models.Model):
 
     date = fields.Date()
 
-    last_review_date = fields.Date(compute="_compute_last_review_date")
+    last_review_date = fields.Date(compute="_compute_last_review_date", store=True)
 
     approved = fields.Boolean()
 

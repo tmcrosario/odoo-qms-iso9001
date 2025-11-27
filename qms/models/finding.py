@@ -24,7 +24,7 @@ class Finding(models.Model):
     name = fields.Char(required=True)
 
     claimant_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     reference = fields.Char(required=True, readonly=True, default="NEW")
@@ -40,6 +40,7 @@ class Finding(models.Model):
         copy=False,
         default=_default_stage,
         group_expand="_stage_groups",
+        ondelete="restrict",
     )
 
     state = fields.Selection(related="stage_id.state", store=True)
@@ -57,10 +58,10 @@ class Finding(models.Model):
 
     action_ids = fields.Many2many(comodel_name="qms.action")
 
-    description = fields.Html(required=True)
+    description = fields.Html()
 
     interested_party_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     process_ids = fields.Many2many(comodel_name="qms.process", required=True)
@@ -70,23 +71,30 @@ class Finding(models.Model):
     )
 
     def write(self, vals):
-        is_writing = "is_writing" in self.env.context
-        is_state_change = "stage_id" in vals or "state" in vals
-
         # Reset kanban state on stage change
+        is_state_change = "stage_id" in vals or "state" in vals
         if is_state_change:
             for finding in self:
                 if finding.kanban_state != "normal":
                     vals["kanban_state"] = "normal"
-        result = super(Finding, self).write(vals)
+                    break  # Only need to set it once for all records
 
-        # Set/reset the closing date
-        if not is_writing and is_state_change:
-            for finding in self.with_context(is_writing=True):
-                # On close set closing date
-                if finding.state == "done" and not finding.closing_date:
-                    finding.closing_date = fields.Datetime.now()
-                # On reopen reset closing date
-                if finding.state != "done" and finding.closing_date:
-                    finding.closing_date = None
-        return result
+        # Handle closing_date based on state change for each record
+        if is_state_change and len(self) == 1:
+            # Determine new state after the write
+            new_stage = vals.get("stage_id")
+            if new_stage:
+                stage = self.env["qms.finding.stage"].browse(new_stage)
+                new_state = stage.state
+            else:
+                new_state = vals.get("state")
+
+            # Only modify closing_date if it needs to change
+            if new_state == "done" and not self.closing_date:
+                # Set closing date when closing
+                vals["closing_date"] = fields.Datetime.now()
+            elif new_state and new_state != "done" and self.closing_date:
+                # Clear closing date when reopening (only if it was set)
+                vals["closing_date"] = False
+
+        return super(Finding, self).write(vals)

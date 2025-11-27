@@ -60,6 +60,7 @@ class InterestedParty(models.Model):
     organization_id = fields.Many2one(
         comodel_name="qms.interested_party",
         domain=[("is_organization", "=", True)],
+        ondelete="set null",
     )
 
     requeriments_interested_party = fields.Html()
@@ -69,7 +70,7 @@ class InterestedParty(models.Model):
     area = fields.Char()
 
     review_ids = fields.One2many(
-        comodel_name="qms.review", inverse_name="interested_party_id"
+        comodel_name="qms.review", inverse_name="responsible_id"
     )
 
     last_review_date = fields.Date(compute="_compute_last_review_date")
@@ -77,7 +78,7 @@ class InterestedParty(models.Model):
     @api.depends("review_ids")
     def _compute_last_review_date(self):
         for interested_party in self:
-            domain = [("interested_party_id", "=", interested_party.id)]
+            domain = [("responsible_id", "=", interested_party.id)]
             related_reviews = interested_party.env["qms.review"].search(domain)
             last_review = related_reviews.sorted(
                 key=lambda r: r.date, reverse=True

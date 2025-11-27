@@ -53,7 +53,7 @@ class Document(models.Model):
     description = fields.Html()
 
     responsible_id = fields.Many2one(
-        comodel_name="qms.interested_party", required=True
+        comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
     process_ids = fields.Many2many(comodel_name="qms.process", required=True)
@@ -64,9 +64,9 @@ class Document(models.Model):
 
     approved = fields.Boolean()
 
-    last_review_date = fields.Date(compute="_compute_last_review_date")
+    last_review_date = fields.Date(compute="_compute_last_review_date", store=True)
 
-    last_version = fields.Char(compute="_compute_last_version")
+    last_version = fields.Char(compute="_compute_last_version", store=True)
 
     @api.depends("review_ids.date")
     def _compute_last_review_date(self):

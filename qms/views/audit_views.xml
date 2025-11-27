@@ -8,6 +8,7 @@
             <list>
                 <field name="reference" />
                 <field name="date" readonly="state == 'done'" />
+                <field name="closing_date" readonly="1" />
                 <field name="create_date" />
                 <field name="state" invisible="True" />
             </list>
@@ -45,6 +46,7 @@
                     <group>
                         <field name="reference" />
                         <field name="date" readonly="state == 'done'" />
+                        <field name="closing_date" readonly="1" />
                         <field name="system" />
                     </group>
                     <notebook>

@@ -152,7 +152,7 @@ class Hazard(models.Model):
         comodel_name="qms.review", inverse_name="hazard_id"
     )
 
-    last_review_date = fields.Date(compute="_compute_last_review_date")
+    last_review_date = fields.Date(compute="_compute_last_review_date", store=True)
 
     @api.depends("review_ids.date")
     def _compute_last_review_date(self):
