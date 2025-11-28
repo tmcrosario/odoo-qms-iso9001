@@ -104,6 +104,34 @@ class Goal(models.Model):
         for goal in self:
             goal.action_count = len(goal.action_ids)
 
+    def write(self, vals):
+        # Handle automatic date setting when state changes via statusbar
+        if "state" in vals:
+            new_state = vals["state"]
+
+            # Set date_open when opening (if not already set)
+            if new_state == "open":
+                for goal in self:
+                    if not goal.date_open:
+                        vals["date_open"] = fields.Datetime.now()
+                        break
+
+            # Set date_close when closing (if not already set)
+            elif new_state == "closed":
+                for goal in self:
+                    if not goal.date_close:
+                        vals["date_close"] = fields.Datetime.now()
+                        break
+
+            # Set cancel_date when cancelling (if not already set)
+            elif new_state == "cancelled":
+                for goal in self:
+                    if not goal.cancel_date:
+                        vals["cancel_date"] = fields.Date.today()
+                        break
+
+        return super(Goal, self).write(vals)
+
     def action_toggle_approved(self):
         self.approved = not self.approved
 
@@ -133,3 +161,19 @@ class Goal(models.Model):
                     raise ValidationError(
                         _("Close date must be after open date")
                     )
+
+    @api.constrains("state", "date_open")
+    def _check_open_date_required(self):
+        for goal in self:
+            if goal.state in ("open", "closed") and not goal.date_open:
+                raise ValidationError(
+                    _("Opening date is required when goal is in Open or Closed state")
+                )
+
+    @api.constrains("state", "date_close")
+    def _check_close_date_required(self):
+        for goal in self:
+            if goal.state == "closed" and not goal.date_close:
+                raise ValidationError(
+                    _("Closing date is required when goal is in Closed state")
+                )
