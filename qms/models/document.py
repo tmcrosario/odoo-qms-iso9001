@@ -37,7 +37,7 @@ class Document(models.Model):
 
     storage = fields.Char()
 
-    link = fields.Char()
+    link = fields.Html()
 
     disposition = fields.Char()
 
