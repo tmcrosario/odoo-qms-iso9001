@@ -11,10 +11,6 @@ class Complaint(models.Model):
         comodel_name="qms.action", inverse_name="complaint_id"
     )
 
-    @api.model
-    def _stage_groups(self, stages, domain):
-        return self.env["qms.finding.stage"].search([])
-
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
