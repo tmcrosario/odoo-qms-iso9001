@@ -20,10 +20,6 @@ class Observation(models.Model):
 
     indicator_id = fields.Many2one(comodel_name="qms.indicator", ondelete="set null")
 
-    @api.model
-    def _stage_groups(self, stages, domain):
-        return self.env["qms.finding.stage"].search([])
-
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:

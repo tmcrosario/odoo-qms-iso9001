@@ -11,9 +11,9 @@ class RevisionByDirection(models.Model):
 
     description = fields.Html()
 
-    date_open = fields.Date()
+    date_open = fields.Datetime()
 
-    date_close = fields.Date()
+    date_close = fields.Datetime()
 
     resource_ids = fields.Many2many(comodel_name="qms.resource")
 
@@ -53,7 +53,7 @@ class RevisionByDirection(models.Model):
 
     def button_close(self):
         self.write(
-            {"state": "done", "date_close": fields.Date.today()}
+            {"state": "done", "date_close": fields.Datetime.now()}
         )
         return True
 
