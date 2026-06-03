@@ -20,9 +20,10 @@ class WeaknessCause(models.Model):
     )
 
     @api.constrains("parent_id")
-    def _check_recursion(self):
-        if not super(WeaknessCause, self)._check_recursion():
+    def _check_parent_recursion(self):
+        # MIG(19.0): _check_recursion() (returned True when VALID) was removed in
+        # 18.0 and replaced by _has_cycle() (returns True when a cycle EXISTS).
+        if self._has_cycle():
             raise exceptions.ValidationError(
                 _("Error! Cannot create recursive cycle.")
             )
-        return

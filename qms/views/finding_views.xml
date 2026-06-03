@@ -130,16 +130,16 @@
                                 <group string="Plan Review">
                                 <group>
                                     <field name="action_plan_comments"
-                                           attrs="{'readonly':[('state','not in',['pending'])]}"
+                                           readonly="state not in ['pending']"
                                            nolabel="1"
                                            placeholder="Action Plan Comments" />
                                 </group>
                             </group>
-                            <group attrs="{'invisible':[('state','not in',['open','done'])]}"
+                            <group invisible="state not in ['open','done']"
                                    string="Effectiveness Review">
                                 <group>
                                     <field name="evaluation_comments"
-                                           attrs="{'readonly':[('state','not in',['open'])]}"
+                                           readonly="state not in ['open']"
                                            nolabel="1"
                                            placeholder="Evaluation Comments" />
                                 </group>
