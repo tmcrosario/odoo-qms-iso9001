@@ -172,6 +172,4 @@ class Hazard(models.Model):
                 vals["number"] = self.env["ir.sequence"].next_by_code("qms.hazard")
         return super(Hazard, self).create(vals_list)
 
-    _sql_constraints = [
-        ("unique_number", "UNIQUE(number)", "Number must be unique")
-    ]
+    _unique_number = models.Constraint("UNIQUE(number)", "Number must be unique")
