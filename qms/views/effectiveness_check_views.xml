@@ -31,6 +31,8 @@
                             <field name="verification_date" />
                         </group>
                         <group>
+                            <!-- Required field: without it standalone creation fails -->
+                            <field name="action_id" />
                             <field name="was_effective" />
                         </group>
                     </group>
