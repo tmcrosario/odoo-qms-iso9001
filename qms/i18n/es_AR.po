@@ -1977,11 +1977,6 @@ msgid "Responsible"
 msgstr "Responsable"
 
 #. module: qms
-#: model:ir.model.fields,field_description:qms.field_qms_revision_by_direction__responsibles_ids
-msgid "Responsibles"
-msgstr "Responsables"
-
-#. module: qms
 #: model:ir.model.fields,field_description:qms.field_qms_goal_measurement__result
 #: model:ir.model.fields,field_description:qms.field_qms_hazard__result
 #: model:ir.model.fields,field_description:qms.field_qms_indicator_measurement__result

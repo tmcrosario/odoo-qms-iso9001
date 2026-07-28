@@ -6,7 +6,6 @@
         <field name="model">qms.finding</field>
         <field name="arch" type="xml">
             <list name="finding">
-                <field name="id" />
                 <field name="name" />
                 <field name="reference" />
                 <field name="create_date" />
@@ -126,25 +125,6 @@
                             invisible="state in ['draft','analysis','cancel']">
                             <separator string="Action Plan" />
                             <field name="action_ids" />
-                            <!--
-                                <group string="Plan Review">
-                                <group>
-                                    <field name="action_plan_comments"
-                                           readonly="state not in ['pending']"
-                                           nolabel="1"
-                                           placeholder="Action Plan Comments" />
-                                </group>
-                            </group>
-                            <group invisible="state not in ['open','done']"
-                                   string="Effectiveness Review">
-                                <group>
-                                    <field name="evaluation_comments"
-                                           readonly="state not in ['open']"
-                                           nolabel="1"
-                                           placeholder="Evaluation Comments" />
-                                </group>
-                            </group>
-                            -->
                         </page>
                     </notebook>
                 </sheet>

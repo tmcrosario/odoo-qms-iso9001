@@ -6,7 +6,6 @@
         <field name="model">qms.action</field>
         <field name="arch" type="xml">
             <list>
-                <field name="id" />
                 <field name="reference" />
                 <field name="name" />
                 <field name="responsible_id" />
