@@ -3,7 +3,8 @@
 
     <menuitem id="menu_qms_root"
         name="Quality Management System"
-        sequence="0" />
+        sequence="13"
+        groups="qms.group_user,qms.group_read_only" />
 
     <menuitem id="menu_qms_main" 
         name="ISO 9001:2015"
@@ -11,13 +12,16 @@
         sequence="5" />
 
     <menuitem id="menu_qms_context"
-        name="Context" 
-        parent="qms.menu_qms_root" 
-        sequence="10" />
+        name="Context"
+        parent="qms.menu_qms_root"
+        sequence="10"
+        groups="qms.group_manager" />
 
-    <menuitem id="menu_qms_configuration" 
-        name="Configuration" 
-        parent="qms.menu_qms_root" 
-        sequence="15" />
+    <!-- Managers only: group_user has write on the stage models below -->
+    <menuitem id="menu_qms_configuration"
+        name="Configuration"
+        parent="qms.menu_qms_root"
+        sequence="15"
+        groups="qms.group_manager" />
 
 </odoo>
