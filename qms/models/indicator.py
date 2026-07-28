@@ -64,8 +64,15 @@ class Indicator(models.Model):
         compute="_compute_last_measurement_date", store=True
     )
 
-    last_measurement_result = fields.Char(
-        compute="_compute_last_measurement_result", store=True
+    # Mirrors qms.indicator.measurement.result so lists show the label, not the key
+    last_measurement_result = fields.Selection(
+        selection=[
+            ("goal_ok", "Goal reached"),
+            ("goal_with_obs", "Goal reached with observations"),
+            ("goal_no_ok", "Unachieved target"),
+        ],
+        compute="_compute_last_measurement_result",
+        store=True,
     )
 
     last_measurement_result_detail = fields.Char(

@@ -54,8 +54,15 @@ class Goal(models.Model):
         compute="_compute_last_measurement_date", store=True
     )
 
-    last_measurement_result = fields.Char(
-        compute="_compute_last_measurement_result", store=True
+    # Mirrors qms.goal.measurement.result so lists show the label, not the key
+    last_measurement_result = fields.Selection(
+        selection=[
+            ("goal_ok", "Goal achieved"),
+            ("goal_with_obs", "Goal achieved with comments"),
+            ("goal_no_ok", "Goal not achieved"),
+        ],
+        compute="_compute_last_measurement_result",
+        store=True,
     )
 
     last_review_date = fields.Date(compute="_compute_last_review_date", store=True)
