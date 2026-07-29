@@ -5,7 +5,7 @@
     "version": "19.0.1.0.0",
     "author": "TMC Rosario, Odoo Community Association",
     "license": "AGPL-3",
-    "depends": [],
+    "depends": ["base"],
     "data": [
         "security/qms_groups.xml",
         "security/ir.model.access.csv",
