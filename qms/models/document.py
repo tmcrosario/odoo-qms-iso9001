@@ -1,3 +1,5 @@
+from datetime import date
+
 from odoo import api, fields, models
 
 
@@ -72,8 +74,9 @@ class Document(models.Model):
     def _compute_last_review_date(self):
         for document in self:
             if document.review_ids:
+                # Fallback date: an undated review must not break the sort
                 last_review = document.review_ids.sorted(
-                    key=lambda r: r.date, reverse=True
+                    key=lambda r: r.date or date.min, reverse=True
                 )
                 document.last_review_date = last_review[0].date
             else:
@@ -83,8 +86,9 @@ class Document(models.Model):
     def _compute_last_version(self):
         for document in self:
             if document.version_ids:
+                # Fallback date: an unopened version must not break the sort
                 last_version = document.version_ids.sorted(
-                    key=lambda r: r.date_open, reverse=True
+                    key=lambda r: r.date_open or date.min, reverse=True
                 )
                 document.last_version = last_version[0].version
             else:
