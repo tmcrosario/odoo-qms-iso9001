@@ -59,11 +59,5 @@
         </field>
     </record>
 
-    <!-- WINDOW ACTION -->
-    <record id="goal_measurement_action_view_tree" model="ir.actions.act_window">
-        <field name="name">Goal Measurements</field>
-        <field name="res_model">qms.goal.measurement</field>
-        <field name="view_mode">list,form</field>
-    </record>
 
 </odoo>

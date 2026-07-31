@@ -1,3 +1,5 @@
+from datetime import date
+
 from odoo import _, api, fields, models
 
 
@@ -75,14 +77,14 @@ class InterestedParty(models.Model):
 
     last_review_date = fields.Date(compute="_compute_last_review_date")
 
-    @api.depends("review_ids")
+    @api.depends("review_ids.date")
     def _compute_last_review_date(self):
         for interested_party in self:
-            domain = [("responsible_id", "=", interested_party.id)]
-            related_reviews = interested_party.env["qms.review"].search(domain)
-            last_review = related_reviews.sorted(
-                key=lambda r: r.date, reverse=True
-            )
-            interested_party.last_review_date = (
-                last_review[0].date if last_review else False
-            )
+            if interested_party.review_ids:
+                # Fallback date: an undated review must not break the sort
+                last_review = interested_party.review_ids.sorted(
+                    key=lambda r: r.date or date.min, reverse=True
+                )
+                interested_party.last_review_date = last_review[0].date
+            else:
+                interested_party.last_review_date = False

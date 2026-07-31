@@ -89,7 +89,5 @@
     </record>
 
     <!-- MENU -->
-    <!-- FIXME -->
-    <menuitem id="documents_menu" name="Documents" parent="menu_qms_root" sequence="5" />
     <menuitem id="document_menu" name="Documents" parent="qms.menu_qms_main" sequence="60" />
 </odoo>

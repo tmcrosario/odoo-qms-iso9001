@@ -99,10 +99,6 @@ class Action(models.Model):
     def _stage_groups(self, stages, domain):
         return self.env["qms.action.stage"].search([])
 
-    @api.model
-    def _get_stage_new(self):
-        return self.env["qms.action.stage"].search([])
-
     @api.constrains("opening_date", "date_closed")
     def _check_dates(self):
         for action in self:

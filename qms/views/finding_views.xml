@@ -55,18 +55,6 @@
                 <templates>
                     <t t-name="card">
                         <div class="oe_kanban_global_click">
-                            <div class="o_dropdown_kanban dropdown">
-                                <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" role="button" aria-label="Dropdown menu" title="Dropdown menu">
-                                    <span class="fa fa-bars fa-lg" />
-                                </a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <t t-if="widget.editable">
-                                        <li>
-                                            <a type="edit">Edit</a>
-                                        </li>
-                                    </t>
-                                </ul>
-                            </div>
                             <div class="oe_kanban_content">
                                 <div>
                                     <strong>

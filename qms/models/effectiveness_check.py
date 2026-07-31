@@ -34,8 +34,8 @@ class EffectivenessCheck(models.Model):
             ):
                 raise ValidationError(
                     _(
-                        "Verification_date are required in order to put a \
-                        effectiveness_check 'closed'"
+                        "A verification date is required to close an "
+                        "effectiveness check."
                     )
                 )
 

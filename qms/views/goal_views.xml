@@ -90,7 +90,7 @@
                             <field name="action_ids" nolabel="1" />
                         </page>
                         <page string="Measurements">
-                            <field name="measurement_ids" nolabel="True" readonly="state == 'done'" />
+                            <field name="measurement_ids" nolabel="True" readonly="state == 'closed'" />
                         </page>
                         <page string="Reviews">
                             <field name="review_ids" />

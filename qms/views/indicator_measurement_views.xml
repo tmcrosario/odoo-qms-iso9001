@@ -60,11 +60,5 @@
         </field>
     </record>
 
-    <!-- WINDOW ACTION -->
-    <record id="indicator_measurement_action_view_tree" model="ir.actions.act_window">
-        <field name="name">Indicator Measurements</field>
-        <field name="res_model">qms.indicator.measurement</field>
-        <field name="view_mode">list,form</field>
-    </record>
 
 </odoo>
