@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Self-contained QMS fixture, mocked (all names suffixed "Demo"); refs
+         resolve inside qms's own seed data. Ordered so parents load first. -->
+
+    <!-- Foundation: interested parties, policy components, process, resource. -->
+    <record id="demo_ip_org" model="qms.interested_party">
+        <field name="name">Organismo Auditado Demo</field>
+        <field name="is_organization" eval="True" />
+        <field name="interested_party_type">external</field>
+    </record>
+    <record id="demo_ip_auditor" model="qms.interested_party">
+        <field name="name">Equipo Auditor Demo</field>
+        <field name="interested_party_type">internal</field>
+        <field name="area">Calidad</field>
+    </record>
+    <record id="demo_ip_referente" model="qms.interested_party">
+        <field name="name">Referente Proceso Demo</field>
+        <field name="interested_party_type">internal</field>
+        <field name="area">Sistemas</field>
+        <field name="organization_id" ref="demo_ip_org" />
+    </record>
+
+    <record id="demo_pc_efic" model="qms.policy_component">
+        <field name="name">a) garantizar la eficacia de los procesos (Demo)</field>
+    </record>
+    <record id="demo_pc_mejora" model="qms.policy_component">
+        <field name="name">b) compromiso de mejora continua del SGC (Demo)</field>
+    </record>
+
+    <record id="demo_proc_dictamen" model="qms.process">
+        <field name="name">Emision de Dictamenes (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_referente" />
+        <field
+            name="policy_component_ids"
+            eval="[(6, 0, [ref('demo_pc_efic'), ref('demo_pc_mejora')])]"
+        />
+        <field name="resource_type">central</field>
+        <field name="state">enabled</field>
+    </record>
+
+    <record id="demo_res_sistema" model="qms.resource">
+        <field name="name">Sistema de Gestion Documental (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_referente" />
+        <field name="resource_type">internal</field>
+        <field name="state">available</field>
+    </record>
+
+    <!-- Indicator + measurement (measurement_date >= expected_date). -->
+    <record id="demo_ind_informes" model="qms.indicator">
+        <field name="name">Informes entregados en termino (Demo)</field>
+        <field name="number">1</field>
+        <field name="responsible_id" ref="demo_ip_referente" />
+        <field name="process_id" ref="demo_proc_dictamen" />
+        <field name="frequency">annual</field>
+        <field name="state">enabled</field>
+    </record>
+    <record id="demo_meas_1" model="qms.indicator.measurement">
+        <field name="name">Medicion 2025 (Demo)</field>
+        <field name="indicator_id" ref="demo_ind_informes" />
+        <field name="expected_date">2025-12-01</field>
+        <field name="measurement_date">2025-12-15</field>
+        <field name="result">goal_ok</field>
+    </record>
+
+    <!-- Hazard (number auto from sequence; result/evaluation computed). -->
+    <record id="demo_hazard" model="qms.hazard">
+        <field name="name">Falta de personal suplente en posiciones clave (Demo)</field>
+        <field name="type_risk">operative</field>
+        <field name="probability">2</field>
+        <field name="impact">3</field>
+        <field name="strategy">watch</field>
+        <field name="state">draft</field>
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_dictamen')])]" />
+    </record>
+
+    <!-- Audit + verification line + evaluation (no closing_date, so open). -->
+    <record id="demo_audit" model="qms.audit">
+        <field name="system">iso9001_2015</field>
+        <field name="date">2025-06-10</field>
+        <field name="reference">Auditoria Interna Demo 2025</field>
+        <field name="state">open</field>
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_dictamen')])]" />
+        <field name="auditors_ids" eval="[(6, 0, [ref('demo_ip_auditor')])]" />
+        <field name="audited_ids" eval="[(6, 0, [ref('demo_ip_org')])]" />
+    </record>
+    <record id="demo_vl" model="qms.audit.verification.line">
+        <field name="audit_id" ref="demo_audit" />
+        <field name="name">Se cumple 8.1 planificacion operacional? (Demo)</field>
+        <field name="clause">8.1</field>
+        <field name="is_conformed" eval="True" />
+        <field name="seq">1</field>
+    </record>
+    <record id="demo_eval" model="qms.audit.evaluation">
+        <field name="audit_id" ref="demo_audit" />
+        <field name="name">Evaluacion Auditoria Demo 2025</field>
+        <field name="responsible_id" ref="demo_ip_auditor" />
+        <field name="type">internal</field>
+        <field name="final_note">8</field>
+    </record>
+
+    <!-- Non-conformity: findings need claimant + interested_party + origin +
+         process; reference/stage auto. -->
+    <record id="demo_nc" model="qms.non_conformity">
+        <field name="name">Requisito 7.4 control de provision externa (Demo)</field>
+        <field name="claimant_id" ref="demo_ip_org" />
+        <field name="interested_party_id" ref="demo_ip_referente" />
+        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_internal_audit')])]" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_dictamen')])]" />
+        <field name="audit_id" ref="demo_audit" />
+        <field
+            name="cause_ids"
+            eval="[(6, 0, [ref('weakness_cause_procedure_not_defined')])]"
+        />
+        <field name="analysis">Analisis de causa raiz demo.</field>
+    </record>
+
+    <!-- Action + effectiveness check (date_closed >= opening_date). -->
+    <record id="demo_action" model="qms.action">
+        <field name="name">Actualizar procedimiento de provision externa (Demo)</field>
+        <field name="response_type">correction</field>
+        <field name="complexity">medium</field>
+        <field name="responsible_id" ref="demo_ip_referente" />
+        <field name="non_conformity_id" ref="demo_nc" />
+        <field name="opening_date">2025-06-20</field>
+        <field name="date_closed">2025-07-30</field>
+    </record>
+    <record id="demo_ec" model="qms.effectiveness_check">
+        <field name="action_id" ref="demo_action" />
+        <field name="expected_date">2025-08-01</field>
+        <field name="verification_date">2025-09-01</field>
+        <field name="state">closed</field>
+        <field name="was_effective" eval="True" />
+    </record>
+
+    <!-- Goal + measurement (state=open requires date_open). -->
+    <record id="demo_goal" model="qms.goal">
+        <field name="name">Garantizar recursos para la mejora continua (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_referente" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_dictamen')])]" />
+        <field name="resource_ids" eval="[(6, 0, [ref('demo_res_sistema')])]" />
+        <field name="state">open</field>
+        <field name="date_open">2025-01-15</field>
+    </record>
+    <record id="demo_gm" model="qms.goal.measurement">
+        <field name="goal_id" ref="demo_goal" />
+        <field name="name">Acciones realizadas/planificadas (Demo)</field>
+        <field name="expected_date">2025-06-01</field>
+        <field name="measurement_date">2025-06-30</field>
+        <field name="result">goal_ok</field>
+    </record>
+</odoo>
