@@ -7,9 +7,9 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
-                <field name="version" />
-                <field name="date" />
-                <field name="last_review_date" />
+                <field name="version" options="{'enable_formatting': False}" />
+                <field name="date" options="{'numeric': True}" />
+                <field name="last_review_date" options="{'numeric': True}" />
                 <field name="approved" />
             </list>
         </field>
@@ -45,9 +45,9 @@
                     </div>
                     <group>
                         <group>
-                            <field name="version" />
-                            <field name="date" />
-                            <field name="last_review_date" />
+                            <field name="version" options="{'enable_formatting': False}" />
+                            <field name="date" options="{'numeric': True}" />
+                            <field name="last_review_date" options="{'numeric': True}" />
                         </group>
                     </group>
                     <notebook>

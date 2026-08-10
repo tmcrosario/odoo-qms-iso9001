@@ -6,8 +6,8 @@
         <field name="model">qms.effectiveness_check</field>
         <field name="arch" type="xml">
             <list>
-                <field name="expected_date" />
-                <field name="verification_date" />
+                <field name="expected_date" options="{'numeric': True}" />
+                <field name="verification_date" options="{'numeric': True}" />
                 <field name="was_effective" />
                 <field name="state" />
                 <field name="action_id" />
@@ -27,8 +27,8 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="expected_date" />
-                            <field name="verification_date" />
+                            <field name="expected_date" options="{'numeric': True}" />
+                            <field name="verification_date" options="{'numeric': True}" />
                         </group>
                         <group>
                             <!-- Required field: without it standalone creation fails -->

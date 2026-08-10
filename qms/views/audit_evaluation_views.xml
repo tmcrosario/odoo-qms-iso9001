@@ -8,7 +8,7 @@
             <list>
                 <field name="name" />
                 <field name="auditors_ids" />
-                <field name="date" />
+                <field name="date" options="{'numeric': True}" />
                 <field name="type" />
                 <field name="competent" />
                 <field name="responsible_id" />
@@ -24,7 +24,7 @@
         <field name="arch" type="xml">
             <search>
                 <group>
-                    <field name="date" />
+                    <field name="date" options="{'numeric': True}" />
                     <field name="description" />
                     <field name="final_note" />
                     <field name="competent" />
@@ -42,7 +42,7 @@
                 <group>
                     <group>
                         <field name="name" />
-                        <field name="date" />
+                        <field name="date" options="{'numeric': True}" />
                         <field name="type" />
                         <field name="responsible_id" />
                     </group>

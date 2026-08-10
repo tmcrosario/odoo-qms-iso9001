@@ -8,8 +8,8 @@
             <list>
                 <field name="name" />
                 <field name="goal" />
-                <field name="expected_date" />
-                <field name="measurement_date" />
+                <field name="expected_date" options="{'numeric': True}" />
+                <field name="measurement_date" options="{'numeric': True}" />
                 <field name="result" />
                 <field name="result_detail" />
             </list>
@@ -25,8 +25,8 @@
                 <group>
                     <field name="name" />
                     <field name="goal" />
-                    <field name="expected_date" />
-                    <field name="measurement_date" />
+                    <field name="expected_date" options="{'numeric': True}" />
+                    <field name="measurement_date" options="{'numeric': True}" />
                     <field name="result" />
                     <field name="comments" />
                 </group>
@@ -44,8 +44,8 @@
                     <group>
                         <field name="name" />
                         <field name="goal" />
-                        <field name="expected_date" />
-                        <field name="measurement_date" />
+                        <field name="expected_date" options="{'numeric': True}" />
+                        <field name="measurement_date" options="{'numeric': True}" />
                     </group>
                     <group>
                         <field name="result" />

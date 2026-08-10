@@ -7,8 +7,8 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
-                <field name="date_open" />
-                <field name="date_close" />
+                <field name="date_open" options="{'numeric': True}" />
+                <field name="date_close" options="{'numeric': True}" />
                 <field name="state" invisible="False" />
             </list>
         </field>
@@ -32,8 +32,8 @@
                     </div>
                     <group>
                         <group>
-                            <field name="date_open" />
-                            <field name="date_close" />
+                            <field name="date_open" options="{'numeric': True}" />
+                            <field name="date_close" options="{'numeric': True}" />
                         </group>
                     </group>
                     <notebook>
@@ -53,7 +53,7 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" />
+                                    <field name="closing_date" options="{'numeric': True}" />
                                 </list>
                             </field>
                         </page>
@@ -67,7 +67,7 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" />
+                                    <field name="closing_date" options="{'numeric': True}" />
                                 </list>
                             </field>
                         </page>
@@ -81,7 +81,7 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" />
+                                    <field name="closing_date" options="{'numeric': True}" />
                                 </list>
                             </field>
                         </page>

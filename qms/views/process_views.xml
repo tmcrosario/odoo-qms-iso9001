@@ -11,7 +11,7 @@
                 <field name="resource_type" />
                 <field name="state" />
                 <field name="indicator_ids" />
-                <field name="last_review_date" />
+                <field name="last_review_date" options="{'numeric': True}" />
             </list>
         </field>
     </record>

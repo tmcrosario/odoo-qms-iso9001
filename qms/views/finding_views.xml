@@ -12,7 +12,7 @@
                 <field name="description" />
                 <field name="stage_id" />
                 <field name="origin_ids" />
-                <field name="closing_date" />
+                <field name="closing_date" options="{'numeric': True}" />
                 <field name="process_ids" />
             </list>
         </field>

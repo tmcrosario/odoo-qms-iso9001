@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
-                <field name="date" />
+                <field name="date" options="{'numeric': True}" />
                 <field name="responsible_id" />
                 <field name="conclusion" />
             </list>
@@ -26,7 +26,7 @@
                             <field name="name" />
                         </group>
                         <group>
-                            <field name="date" />
+                            <field name="date" options="{'numeric': True}" />
                             <field name="responsible_id" />
                         </group>
                         <group>

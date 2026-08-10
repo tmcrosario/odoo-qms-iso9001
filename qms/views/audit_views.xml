@@ -7,8 +7,8 @@
         <field name="arch" type="xml">
             <list>
                 <field name="reference" />
-                <field name="date" readonly="state == 'done'" />
-                <field name="closing_date" readonly="1" />
+                <field name="date" readonly="state == 'done'" options="{'numeric': True}" />
+                <field name="closing_date" readonly="1" options="{'numeric': True}" />
                 <field name="create_date" />
                 <field name="state" invisible="True" />
             </list>
@@ -24,7 +24,7 @@
                 <group>
                     <filter name="open" domain="[('state','=','open')]" string="Open" />
                     <filter name="closed" domain="[('state','=','done')]" string="Closed" />
-                    <field name="date" />
+                    <field name="date" options="{'numeric': True}" />
                     <field name="reference" />
                 </group>
             </search>
@@ -45,8 +45,8 @@
                 <sheet>
                     <group>
                         <field name="reference" />
-                        <field name="date" readonly="state == 'done'" />
-                        <field name="closing_date" readonly="1" />
+                        <field name="date" readonly="state == 'done'" options="{'numeric': True}" />
+                        <field name="closing_date" readonly="1" options="{'numeric': True}" />
                         <field name="system" />
                     </group>
                     <notebook>
@@ -76,7 +76,7 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" />
+                                    <field name="closing_date" options="{'numeric': True}" />
                                 </list>
                             </field>
                         </page>
@@ -90,7 +90,7 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" />
+                                    <field name="closing_date" options="{'numeric': True}" />
                                 </list>
                             </field>
                         </page>
@@ -104,7 +104,7 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" />
+                                    <field name="closing_date" options="{'numeric': True}" />
                                 </list>
                             </field>
                         </page>

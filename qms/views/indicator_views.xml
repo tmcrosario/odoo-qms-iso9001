@@ -6,15 +6,15 @@
         <field name="model">qms.indicator</field>
         <field name="arch" type="xml">
             <list>
-                <field name="number" />
+                <field name="number" options="{'enable_formatting': False}" />
                 <field name="name" />
                 <field name="responsible_id" />
                 <field name="process_id" />
                 <field name="state" />
-                <field name="last_measurement_date" />
+                <field name="last_measurement_date" options="{'numeric': True}" />
                 <field name="last_measurement_result" />
                 <field name="last_measurement_result_detail" />
-                <field name="last_review_date" />
+                <field name="last_review_date" options="{'numeric': True}" />
             </list>
         </field>
     </record>
@@ -36,7 +36,7 @@
                     </div>
                     <group>
                         <group>
-                            <field name="number" />
+                            <field name="number" options="{'enable_formatting': False}" />
                             <field name="responsible_id" />
                             <field name="process_id" />
                             <field name="frequency" />
@@ -59,7 +59,7 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" />
+                                    <field name="closing_date" options="{'numeric': True}" />
                                 </list>
                             </field>
                         </page>
@@ -73,7 +73,7 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" />
+                                    <field name="closing_date" options="{'numeric': True}" />
                                 </list>
                             </field>
                         </page>
@@ -87,7 +87,7 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" />
+                                    <field name="closing_date" options="{'numeric': True}" />
                                 </list>
                             </field>
                         </page>

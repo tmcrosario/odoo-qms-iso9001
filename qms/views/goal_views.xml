@@ -7,13 +7,13 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
-                <field name="date_open" />
-                <field name="cancel_date" />
-                <field name="date_close" />
+                <field name="date_open" options="{'numeric': True}" />
+                <field name="cancel_date" options="{'numeric': True}" />
+                <field name="date_close" options="{'numeric': True}" />
                 <field name="responsible_id" />
                 <field name="state" />
                 <field name="approved" />
-                <field name="last_review_date" />
+                <field name="last_review_date" options="{'numeric': True}" />
             </list>
         </field>
     </record>
@@ -68,12 +68,12 @@
                     </div>
                     <group>
                         <group>
-                            <field name="date_open" />
+                            <field name="date_open" options="{'numeric': True}" />
                             <field name="responsible_id" />
                         </group>
                         <group>
-                            <field name="cancel_date" />
-                            <field name="date_close" />
+                            <field name="cancel_date" options="{'numeric': True}" />
+                            <field name="date_close" options="{'numeric': True}" />
                         </group>
                     </group>
                     <notebook>

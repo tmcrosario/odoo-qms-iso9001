@@ -16,7 +16,7 @@
                 <field name="holding_time" />
                 <field name="disposition" />
                 <field name="link" />
-                <field name="last_review_date" />
+                <field name="last_review_date" options="{'numeric': True}" />
             </list>
         </field>
     </record>

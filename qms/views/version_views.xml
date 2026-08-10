@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="version" />
-                <field name="date_open" />
+                <field name="date_open" options="{'numeric': True}" />
                 <field name="responsible_id" />
                 <field name="change_history" />
             </list>
@@ -22,7 +22,7 @@
             <search>
                 <group>
                     <field name="version" />
-                    <field name="date_open" />
+                    <field name="date_open" options="{'numeric': True}" />
                     <field name="responsible_id" />
                     <field name="change_history" />
                 </group>
@@ -42,7 +42,7 @@
                         <field name="responsible_id" />
                     </group>
                     <group>
-                        <field name="date_open" />
+                        <field name="date_open" options="{'numeric': True}" />
                     </group>
                 </group>
                 <group>

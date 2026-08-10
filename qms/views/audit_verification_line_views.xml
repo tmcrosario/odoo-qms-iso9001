@@ -6,7 +6,7 @@
         <field name="model">qms.audit.verification.line</field>
         <field name="arch" type="xml">
             <list>
-                <field name="seq" />
+                <field name="seq" options="{'enable_formatting': False}" />
                 <field name="name" />
                 <field name="clause" />
                 <field name="is_conformed" />
@@ -42,7 +42,7 @@
                     <field name="name" />
                     <field name="clause" />
                     <field name="is_conformed" />
-                    <field name="seq" />
+                    <field name="seq" options="{'enable_formatting': False}" />
                     <field name="comments" />
                 </group>
             </form>
