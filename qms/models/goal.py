@@ -1,3 +1,5 @@
+from datetime import date
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -78,7 +80,7 @@ class Goal(models.Model):
         for goal in self:
             if goal.measurement_ids:
                 last_measurement = goal.measurement_ids.sorted(
-                    key=lambda r: r.measurement_date, reverse=True
+                    key=lambda r: r.measurement_date or date.min, reverse=True
                 )
                 goal.last_measurement_date = last_measurement[0].measurement_date
             else:
@@ -89,7 +91,7 @@ class Goal(models.Model):
         for goal in self:
             if goal.measurement_ids:
                 last_measurement = goal.measurement_ids.sorted(
-                    key=lambda r: r.measurement_date, reverse=True
+                    key=lambda r: r.measurement_date or date.min, reverse=True
                 )
                 goal.last_measurement_result = last_measurement[0].result
             else:
@@ -100,7 +102,7 @@ class Goal(models.Model):
         for goal in self:
             if goal.review_ids:
                 last_review = goal.review_ids.sorted(
-                    key=lambda r: r.date, reverse=True
+                    key=lambda r: r.date or date.min, reverse=True
                 )
                 goal.last_review_date = last_review[0].date
             else:
@@ -112,23 +114,22 @@ class Goal(models.Model):
             goal.action_count = len(goal.action_ids)
 
     def write(self, vals):
-        res = super().write(vals)
-        # Set the transition date only on records that lack it, so a batch
-        # state change never clobbers dates already stored on other records
+        # Stamp the transition date on records lacking it BEFORE the state
+        # write, so the state constraints (validated inside super) are met
         new_state = vals.get("state")
         if new_state == "open":
-            self.filtered(lambda g: not g.date_open).date_open = (
-                fields.Datetime.now()
+            self.filtered(lambda g: not g.date_open).write(
+                {"date_open": fields.Datetime.now()}
             )
         elif new_state == "closed":
-            self.filtered(lambda g: not g.date_close).date_close = (
-                fields.Datetime.now()
+            self.filtered(lambda g: not g.date_close).write(
+                {"date_close": fields.Datetime.now()}
             )
         elif new_state == "cancelled":
-            self.filtered(lambda g: not g.cancel_date).cancel_date = (
-                fields.Date.today()
+            self.filtered(lambda g: not g.cancel_date).write(
+                {"cancel_date": fields.Date.today()}
             )
-        return res
+        return super().write(vals)
 
     def action_toggle_approved(self):
         self.approved = not self.approved
@@ -138,18 +139,12 @@ class Goal(models.Model):
 
     def action_open(self):
         self.state = "open"
-        if not self.date_open:
-            self.date_open = fields.Datetime.now()
 
     def action_close(self):
         self.state = "closed"
-        if not self.date_close:
-            self.date_close = fields.Datetime.now()
 
     def action_cancel(self):
         self.state = "cancelled"
-        if not self.cancel_date:
-            self.cancel_date = fields.Date.today()
 
     @api.constrains("date_open", "date_close")
     def _check_dates(self):

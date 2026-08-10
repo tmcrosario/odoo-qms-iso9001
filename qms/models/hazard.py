@@ -1,3 +1,5 @@
+from datetime import date
+
 from odoo import _, api, fields, models
 
 
@@ -159,7 +161,7 @@ class Hazard(models.Model):
         for hazard in self:
             if hazard.review_ids:
                 last_review = hazard.review_ids.sorted(
-                    key=lambda r: r.date, reverse=True
+                    key=lambda r: r.date or date.min, reverse=True
                 )
                 hazard.last_review_date = last_review[0].date
             else:

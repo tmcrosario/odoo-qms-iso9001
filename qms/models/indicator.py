@@ -1,3 +1,5 @@
+from datetime import date
+
 from odoo import _, api, fields, models
 
 
@@ -86,7 +88,7 @@ class Indicator(models.Model):
         for indicator in self:
             if indicator.measurement_ids:
                 last_measurement = indicator.measurement_ids.sorted(
-                    key=lambda r: r.measurement_date, reverse=True
+                    key=lambda r: r.measurement_date or date.min, reverse=True
                 )
                 indicator.last_measurement_date = last_measurement[0].measurement_date
             else:
@@ -97,7 +99,7 @@ class Indicator(models.Model):
         for indicator in self:
             if indicator.measurement_ids:
                 last_measurement = indicator.measurement_ids.sorted(
-                    key=lambda r: r.measurement_date, reverse=True
+                    key=lambda r: r.measurement_date or date.min, reverse=True
                 )
                 indicator.last_measurement_result = last_measurement[0].result
             else:
@@ -108,7 +110,7 @@ class Indicator(models.Model):
         for indicator in self:
             if indicator.measurement_ids:
                 last_measurement = indicator.measurement_ids.sorted(
-                    key=lambda r: r.measurement_date, reverse=True
+                    key=lambda r: r.measurement_date or date.min, reverse=True
                 )
                 indicator.last_measurement_result_detail = last_measurement[0].result_detail
             else:
@@ -119,7 +121,7 @@ class Indicator(models.Model):
         for indicator in self:
             if indicator.review_ids:
                 last_review = indicator.review_ids.sorted(
-                    key=lambda r: r.date, reverse=True
+                    key=lambda r: r.date or date.min, reverse=True
                 )
                 indicator.last_review_date = last_review[0].date
             else:

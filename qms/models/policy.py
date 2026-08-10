@@ -1,3 +1,5 @@
+from datetime import date
+
 from odoo import api, fields, models
 
 
@@ -37,7 +39,7 @@ class Policy(models.Model):
         for policy in self:
             if policy.review_ids:
                 last_review = policy.review_ids.sorted(
-                    key=lambda r: r.date, reverse=True
+                    key=lambda r: r.date or date.min, reverse=True
                 )
                 policy.last_review_date = last_review[0].date
             else:

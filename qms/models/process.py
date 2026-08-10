@@ -1,3 +1,5 @@
+from datetime import date
+
 from odoo import api, fields, models
 
 
@@ -61,7 +63,7 @@ class Process(models.Model):
         for process in self:
             if process.review_ids:
                 last_review = process.review_ids.sorted(
-                    key=lambda r: r.date, reverse=True
+                    key=lambda r: r.date or date.min, reverse=True
                 )
                 process.last_review_date = last_review[0].date
             else:
