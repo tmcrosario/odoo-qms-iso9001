@@ -33,7 +33,6 @@ class IndicatorMeasurement(models.Model):
             ("goal_no_ok", "Unachieved target"),
         ],
         required=False,
-        store=True,
     )
 
     result_detail = fields.Char()
