@@ -149,4 +149,485 @@
         <field name="measurement_date">2025-06-30</field>
         <field name="result">goal_ok</field>
     </record>
+
+    <!-- ============================================================= -->
+    <!-- Expanded fixture: same mocked style, Quijote-derived people,   -->
+    <!-- everything suffixed "Demo" and wired together coherently.      -->
+    <!-- ============================================================= -->
+
+    <!-- More interested parties: internal agents + external stakeholders. -->
+    <record id="demo_ip_quijano" model="qms.interested_party">
+        <field name="name">Alonso Quijano (Demo)</field>
+        <field name="interested_party_type">internal</field>
+        <field name="area">Direccion</field>
+        <field name="power">4</field>
+        <field name="interest">3</field>
+    </record>
+    <record id="demo_ip_panza" model="qms.interested_party">
+        <field name="name">Sancho Panza (Demo)</field>
+        <field name="interested_party_type">internal</field>
+        <field name="area">Compras</field>
+        <field name="power">2</field>
+        <field name="interest">3</field>
+    </record>
+    <record id="demo_ip_carrasco" model="qms.interested_party">
+        <field name="name">Sanson Carrasco (Demo)</field>
+        <field name="interested_party_type">internal</field>
+        <field name="area">Calidad</field>
+    </record>
+    <record id="demo_ip_proveedor" model="qms.interested_party">
+        <field name="name">Proveedora del Toboso S.A. (Demo)</field>
+        <field name="is_organization" eval="True" />
+        <field name="interested_party_type">external</field>
+        <field name="power">2</field>
+        <field name="interest">4</field>
+    </record>
+    <record id="demo_ip_vecino" model="qms.interested_party">
+        <field name="name">Vecino del Toboso (Demo)</field>
+        <field name="interested_party_type">external</field>
+        <field name="cooperation">2</field>
+        <field name="impact">3</field>
+    </record>
+
+    <!-- More processes (policy_component_ids required). -->
+    <record id="demo_proc_compras" model="qms.process">
+        <field name="name">Compras y Contrataciones (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_panza" />
+        <field name="policy_component_ids" eval="[(6, 0, [ref('demo_pc_efic')])]" />
+        <field name="resource_type">support</field>
+        <field name="state">enabled</field>
+    </record>
+    <record id="demo_proc_capacitacion" model="qms.process">
+        <field name="name">Capacitacion del Personal (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_carrasco" />
+        <field name="policy_component_ids" eval="[(6, 0, [ref('demo_pc_mejora')])]" />
+        <field name="resource_type">support</field>
+        <field name="state">enabled</field>
+    </record>
+    <record id="demo_proc_planificacion" model="qms.process">
+        <field name="name">Planificacion Estrategica (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_quijano" />
+        <field
+            name="policy_component_ids"
+            eval="[(6, 0, [ref('demo_pc_efic'), ref('demo_pc_mejora')])]"
+        />
+        <field name="resource_type">strategic</field>
+        <field name="state">enabled</field>
+    </record>
+    <record id="demo_proc_atencion" model="qms.process">
+        <field name="name">Atencion a la Ciudadania (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_referente" />
+        <field name="policy_component_ids" eval="[(6, 0, [ref('demo_pc_efic')])]" />
+        <field name="resource_type">central</field>
+        <field name="state">enabled</field>
+    </record>
+
+    <!-- More indicators (process_id + responsible_id required). -->
+    <record id="demo_ind_compras" model="qms.indicator">
+        <field name="name">Ordenes de compra sin observaciones (Demo)</field>
+        <field name="number">2</field>
+        <field name="responsible_id" ref="demo_ip_panza" />
+        <field name="process_id" ref="demo_proc_compras" />
+        <field name="frequency">monthly</field>
+        <field name="state">enabled</field>
+    </record>
+    <record id="demo_ind_capacitacion" model="qms.indicator">
+        <field name="name">Horas de capacitacion por agente (Demo)</field>
+        <field name="number">3</field>
+        <field name="responsible_id" ref="demo_ip_carrasco" />
+        <field name="process_id" ref="demo_proc_capacitacion" />
+        <field name="frequency">biannual</field>
+        <field name="state">enabled</field>
+    </record>
+    <record id="demo_ind_satisfaccion" model="qms.indicator">
+        <field name="name">Satisfaccion de la ciudadania (Demo)</field>
+        <field name="number">4</field>
+        <field name="responsible_id" ref="demo_ip_referente" />
+        <field name="process_id" ref="demo_proc_atencion" />
+        <field name="frequency">annual</field>
+        <field name="state">enabled</field>
+    </record>
+    <record id="demo_ind_desvios" model="qms.indicator">
+        <field name="name">Desvios sobre lo planificado (Demo)</field>
+        <field name="number">5</field>
+        <field name="responsible_id" ref="demo_ip_quijano" />
+        <field name="process_id" ref="demo_proc_planificacion" />
+        <field name="frequency">quarterly</field>
+        <field name="state">disabled</field>
+    </record>
+
+    <!-- Indicator measurements (measurement_date >= expected_date). -->
+    <record id="demo_meas_compras_1" model="qms.indicator.measurement">
+        <field name="name">Medicion enero 2025 (Demo)</field>
+        <field name="indicator_id" ref="demo_ind_compras" />
+        <field name="expected_date">2025-01-31</field>
+        <field name="measurement_date">2025-02-05</field>
+        <field name="result">goal_with_obs</field>
+    </record>
+    <record id="demo_meas_capac_1" model="qms.indicator.measurement">
+        <field name="name">Medicion 1er semestre 2025 (Demo)</field>
+        <field name="indicator_id" ref="demo_ind_capacitacion" />
+        <field name="expected_date">2025-06-30</field>
+        <field name="measurement_date">2025-07-10</field>
+        <field name="result">goal_ok</field>
+    </record>
+    <record id="demo_meas_satisf_1" model="qms.indicator.measurement">
+        <field name="name">Encuesta anual 2025 (Demo)</field>
+        <field name="indicator_id" ref="demo_ind_satisfaccion" />
+        <field name="expected_date">2025-12-01</field>
+        <field name="measurement_date">2025-12-20</field>
+        <field name="result">goal_no_ok</field>
+    </record>
+    <record id="demo_meas_desvios_1" model="qms.indicator.measurement">
+        <field name="name">Medicion 1er trimestre 2025 (Demo)</field>
+        <field name="indicator_id" ref="demo_ind_desvios" />
+        <field name="expected_date">2025-03-31</field>
+        <field name="measurement_date">2025-04-02</field>
+        <field name="result">goal_with_obs</field>
+    </record>
+
+    <!-- More hazards (number auto; result/evaluation computed). -->
+    <record id="demo_hazard_ciber" model="qms.hazard">
+        <field name="name">Ciberataque al sistema documental (Demo)</field>
+        <field name="type_risk">technological</field>
+        <field name="factor">i_technological</field>
+        <field name="probability">3</field>
+        <field name="impact">5</field>
+        <field name="strategy">reduce</field>
+        <field name="state">open</field>
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_atencion')])]" />
+    </record>
+    <record id="demo_hazard_presupuesto" model="qms.hazard">
+        <field name="name">Recorte presupuestario imprevisto (Demo)</field>
+        <field name="type_risk">financial</field>
+        <field name="factor">e_economic</field>
+        <field name="probability">2</field>
+        <field name="impact">4</field>
+        <field name="strategy">transfer</field>
+        <field name="state">open</field>
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_planificacion')])]" />
+    </record>
+    <record id="demo_hazard_normativa" model="qms.hazard">
+        <field name="name">Cambio normativo que afecta compras (Demo)</field>
+        <field name="type_risk">compliance</field>
+        <field name="factor">e_politicians</field>
+        <field name="probability">3</field>
+        <field name="impact">3</field>
+        <field name="strategy">watch</field>
+        <field name="state">draft</field>
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_compras')])]" />
+    </record>
+    <record id="demo_hazard_rrhh" model="qms.hazard">
+        <field name="name">Rotacion de personal capacitado (Demo)</field>
+        <field name="type_risk">operative</field>
+        <field name="factor">i_personal</field>
+        <field name="probability">4</field>
+        <field name="impact">3</field>
+        <field name="strategy">reduce</field>
+        <field name="state">open</field>
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_capacitacion')])]" />
+    </record>
+
+    <!-- More audits; done ones have closing_date >= date (Datetime). -->
+    <record id="demo_audit_compras" model="qms.audit">
+        <field name="system">iso9001_2015</field>
+        <field name="date">2025-03-05</field>
+        <field name="reference">Auditoria Interna Compras Demo 2025</field>
+        <field name="state">done</field>
+        <field name="closing_date">2025-03-20 16:00:00</field>
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_compras')])]" />
+        <field name="auditors_ids" eval="[(6, 0, [ref('demo_ip_carrasco')])]" />
+        <field name="audited_ids" eval="[(6, 0, [ref('demo_ip_panza')])]" />
+    </record>
+    <record id="demo_audit_atencion" model="qms.audit">
+        <field name="system">iso9001_2015</field>
+        <field name="date">2025-09-08</field>
+        <field name="reference">Auditoria Interna Atencion Demo 2025</field>
+        <field name="state">done</field>
+        <field name="closing_date">2025-09-19 15:30:00</field>
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_atencion')])]" />
+        <field name="auditors_ids" eval="[(6, 0, [ref('demo_ip_auditor')])]" />
+        <field name="audited_ids" eval="[(6, 0, [ref('demo_ip_referente')])]" />
+    </record>
+    <record id="demo_audit_capacitacion" model="qms.audit">
+        <field name="system">iso9001_2008</field>
+        <field name="date">2025-07-14</field>
+        <field name="reference">Auditoria Interna Capacitacion Demo 2025</field>
+        <field name="state">open</field>
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_capacitacion')])]" />
+        <field name="auditors_ids" eval="[(6, 0, [ref('demo_ip_carrasco')])]" />
+        <field name="audited_ids" eval="[(6, 0, [ref('demo_ip_org')])]" />
+    </record>
+    <record id="demo_audit_planif" model="qms.audit">
+        <field name="system">iso9001_2015</field>
+        <field name="date">2025-10-06</field>
+        <field name="reference">Auditoria Interna Planificacion Demo 2025</field>
+        <field name="state">draft</field>
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_planificacion')])]" />
+        <field name="auditors_ids" eval="[(6, 0, [ref('demo_ip_auditor')])]" />
+        <field name="audited_ids" eval="[(6, 0, [ref('demo_ip_quijano')])]" />
+    </record>
+
+    <!-- Verification lines and evaluations for the new audits. -->
+    <record id="demo_vl_compras_1" model="qms.audit.verification.line">
+        <field name="audit_id" ref="demo_audit_compras" />
+        <field name="name">Se documenta la evaluacion de proveedores? (Demo)</field>
+        <field name="clause">8.4</field>
+        <field name="is_conformed" eval="False" />
+        <field name="seq">1</field>
+    </record>
+    <record id="demo_vl_compras_2" model="qms.audit.verification.line">
+        <field name="audit_id" ref="demo_audit_compras" />
+        <field name="name">Existen criterios de seleccion definidos? (Demo)</field>
+        <field name="clause">8.4.1</field>
+        <field name="is_conformed" eval="True" />
+        <field name="seq">2</field>
+    </record>
+    <record id="demo_vl_atencion_1" model="qms.audit.verification.line">
+        <field name="audit_id" ref="demo_audit_atencion" />
+        <field name="name">Se mide la satisfaccion del ciudadano? (Demo)</field>
+        <field name="clause">9.1.2</field>
+        <field name="is_conformed" eval="True" />
+        <field name="seq">1</field>
+    </record>
+    <record id="demo_eval_compras" model="qms.audit.evaluation">
+        <field name="audit_id" ref="demo_audit_compras" />
+        <field name="name">Evaluacion Auditoria Compras Demo 2025</field>
+        <field name="responsible_id" ref="demo_ip_carrasco" />
+        <field name="type">internal</field>
+        <field name="final_note">7</field>
+        <field name="compliance">7</field>
+        <field name="planning">8</field>
+    </record>
+    <record id="demo_eval_atencion" model="qms.audit.evaluation">
+        <field name="audit_id" ref="demo_audit_atencion" />
+        <field name="name">Evaluacion Auditoria Atencion Demo 2025</field>
+        <field name="responsible_id" ref="demo_ip_auditor" />
+        <field name="type">internal</field>
+        <field name="final_note">9</field>
+        <field name="understanding">9</field>
+        <field name="report">9</field>
+    </record>
+
+    <!-- More non-conformities: claimant + interested_party + origin +
+         process required; wired to audits/processes/indicators. -->
+    <record id="demo_nc_compras" model="qms.non_conformity">
+        <field name="name">Proveedor no evaluado antes de la adjudicacion (Demo)</field>
+        <field name="claimant_id" ref="demo_ip_proveedor" />
+        <field name="interested_party_id" ref="demo_ip_panza" />
+        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_internal_audit')])]" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_compras')])]" />
+        <field name="audit_id" ref="demo_audit_compras" />
+        <field name="indicator_id" ref="demo_ind_compras" />
+        <field name="stage_id" ref="finding_stage_open" />
+        <field
+            name="cause_ids"
+            eval="[(6, 0, [ref('weakness_cause_procedure_not_respected')])]"
+        />
+        <field name="analysis">La orden se emitio sin registro de evaluacion previa.</field>
+    </record>
+    <record id="demo_nc_atencion" model="qms.non_conformity">
+        <field name="name">Reclamos ciudadanos sin respuesta en plazo (Demo)</field>
+        <field name="claimant_id" ref="demo_ip_vecino" />
+        <field name="interested_party_id" ref="demo_ip_referente" />
+        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_external_client')])]" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_atencion')])]" />
+        <field name="audit_id" ref="demo_audit_atencion" />
+        <field name="stage_id" ref="finding_stage_pending" />
+        <field
+            name="cause_ids"
+            eval="[(6, 0, [ref('weakness_cause_hr_unavailable_inadequate')])]"
+        />
+    </record>
+    <record id="demo_nc_capacitacion" model="qms.non_conformity">
+        <field name="name">Plan de capacitacion no ejecutado (Demo)</field>
+        <field name="claimant_id" ref="demo_ip_carrasco" />
+        <field name="interested_party_id" ref="demo_ip_carrasco" />
+        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_internal_audit')])]" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_capacitacion')])]" />
+        <field name="stage_id" ref="finding_stage_analysis" />
+        <field
+            name="cause_ids"
+            eval="[(6, 0, [ref('weakness_cause_work_conditions')])]"
+        />
+    </record>
+    <record id="demo_nc_planif" model="qms.non_conformity">
+        <field name="name">Objetivos de calidad sin metas medibles (Demo)</field>
+        <field name="claimant_id" ref="demo_ip_org" />
+        <field name="interested_party_id" ref="demo_ip_quijano" />
+        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_dr')])]" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_planificacion')])]" />
+        <field
+            name="cause_ids"
+            eval="[(6, 0, [ref('weakness_cause_badly_defined_need')])]"
+        />
+    </record>
+
+    <!-- Observations (findings): same required refs as non-conformities. -->
+    <record id="demo_obs_compras" model="qms.observation">
+        <field name="name">Registros de compra sin firma del responsable (Demo)</field>
+        <field name="claimant_id" ref="demo_ip_panza" />
+        <field name="interested_party_id" ref="demo_ip_panza" />
+        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_process')])]" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_compras')])]" />
+        <field name="audit_id" ref="demo_audit_compras" />
+        <field name="stage_id" ref="finding_stage_done" />
+    </record>
+    <record id="demo_obs_atencion" model="qms.observation">
+        <field name="name">Buzon de sugerencias sin seguimiento formal (Demo)</field>
+        <field name="claimant_id" ref="demo_ip_vecino" />
+        <field name="interested_party_id" ref="demo_ip_referente" />
+        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_command_board')])]" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_atencion')])]" />
+        <field name="audit_id" ref="demo_audit_atencion" />
+        <field name="stage_id" ref="finding_stage_open" />
+    </record>
+    <record id="demo_obs_capacitacion" model="qms.observation">
+        <field name="name">Encuestas de capacitacion sin analisis (Demo)</field>
+        <field name="claimant_id" ref="demo_ip_carrasco" />
+        <field name="interested_party_id" ref="demo_ip_carrasco" />
+        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_training')])]" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_capacitacion')])]" />
+        <field name="indicator_id" ref="demo_ind_capacitacion" />
+    </record>
+    <record id="demo_obs_dictamen" model="qms.observation">
+        <field name="name">Plantilla de dictamen sin numero de version (Demo)</field>
+        <field name="claimant_id" ref="demo_ip_org" />
+        <field name="interested_party_id" ref="demo_ip_referente" />
+        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_internal_audit')])]" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_dictamen')])]" />
+        <field name="audit_id" ref="demo_audit" />
+        <field name="stage_id" ref="finding_stage_analysis" />
+    </record>
+
+    <!-- More goals: state open/closed requires date_open; closed also
+         requires date_close (>= date_open). Defined before actions so
+         action.goal_id refs resolve at load time. -->
+    <record id="demo_goal_capacitacion" model="qms.goal">
+        <field name="name">Ejecutar el 90% del plan de capacitacion (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_carrasco" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_capacitacion')])]" />
+        <field name="state">open</field>
+        <field name="date_open">2025-02-01 09:00:00</field>
+        <field name="approved" eval="True" />
+    </record>
+    <record id="demo_goal_satisfaccion" model="qms.goal">
+        <field name="name">Alcanzar 80% de satisfaccion ciudadana (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_referente" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_atencion')])]" />
+        <field name="resource_ids" eval="[(6, 0, [ref('demo_res_sistema')])]" />
+        <field name="state">closed</field>
+        <field name="date_open">2025-01-10 09:00:00</field>
+        <field name="date_close">2025-11-30 18:00:00</field>
+        <field name="approved" eval="True" />
+    </record>
+    <record id="demo_goal_transparencia" model="qms.goal">
+        <field name="name">Publicar tablero de indicadores trimestral (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_quijano" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_planificacion')])]" />
+        <field name="state">open</field>
+        <field name="date_open">2025-03-15 10:00:00</field>
+    </record>
+    <record id="demo_goal_compras" model="qms.goal">
+        <field name="name">Reducir compras sin evaluacion previa (Demo)</field>
+        <field name="responsible_id" ref="demo_ip_panza" />
+        <field name="process_ids" eval="[(6, 0, [ref('demo_proc_compras')])]" />
+        <field name="state">draft</field>
+    </record>
+
+    <!-- Goal measurements (measurement_date >= expected_date). -->
+    <record id="demo_gm_capac" model="qms.goal.measurement">
+        <field name="goal_id" ref="demo_goal_capacitacion" />
+        <field name="name">Avance 1er semestre (Demo)</field>
+        <field name="expected_date">2025-06-01</field>
+        <field name="measurement_date">2025-06-20</field>
+        <field name="result">goal_with_obs</field>
+    </record>
+    <record id="demo_gm_satisf" model="qms.goal.measurement">
+        <field name="goal_id" ref="demo_goal_satisfaccion" />
+        <field name="name">Medicion de cierre (Demo)</field>
+        <field name="expected_date">2025-10-01</field>
+        <field name="measurement_date">2025-10-15</field>
+        <field name="result">goal_no_ok</field>
+    </record>
+    <record id="demo_gm_transparencia" model="qms.goal.measurement">
+        <field name="goal_id" ref="demo_goal_transparencia" />
+        <field name="name">Publicacion 1er trimestre (Demo)</field>
+        <field name="expected_date">2025-05-01</field>
+        <field name="measurement_date">2025-05-05</field>
+        <field name="result">goal_ok</field>
+    </record>
+
+    <!-- More actions (date_closed >= opening_date), wired to findings,
+         goals and hazards. -->
+    <record id="demo_action_compras" model="qms.action">
+        <field name="name">Reinstaurar evaluacion previa de proveedores (Demo)</field>
+        <field name="response_type">correction</field>
+        <field name="complexity">high</field>
+        <field name="responsible_id" ref="demo_ip_panza" />
+        <field name="non_conformity_id" ref="demo_nc_compras" />
+        <field name="opening_date">2025-03-25</field>
+        <field name="date_closed">2025-05-10</field>
+        <field name="stage_id" ref="action_stage_close" />
+    </record>
+    <record id="demo_action_atencion" model="qms.action">
+        <field name="name">Definir circuito de respuesta a reclamos (Demo)</field>
+        <field name="response_type">immediate</field>
+        <field name="complexity">medium</field>
+        <field name="responsible_id" ref="demo_ip_referente" />
+        <field name="observation_id" ref="demo_obs_atencion" />
+        <field name="opening_date">2025-09-22</field>
+        <field name="date_closed">2025-10-30</field>
+        <field name="stage_id" ref="action_stage_close" />
+    </record>
+    <record id="demo_action_capac" model="qms.action">
+        <field name="name">Reprogramar el plan anual de capacitacion (Demo)</field>
+        <field name="response_type">improvement</field>
+        <field name="complexity">medium</field>
+        <field name="responsible_id" ref="demo_ip_carrasco" />
+        <field name="goal_id" ref="demo_goal_capacitacion" />
+        <field name="opening_date">2025-04-01</field>
+        <field name="stage_id" ref="action_stage_open" />
+    </record>
+    <record id="demo_action_ciber" model="qms.action">
+        <field name="name">Implementar copias de respaldo cifradas (Demo)</field>
+        <field name="response_type">preventive</field>
+        <field name="complexity">very_high</field>
+        <field name="responsible_id" ref="demo_ip_referente" />
+        <field name="hazard_id" ref="demo_hazard_ciber" />
+        <field name="opening_date">2025-05-15</field>
+        <field name="stage_id" ref="action_stage_open" />
+    </record>
+    <record id="demo_action_planif" model="qms.action">
+        <field name="name">Redefinir objetivos con metas medibles (Demo)</field>
+        <field name="response_type">correction</field>
+        <field name="complexity">low</field>
+        <field name="responsible_id" ref="demo_ip_quijano" />
+        <field name="non_conformity_id" ref="demo_nc_planif" />
+        <field name="opening_date">2025-10-10</field>
+        <field name="stage_id" ref="action_stage_open" />
+    </record>
+
+    <!-- Effectiveness checks: closed ones need verification_date and
+         verification_date >= expected_date; pending needs neither. -->
+    <record id="demo_ec_compras" model="qms.effectiveness_check">
+        <field name="action_id" ref="demo_action_compras" />
+        <field name="expected_date">2025-05-15</field>
+        <field name="verification_date">2025-06-16</field>
+        <field name="state">closed</field>
+        <field name="was_effective" eval="True" />
+    </record>
+    <record id="demo_ec_atencion" model="qms.effectiveness_check">
+        <field name="action_id" ref="demo_action_atencion" />
+        <field name="expected_date">2025-11-01</field>
+        <field name="verification_date">2025-12-01</field>
+        <field name="state">closed</field>
+        <field name="was_effective" eval="False" />
+        <field name="observations">El circuito se aplica parcialmente; se reitera la accion.</field>
+    </record>
+    <record id="demo_ec_capac" model="qms.effectiveness_check">
+        <field name="action_id" ref="demo_action_capac" />
+        <field name="expected_date">2025-12-01</field>
+        <field name="state">pending</field>
+    </record>
 </odoo>
