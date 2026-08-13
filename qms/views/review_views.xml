@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="review_view_tree" model="ir.ui.view">
         <field name="name">qms.review.view_tree</field>
@@ -37,5 +36,4 @@
             </form>
         </field>
     </record>
-
 </odoo>

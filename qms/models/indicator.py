@@ -1,10 +1,9 @@
 from datetime import date
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class Indicator(models.Model):
-
     _name = "qms.indicator"
     _description = "Indicator"
 
@@ -16,9 +15,7 @@ class Indicator(models.Model):
         comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
-    review_ids = fields.One2many(
-        comodel_name="qms.review", inverse_name="indicator_id"
-    )
+    review_ids = fields.One2many(comodel_name="qms.review", inverse_name="indicator_id")
 
     state = fields.Selection(
         selection=[
@@ -38,7 +35,9 @@ class Indicator(models.Model):
         default="annual",
     )
 
-    process_id = fields.Many2one(comodel_name="qms.process", required=True, ondelete="restrict")
+    process_id = fields.Many2one(
+        comodel_name="qms.process", required=True, ondelete="restrict"
+    )
 
     measurement_ids = fields.One2many(
         comodel_name="qms.indicator.measurement", inverse_name="indicator_id"
@@ -112,7 +111,9 @@ class Indicator(models.Model):
                 last_measurement = indicator.measurement_ids.sorted(
                     key=lambda r: r.measurement_date or date.min, reverse=True
                 )
-                indicator.last_measurement_result_detail = last_measurement[0].result_detail
+                indicator.last_measurement_result_detail = last_measurement[
+                    0
+                ].result_detail
             else:
                 indicator.last_measurement_result_detail = False
 

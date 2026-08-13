@@ -2,7 +2,6 @@ from odoo import api, fields, models
 
 
 class FindingMilestone(models.Model):
-
     _name = "qms.finding.milestone"
     _description = "Finding Milestone"
     _order = "sequence"

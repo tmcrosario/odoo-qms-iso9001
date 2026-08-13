@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="document_view_tree" model="ir.ui.view">
         <field name="name">qms.document.view.tree</field>
@@ -29,17 +28,29 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_toggle_approved" type="object" class="oe_stat_button" icon="fa-check-square-o" invisible="approved">
+                        <button
+                            name="action_toggle_approved"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check-square-o"
+                            invisible="approved"
+                        >
                             <div class="o_field_widget o_stat_info">
                                 <span class="o_stat_text">Not Approved</span>
                             </div>
                         </button>
-                        <button name="action_toggle_approved" type="object" class="oe_stat_button" icon="fa-check-square-o" invisible="not approved">
+                        <button
+                            name="action_toggle_approved"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check-square-o"
+                            invisible="not approved"
+                        >
                             <div class="o_field_widget o_stat_info">
                                 <span class="o_stat_text">Approved</span>
                             </div>
                         </button>
-                        <field name="approved" invisible="1"/>
+                        <field name="approved" invisible="1" />
                     </div>
                     <group>
                         <group>
@@ -89,5 +100,10 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="document_menu" name="Documents" parent="qms.menu_qms_main" sequence="60" />
+    <menuitem
+        id="document_menu"
+        name="Documents"
+        parent="qms.menu_qms_main"
+        sequence="60"
+    />
 </odoo>

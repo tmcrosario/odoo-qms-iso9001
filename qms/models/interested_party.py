@@ -1,10 +1,9 @@
 from datetime import date
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class InterestedParty(models.Model):
-
     _name = "qms.interested_party"
     _description = "Interested Party"
 

@@ -2,7 +2,6 @@ from odoo import fields, models
 
 
 class Registry(models.Model):
-
     _name = "qms.registry"
     _description = "Registry"
 
@@ -14,6 +13,4 @@ class Registry(models.Model):
         comodel_name="qms.version", inverse_name="registry_id"
     )
 
-    review_ids = fields.One2many(
-        comodel_name="qms.review", inverse_name="registry_id"
-    )
+    review_ids = fields.One2many(comodel_name="qms.review", inverse_name="registry_id")

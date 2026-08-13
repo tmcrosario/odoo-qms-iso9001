@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="process_view_tree" model="ir.ui.view">
         <field name="name">qms.process.view.tree</field>
@@ -23,7 +22,11 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" options='{"clickable": "1"}' />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        options='{"clickable": "1"}'
+                    />
                 </header>
                 <sheet>
                     <group>
@@ -68,6 +71,10 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="menu_open_process" parent="qms.menu_qms_main" sequence="15" action="process_action_view_tree" />
-
+    <menuitem
+        id="menu_open_process"
+        parent="qms.menu_qms_main"
+        sequence="15"
+        action="process_action_view_tree"
+    />
 </odoo>

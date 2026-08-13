@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="goal_measurement_view_tree" model="ir.ui.view">
         <field name="name">qms.goal.measurement.view.tree</field>
@@ -58,6 +57,4 @@
             </form>
         </field>
     </record>
-
-
 </odoo>

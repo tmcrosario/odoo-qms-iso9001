@@ -4,11 +4,9 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.tools.translate import _
 
 
 class GoalMeasurement(models.Model):
-
     _name = "qms.goal.measurement"
     _description = "Goal Measurement"
 
@@ -43,5 +41,7 @@ class GoalMeasurement(models.Model):
             if measurement.measurement_date and measurement.expected_date:
                 if measurement.measurement_date < measurement.expected_date:
                     raise ValidationError(
-                        _("Measurement date cannot be earlier than expected date")
+                        self.env._(
+                            "Measurement date cannot be earlier than expected date"
+                        )
                     )

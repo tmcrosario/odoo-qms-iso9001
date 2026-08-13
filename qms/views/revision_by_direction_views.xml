@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="revision_by_direction_view_tree" model="ir.ui.view">
         <field name="name">qms.revision.by.direction.view.tree</field>
@@ -21,8 +20,17 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="button_close" string="Close" invisible="state != 'open'" type="object" />
-                    <field name="state" widget="statusbar" options='{"clickable": "1"}' />
+                    <button
+                        name="button_close"
+                        string="Close"
+                        invisible="state != 'open'"
+                        type="object"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        options='{"clickable": "1"}'
+                    />
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -44,8 +52,11 @@
                             <field name="resource_ids" />
                         </page>
                         <page string="NC" name="non_conformitys">
-                            <field name="non_conformity_ids" nolabel="1"
-                                context="{'form_view_ref': 'qms.non_conformity_view_form'}">
+                            <field
+                                name="non_conformity_ids"
+                                nolabel="1"
+                                context="{'form_view_ref': 'qms.non_conformity_view_form'}"
+                            >
                                 <list>
                                     <field name="name" />
                                     <field name="description" />
@@ -53,13 +64,19 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" options="{'numeric': True}" />
+                                    <field
+                                        name="closing_date"
+                                        options="{'numeric': True}"
+                                    />
                                 </list>
                             </field>
                         </page>
                         <page string="OBS" name="observations">
-                            <field name="observation_ids" nolabel="1"
-                                context="{'form_view_ref': 'qms.observation_view_form'}">
+                            <field
+                                name="observation_ids"
+                                nolabel="1"
+                                context="{'form_view_ref': 'qms.observation_view_form'}"
+                            >
                                 <list>
                                     <field name="name" />
                                     <field name="description" />
@@ -67,13 +84,19 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" options="{'numeric': True}" />
+                                    <field
+                                        name="closing_date"
+                                        options="{'numeric': True}"
+                                    />
                                 </list>
                             </field>
                         </page>
                         <page string="OM" name="opportunitys">
-                            <field name="opportunity_ids" nolabel="1"
-                                context="{'form_view_ref': 'qms.opportunity_view_form'}">
+                            <field
+                                name="opportunity_ids"
+                                nolabel="1"
+                                context="{'form_view_ref': 'qms.opportunity_view_form'}"
+                            >
                                 <list>
                                     <field name="name" />
                                     <field name="description" />
@@ -81,7 +104,10 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" options="{'numeric': True}" />
+                                    <field
+                                        name="closing_date"
+                                        options="{'numeric': True}"
+                                    />
                                 </list>
                             </field>
                         </page>
@@ -102,7 +128,10 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="revision_by_direction_menu" action="revision_by_direction_action_view_tree"
-        parent="qms.menu_qms_main" sequence="50" />
-
+    <menuitem
+        id="revision_by_direction_menu"
+        action="revision_by_direction_action_view_tree"
+        parent="qms.menu_qms_main"
+        sequence="50"
+    />
 </odoo>

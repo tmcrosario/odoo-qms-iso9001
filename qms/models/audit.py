@@ -4,11 +4,9 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.tools.translate import _
 
 
 class Audit(models.Model):
-
     _name = "qms.audit"
     _rec_name = "reference"
     _description = "Audit"
@@ -107,25 +105,31 @@ class Audit(models.Model):
             audit.opportunity_count = len(audit.opportunity_ids)
 
             # Count open findings (not in 'done' or 'cancel')
-            audit.open_findings_count = sum([
-                len(audit.non_conformity_ids.filtered(
-                    lambda x: x.state not in ("done", "cancel")
-                )),
-                len(audit.observation_ids.filtered(
-                    lambda x: x.state not in ("done", "cancel")
-                )),
-                len(audit.opportunity_ids.filtered(
-                    lambda x: x.state not in ("done", "cancel")
-                )),
-            ])
+            audit.open_findings_count = sum(
+                [
+                    len(
+                        audit.non_conformity_ids.filtered(
+                            lambda x: x.state not in ("done", "cancel")
+                        )
+                    ),
+                    len(
+                        audit.observation_ids.filtered(
+                            lambda x: x.state not in ("done", "cancel")
+                        )
+                    ),
+                    len(
+                        audit.opportunity_ids.filtered(
+                            lambda x: x.state not in ("done", "cancel")
+                        )
+                    ),
+                ]
+            )
 
     def action_open(self):
         return self.write({"state": "open"})
 
     def button_close(self):
-        return self.write(
-            {"state": "done", "closing_date": fields.Datetime.now()}
-        )
+        return self.write({"state": "done", "closing_date": fields.Datetime.now()})
 
     @api.constrains("date", "closing_date")
     def _check_dates(self):
@@ -134,5 +138,5 @@ class Audit(models.Model):
                 closing_date_only = audit.closing_date.date()
                 if closing_date_only < audit.date:
                     raise ValidationError(
-                        _("Closing date cannot be earlier than audit date")
+                        self.env._("Closing date cannot be earlier than audit date")
                     )

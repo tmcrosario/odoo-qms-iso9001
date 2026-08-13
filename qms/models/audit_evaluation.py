@@ -2,7 +2,6 @@ from odoo import fields, models
 
 
 class AuditEvaluation(models.Model):
-
     _name = "qms.audit.evaluation"
     _description = "Audit Evaluation"
 

@@ -2,7 +2,6 @@ from odoo import fields, models
 
 
 class Procedure(models.Model):
-
     _name = "qms.procedure"
     _description = "Procedure"
     _inherit = "qms.document"
@@ -13,6 +12,4 @@ class Procedure(models.Model):
         comodel_name="qms.version", inverse_name="procedure_id"
     )
 
-    review_ids = fields.One2many(
-        comodel_name="qms.review", inverse_name="procedure_id"
-    )
+    review_ids = fields.One2many(comodel_name="qms.review", inverse_name="procedure_id")

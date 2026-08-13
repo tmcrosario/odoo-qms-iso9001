@@ -2,7 +2,6 @@ from odoo import api, fields, models
 
 
 class NonConformity(models.Model):
-
     _name = "qms.non_conformity"
     _description = "Non Conformity"
     _inherit = ["qms.finding", "qms.weakness"]
@@ -29,4 +28,4 @@ class NonConformity(models.Model):
                     )
                 }
             )
-        return super(NonConformity, self).create(vals_list)
+        return super().create(vals_list)

@@ -1,8 +1,7 @@
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 
 
 class WeaknessCause(models.Model):
-
     _name = "qms.weakness.cause"
     _description = "Weakness Cause"
     _order = "parent_id, sequence"
@@ -25,5 +24,5 @@ class WeaknessCause(models.Model):
         # 18.0 and replaced by _has_cycle() (returns True when a cycle EXISTS).
         if self._has_cycle():
             raise exceptions.ValidationError(
-                _("Error! Cannot create recursive cycle.")
+                self.env._("Error! Cannot create recursive cycle.")
             )

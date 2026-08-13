@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="finding_view_tree" model="ir.ui.view">
         <field name="name">qms.finding.view.tree</field>
@@ -25,13 +24,41 @@
         <field name="arch" type="xml">
             <search>
                 <group>
-                    <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]" />
-                    <filter name="pending" string="Analysis" domain="[('state', 'in', ['analysis', 'pending'])]" />
-                    <filter name="current" string="In Progress" domain="[('state', '=', 'open')]" />
-                    <filter name="done" string="Closed" domain="[('state', '=', 'done')]" />
-                    <filter name="kanban_normal" string="Kanban: In Progress" domain="[('kanban_state', '=', 'normal')]" />
-                    <filter name="kanban_done" string="Kanban: Ready" domain="[('kanban_state', '=', 'done')]" />
-                    <filter name="kanban_blocked" string="Kanban: Blocked" domain="[('kanban_state', '=', 'blocked')]" />
+                    <filter
+                        name="draft"
+                        string="Draft"
+                        domain="[('state', '=', 'draft')]"
+                    />
+                    <filter
+                        name="pending"
+                        string="Analysis"
+                        domain="[('state', 'in', ['analysis', 'pending'])]"
+                    />
+                    <filter
+                        name="current"
+                        string="In Progress"
+                        domain="[('state', '=', 'open')]"
+                    />
+                    <filter
+                        name="done"
+                        string="Closed"
+                        domain="[('state', '=', 'done')]"
+                    />
+                    <filter
+                        name="kanban_normal"
+                        string="Kanban: In Progress"
+                        domain="[('kanban_state', '=', 'normal')]"
+                    />
+                    <filter
+                        name="kanban_done"
+                        string="Kanban: Ready"
+                        domain="[('kanban_state', '=', 'done')]"
+                    />
+                    <filter
+                        name="kanban_blocked"
+                        string="Kanban: Blocked"
+                        domain="[('kanban_state', '=', 'blocked')]"
+                    />
                     <field name="name" />
                     <field name="reference" />
                     <field name="claimant_id" />
@@ -48,7 +75,12 @@
         <field name="name">qms.finding.view.kanban</field>
         <field name="model">qms.finding</field>
         <field name="arch" type="xml">
-            <kanban name="finding" quick_create="false" default_group_by="stage_id" class="o_kanban_small_column">
+            <kanban
+                name="finding"
+                quick_create="false"
+                default_group_by="stage_id"
+                class="o_kanban_small_column"
+            >
                 <field name="stage_id" />
                 <field name="reference" />
                 <field name="name" />
@@ -80,7 +112,11 @@
         <field name="arch" type="xml">
             <form name="finding" string="Finding">
                 <header>
-                    <field name="stage_id" widget="statusbar" options='{"clickable": "1"}' />
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        options='{"clickable": "1"}'
+                    />
                     <field name="state" invisible="True" />
                 </header>
                 <sheet>
@@ -88,29 +124,49 @@
                     <group>
                         <group>
                             <field name="name" />
-                            <field name="create_date" readonly="state not in ['draft']" />
+                            <field
+                                name="create_date"
+                                readonly="state not in ['draft']"
+                            />
                             <field name="reference" />
                         </group>
                         <group>
-                            <field name="origin_ids" widget="many2many_tags"
-                                readonly="state not in ['draft','analysis']" />
-                            <field name="claimant_id" readonly="state not in ['draft','analysis']" />
-                            <field name="interested_party_id"
-                                readonly="state not in ['draft','analysis']" />
+                            <field
+                                name="origin_ids"
+                                widget="many2many_tags"
+                                readonly="state not in ['draft','analysis']"
+                            />
+                            <field
+                                name="claimant_id"
+                                readonly="state not in ['draft','analysis']"
+                            />
+                            <field
+                                name="interested_party_id"
+                                readonly="state not in ['draft','analysis']"
+                            />
                         </group>
                     </group>
                     <notebook>
                         <page string="Description">
-                            <field name="description" readonly="state not in ['draft','analysis']" />
+                            <field
+                                name="description"
+                                readonly="state not in ['draft','analysis']"
+                            />
                         </page>
                         <page string="Process">
-                            <field name="process_ids" readonly="state not in ['draft','analysis']" />
+                            <field
+                                name="process_ids"
+                                readonly="state not in ['draft','analysis']"
+                            />
                         </page>
                         <page string="Related Audits">
                             <field name="audit_ids" nolabel="1" />
                         </page>
-                        <page name="actions" string="Actions"
-                            invisible="state in ['draft','analysis','cancel']">
+                        <page
+                            name="actions"
+                            string="Actions"
+                            invisible="state in ['draft','analysis','cancel']"
+                        >
                             <separator string="Action Plan" />
                             <field name="action_ids" />
                         </page>
@@ -121,7 +177,16 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="finding_menu" name="Findings" parent="qms.menu_qms_main" sequence="55" />
-    <menuitem id="finding_menu_config" name="Findings" parent="qms.menu_qms_configuration" sequence="10" />
-
+    <menuitem
+        id="finding_menu"
+        name="Findings"
+        parent="qms.menu_qms_main"
+        sequence="55"
+    />
+    <menuitem
+        id="finding_menu_config"
+        name="Findings"
+        parent="qms.menu_qms_configuration"
+        sequence="10"
+    />
 </odoo>

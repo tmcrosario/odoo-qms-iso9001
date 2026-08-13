@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record model="ir.ui.view" id="qms_finding_stage_tree_view">
         <field name="name">qms.finding.stage.tree</field>
@@ -24,7 +23,11 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="finding_menu_stage" name="Stages" parent="finding_menu_config"
-        action="open_qms_finding_stage_list" sequence="15" />
-
+    <menuitem
+        id="finding_menu_stage"
+        name="Stages"
+        parent="finding_menu_config"
+        action="open_qms_finding_stage_list"
+        sequence="15"
+    />
 </odoo>

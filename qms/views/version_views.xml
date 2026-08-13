@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="version_view_tree" model="ir.ui.view">
         <field name="name">qms.version.view.tree</field>
@@ -51,6 +50,4 @@
             </form>
         </field>
     </record>
-
-
 </odoo>

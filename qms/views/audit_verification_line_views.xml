@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="audit_verification_line_view_tree" model="ir.ui.view">
         <field name="name">qms.audit.verification.line.view.tree</field>
@@ -48,6 +47,4 @@
             </form>
         </field>
     </record>
-
-
 </odoo>

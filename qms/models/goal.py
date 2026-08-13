@@ -1,11 +1,10 @@
 from datetime import date
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class Goal(models.Model):
-
     _name = "qms.goal"
     _description = "Goal"
 
@@ -33,9 +32,7 @@ class Goal(models.Model):
         comodel_name="qms.goal.measurement", inverse_name="goal_id"
     )
 
-    action_ids = fields.One2many(
-        comodel_name="qms.action", inverse_name="goal_id"
-    )
+    action_ids = fields.One2many(comodel_name="qms.action", inverse_name="goal_id")
 
     state = fields.Selection(
         selection=[
@@ -48,9 +45,7 @@ class Goal(models.Model):
         required=True,
     )
 
-    review_ids = fields.One2many(
-        comodel_name="qms.review", inverse_name="goal_id"
-    )
+    review_ids = fields.One2many(comodel_name="qms.review", inverse_name="goal_id")
 
     last_measurement_date = fields.Date(
         compute="_compute_last_measurement_date", store=True
@@ -152,7 +147,7 @@ class Goal(models.Model):
             if goal.date_close and goal.date_open:
                 if goal.date_close < goal.date_open:
                     raise ValidationError(
-                        _("Close date must be after open date")
+                        self.env._("Close date must be after open date")
                     )
 
     @api.constrains("state", "date_open")
@@ -160,7 +155,9 @@ class Goal(models.Model):
         for goal in self:
             if goal.state in ("open", "closed") and not goal.date_open:
                 raise ValidationError(
-                    _("Opening date is required when goal is in Open or Closed state")
+                    self.env._(
+                        "Opening date is required when goal is in Open or Closed state"
+                    )
                 )
 
     @api.constrains("state", "date_close")
@@ -168,5 +165,5 @@ class Goal(models.Model):
         for goal in self:
             if goal.state == "closed" and not goal.date_close:
                 raise ValidationError(
-                    _("Closing date is required when goal is in Closed state")
+                    self.env._("Closing date is required when goal is in Closed state")
                 )

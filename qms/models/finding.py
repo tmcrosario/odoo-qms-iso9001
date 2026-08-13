@@ -6,7 +6,6 @@ from odoo import api, fields, models
 
 
 class Finding(models.Model):
-
     _name = "qms.finding"
     _description = "Finding"
     _order = "create_date desc"
@@ -19,6 +18,8 @@ class Finding(models.Model):
 
     @api.model
     def _stage_groups(self, stages, domain):
+        # group_expand must return every stage so empty kanban columns render.
+        # pylint: disable-next=no-search-all
         return self.env["qms.finding.stage"].search([])
 
     name = fields.Char(required=True)
@@ -31,14 +32,12 @@ class Finding(models.Model):
 
     closing_date = fields.Datetime(readonly=True)
 
-    origin_ids = fields.Many2many(
-        comodel_name="qms.finding.origin", required=True
-    )
+    origin_ids = fields.Many2many(comodel_name="qms.finding.origin", required=True)
 
     stage_id = fields.Many2one(
         comodel_name="qms.finding.stage",
         copy=False,
-        default=_default_stage,
+        default=lambda self: self._default_stage(),
         group_expand="_stage_groups",
         ondelete="restrict",
     )
@@ -66,9 +65,7 @@ class Finding(models.Model):
 
     process_ids = fields.Many2many(comodel_name="qms.process", required=True)
 
-    audit_ids = fields.Many2many(
-        comodel_name="qms.audit", string="Related Audits"
-    )
+    audit_ids = fields.Many2many(comodel_name="qms.audit", string="Related Audits")
 
     def write(self, vals):
         is_state_change = "stage_id" in vals or "state" in vals
@@ -79,8 +76,8 @@ class Finding(models.Model):
         if is_state_change:
             # state is a stored related, so it is current after super()
             done = self.filtered(lambda f: f.state == "done")
-            done.filtered(lambda f: not f.closing_date).closing_date = (
-                fields.Datetime.now()
-            )
+            done.filtered(
+                lambda f: not f.closing_date
+            ).closing_date = fields.Datetime.now()
             (self - done).filtered(lambda f: f.closing_date).closing_date = False
         return res

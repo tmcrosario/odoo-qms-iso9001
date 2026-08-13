@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="indicator_view_tree" model="ir.ui.view">
         <field name="name">qms.indicator.view.tree</field>
@@ -26,7 +25,11 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" options='{"clickable": "1"}' />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        options='{"clickable": "1"}'
+                    />
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -36,7 +39,10 @@
                     </div>
                     <group>
                         <group>
-                            <field name="number" options="{'enable_formatting': False}" />
+                            <field
+                                name="number"
+                                options="{'enable_formatting': False}"
+                            />
                             <field name="responsible_id" />
                             <field name="process_id" />
                             <field name="frequency" />
@@ -47,11 +53,18 @@
                     </group>
                     <notebook>
                         <page string="Measurements">
-                            <field name="measurement_ids" nolabel="True" readonly="state == 'done'" />
+                            <field
+                                name="measurement_ids"
+                                nolabel="True"
+                                readonly="state == 'done'"
+                            />
                         </page>
                         <page string="NC" name="non_conformitys">
-                            <field name="non_conformity_ids" nolabel="1"
-                                context="{'form_view_ref': 'qms.non_conformity_view_form'}">
+                            <field
+                                name="non_conformity_ids"
+                                nolabel="1"
+                                context="{'form_view_ref': 'qms.non_conformity_view_form'}"
+                            >
                                 <list>
                                     <field name="name" />
                                     <field name="description" />
@@ -59,13 +72,19 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" options="{'numeric': True}" />
+                                    <field
+                                        name="closing_date"
+                                        options="{'numeric': True}"
+                                    />
                                 </list>
                             </field>
                         </page>
                         <page string="OBS" name="observations">
-                            <field name="observation_ids" nolabel="1"
-                                context="{'form_view_ref': 'qms.observation_view_form'}">
+                            <field
+                                name="observation_ids"
+                                nolabel="1"
+                                context="{'form_view_ref': 'qms.observation_view_form'}"
+                            >
                                 <list>
                                     <field name="name" />
                                     <field name="description" />
@@ -73,13 +92,19 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" options="{'numeric': True}" />
+                                    <field
+                                        name="closing_date"
+                                        options="{'numeric': True}"
+                                    />
                                 </list>
                             </field>
                         </page>
                         <page string="OM" name="opportunitys">
-                            <field name="opportunity_ids" nolabel="1"
-                                context="{'form_view_ref': 'qms.opportunity_view_form'}">
+                            <field
+                                name="opportunity_ids"
+                                nolabel="1"
+                                context="{'form_view_ref': 'qms.opportunity_view_form'}"
+                            >
                                 <list>
                                     <field name="name" />
                                     <field name="description" />
@@ -87,7 +112,10 @@
                                     <field name="create_date" />
                                     <field name="stage_id" />
                                     <field name="origin_ids" />
-                                    <field name="closing_date" options="{'numeric': True}" />
+                                    <field
+                                        name="closing_date"
+                                        options="{'numeric': True}"
+                                    />
                                 </list>
                             </field>
                         </page>
@@ -111,6 +139,10 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="indicator_menu" parent="qms.menu_qms_main" action="indicator_action_view_tree" sequence="20" />
-
+    <menuitem
+        id="indicator_menu"
+        parent="qms.menu_qms_main"
+        action="indicator_action_view_tree"
+        sequence="20"
+    />
 </odoo>

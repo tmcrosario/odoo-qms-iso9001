@@ -6,7 +6,6 @@ from odoo import fields, models
 
 
 class AuditVerificationLine(models.Model):
-
     _name = "qms.audit.verification.line"
     _description = "Audit Verification Line"
 
@@ -16,9 +15,7 @@ class AuditVerificationLine(models.Model):
 
     clause = fields.Char(required=True)
 
-    audit_id = fields.Many2one(
-        comodel_name="qms.audit", ondelete="cascade", index=True
-    )
+    audit_id = fields.Many2one(comodel_name="qms.audit", ondelete="cascade", index=True)
 
     is_conformed = fields.Boolean()
 

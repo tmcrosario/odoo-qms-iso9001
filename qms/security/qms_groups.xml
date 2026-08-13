@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="group_user" model="res.groups">
         <field name="name">QMS / User</field>
     </record>
@@ -14,5 +13,4 @@
     <record id="group_read_only" model="res.groups">
         <field name="name">QMS / Read Only</field>
     </record>
-
 </odoo>

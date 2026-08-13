@@ -1,9 +1,8 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class RevisionByDirection(models.Model):
-
     _name = "qms.revision_by_direction"
     _description = "Revision by Direction"
 
@@ -44,9 +43,7 @@ class RevisionByDirection(models.Model):
     )
 
     def button_close(self):
-        self.write(
-            {"state": "done", "date_close": fields.Datetime.now()}
-        )
+        self.write({"state": "done", "date_close": fields.Datetime.now()})
         return True
 
     @api.constrains("date_open", "date_close")
@@ -55,5 +52,5 @@ class RevisionByDirection(models.Model):
             if revision.date_close and revision.date_open:
                 if revision.date_close < revision.date_open:
                     raise ValidationError(
-                        _("Close date must be after open date")
+                        self.env._("Close date must be after open date")
                     )

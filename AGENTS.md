@@ -2,13 +2,14 @@
 
 ## Project Overview
 
-This is the TMC (Tribunal Municipal de Cuentas de Rosario) module for Odoo 19.0, providing a Document Management System (Sistema de Gestión Documental).
+This is the TMC (Tribunal Municipal de Cuentas de Rosario) module for Odoo 19.0,
+providing a Document Management System (Sistema de Gestión Documental).
 
 ## Agent Working Conventions
 
-Conventions for anyone (including AI assistants) working in this repo. They live
-here, checked into git, so they travel across machines instead of depending on a
-local assistant memory.
+Conventions for anyone (including AI assistants) working in this repo. They live here,
+checked into git, so they travel across machines instead of depending on a local
+assistant memory.
 
 ### Working environment — never touch production
 
@@ -25,11 +26,11 @@ local assistant memory.
 
 ### Code comments
 
-- Inline comments (XML, Python, JS) must be **a single line**, in English, and
-  explain _why_, not _what_.
+- Inline comments (XML, Python, JS) must be **a single line**, in English, and explain
+  _why_, not _what_.
 - Keep them **short — under ~79 characters**.
-- If a rationale genuinely needs paragraphs (e.g. a subtle test invariant), put it
-  in the commit message or PR description, not in an inline block.
+- If a rationale genuinely needs paragraphs (e.g. a subtle test invariant), put it in
+  the commit message or PR description, not in an inline block.
 
 ### Formatting
 
@@ -48,18 +49,19 @@ local assistant memory.
 
 ### Commit authorship
 
-- **Never** add AI attribution: no `Co-Authored-By: Claude`, no "Generated with
-  Claude Code", no emoji footer. Commits are authored solely by the human.
+- **Never** add AI attribution: no `Co-Authored-By: Claude`, no "Generated with Claude
+  Code", no emoji footer. Commits are authored solely by the human.
 - When porting someone else's commit (cherry-pick / re-apply), preserve **their**
   authorship with `git commit --author="Name <email>"` and keep a
   `(cherry picked from commit <sha>)` line.
-- Ask the user for confirmation — files to commit plus the proposed
-  message — before creating any commit; amends and cherry-picks included.
+- Ask the user for confirmation — files to commit plus the proposed message — before
+  creating any commit; amends and cherry-picks included.
 
 ## Commit Message Style
 
-Follow this repository's commit message conventions and the official Odoo Git Guidelines:
-**Reference**: https://www.odoo.com/documentation/19.0/contributing/development/git_guidelines.html
+Follow this repository's commit message conventions and the official Odoo Git
+Guidelines: **Reference**:
+https://www.odoo.com/documentation/19.0/contributing/development/git_guidelines.html
 
 ### Format
 
@@ -90,7 +92,8 @@ Follow this repository's commit message conventions and the official Odoo Git Gu
 - Keep the first line concise and descriptive (ideally under 72 characters)
 - Use bullet points for detailed changes
 - Reference issue/ticket numbers when applicable
-- **DO NOT include AI attribution** (no "Generated with Claude Code" or "Co-Authored-By: Claude")
+- **DO NOT include AI attribution** (no "Generated with Claude Code" or "Co-Authored-By:
+  Claude")
 - One logical change per commit (split unrelated changes into separate commits)
 
 ### Examples
@@ -352,7 +355,8 @@ if record.date_end < record.date_start:
 
 ### 9. Code Style
 
-- Follow Odoo's coding guidelines: https://www.odoo.com/documentation/19.0/contributing/development/coding_guidelines.html
+- Follow Odoo's coding guidelines:
+  https://www.odoo.com/documentation/19.0/contributing/development/coding_guidelines.html
 - Use `pylint-odoo` for linting and code consistency
 - Use meaningful variable and method names
 - Keep methods short and focused (Single Responsibility Principle)
@@ -528,10 +532,10 @@ Define server actions in XML for button actions:
 
 ```xml
 <record id="action_server_my_action" model="ir.actions.server">
-    <field name="name">My Action</field>
-    <field name="model_id" ref="model_my_model"/>
-    <field name="state">code</field>
-    <field name="code">
+  <field name="name">My Action</field>
+  <field name="model_id" ref="model_my_model" />
+  <field name="state">code</field>
+  <field name="code">
         action = records.action_my_method()
     </field>
 </record>
@@ -541,21 +545,24 @@ Define server actions in XML for button actions:
 
 ```xml
 <record id="ir_cron_my_task" model="ir.cron">
-    <field name="name">My Scheduled Task</field>
-    <field name="model_id" ref="model_my_model"/>
-    <field name="state">code</field>
-    <field name="code">model._cron_my_task()</field>
-    <field name="interval_number">1</field>
-    <field name="interval_type">days</field>
+  <field name="name">My Scheduled Task</field>
+  <field name="model_id" ref="model_my_model" />
+  <field name="state">code</field>
+  <field name="code">model._cron_my_task()</field>
+  <field name="interval_number">1</field>
+  <field name="interval_type">days</field>
 </record>
 ```
 
 ## References
 
 - **Odoo 19.0 Documentation:** https://www.odoo.com/documentation/19.0/
-- **Odoo Git Guidelines:** https://www.odoo.com/documentation/19.0/contributing/development/git_guidelines.html
-- **Odoo Coding Guidelines:** https://www.odoo.com/documentation/19.0/contributing/development/coding_guidelines.html
-- **OWL Documentation:** https://www.odoo.com/documentation/19.0/developer/reference/frontend/owl_components.html
+- **Odoo Git Guidelines:**
+  https://www.odoo.com/documentation/19.0/contributing/development/git_guidelines.html
+- **Odoo Coding Guidelines:**
+  https://www.odoo.com/documentation/19.0/contributing/development/coding_guidelines.html
+- **OWL Documentation:**
+  https://www.odoo.com/documentation/19.0/developer/reference/frontend/owl_components.html
 - **Python PEP 8:** https://peps.python.org/pep-0008/
 
 ## TMC Module Structure
@@ -601,7 +608,8 @@ Organizational units or dependencies within the municipality.
 - `document_type_ids` - Allowed document types for this dependence
 - `document_topic_ids` - Available topics for this dependence
 - `system_ids` - Related systems
-- `in_actual_nomenclator` - Whether this dependence is in the current institutional classifier
+- `in_actual_nomenclator` - Whether this dependence is in the current institutional
+  classifier
 
 **Key Features:**
 

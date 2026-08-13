@@ -4,7 +4,6 @@ from odoo import api, fields, models
 
 
 class Document(models.Model):
-
     _name = "qms.document"
     _description = "Document"
 
@@ -60,9 +59,7 @@ class Document(models.Model):
 
     process_ids = fields.Many2many(comodel_name="qms.process", required=True)
 
-    review_ids = fields.One2many(
-        comodel_name="qms.review", inverse_name="document_id"
-    )
+    review_ids = fields.One2many(comodel_name="qms.review", inverse_name="document_id")
 
     approved = fields.Boolean()
 

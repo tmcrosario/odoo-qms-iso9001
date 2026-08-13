@@ -1,8 +1,7 @@
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 
 
 class FindingOrigin(models.Model):
-
     _name = "qms.finding.origin"
     _description = "Finding Origin"
     _order = "parent_id, sequence"
@@ -25,5 +24,5 @@ class FindingOrigin(models.Model):
         # 18.0 and replaced by _has_cycle() (returns True when a cycle EXISTS).
         if self._has_cycle():
             raise exceptions.ValidationError(
-                _("Error! Cannot create recursive cycle.")
+                self.env._("Error! Cannot create recursive cycle.")
             )

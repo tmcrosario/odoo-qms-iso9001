@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="view_qms_opportunity_tree" model="ir.ui.view">
         <field name="name">qms.opportunity.tree</field>
@@ -65,7 +64,11 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="menu_open_opportunity" name="Opportunities" parent="qms.finding_menu"
-        action="open_qms_opportunity_list" sequence="20" />
-
+    <menuitem
+        id="menu_open_opportunity"
+        name="Opportunities"
+        parent="qms.finding_menu"
+        action="open_qms_opportunity_list"
+        sequence="20"
+    />
 </odoo>

@@ -2,7 +2,6 @@ from odoo import api, fields, models
 
 
 class Opportunity(models.Model):
-
     _name = "qms.opportunity"
     _description = "Opportunity"
     _inherit = ["qms.finding"]
@@ -23,10 +22,6 @@ class Opportunity(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             vals.update(
-                {
-                    "reference": self.env["ir.sequence"].next_by_code(
-                        "qms.opportunity"
-                    )
-                }
+                {"reference": self.env["ir.sequence"].next_by_code("qms.opportunity")}
             )
-        return super(Opportunity, self).create(vals_list)
+        return super().create(vals_list)

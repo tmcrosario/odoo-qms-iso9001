@@ -2,7 +2,6 @@ from odoo import fields, models
 
 
 class Stage(models.Model):
-
     _name = "qms.stage"
     _description = "Stage"
     _order = "sequence"
@@ -15,4 +14,4 @@ class Stage(models.Model):
 
     is_starting = fields.Boolean(string="Starting Stage")
 
-    color = fields.Integer(string="Color", default=0)
+    color = fields.Integer(default=0)

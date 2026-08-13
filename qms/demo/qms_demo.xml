@@ -105,7 +105,10 @@
         <field name="name">Requisito 7.4 control de provision externa (Demo)</field>
         <field name="claimant_id" ref="demo_ip_org" />
         <field name="interested_party_id" ref="demo_ip_referente" />
-        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_internal_audit')])]" />
+        <field
+            name="origin_ids"
+            eval="[(6, 0, [ref('finding_origin_internal_audit')])]"
+        />
         <field name="process_ids" eval="[(6, 0, [ref('demo_proc_dictamen')])]" />
         <field name="audit_id" ref="demo_audit" />
         <field
@@ -415,7 +418,10 @@
         <field name="name">Proveedor no evaluado antes de la adjudicacion (Demo)</field>
         <field name="claimant_id" ref="demo_ip_proveedor" />
         <field name="interested_party_id" ref="demo_ip_panza" />
-        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_internal_audit')])]" />
+        <field
+            name="origin_ids"
+            eval="[(6, 0, [ref('finding_origin_internal_audit')])]"
+        />
         <field name="process_ids" eval="[(6, 0, [ref('demo_proc_compras')])]" />
         <field name="audit_id" ref="demo_audit_compras" />
         <field name="indicator_id" ref="demo_ind_compras" />
@@ -424,13 +430,18 @@
             name="cause_ids"
             eval="[(6, 0, [ref('weakness_cause_procedure_not_respected')])]"
         />
-        <field name="analysis">La orden se emitio sin registro de evaluacion previa.</field>
+        <field
+            name="analysis"
+        >La orden se emitio sin registro de evaluacion previa.</field>
     </record>
     <record id="demo_nc_atencion" model="qms.non_conformity">
         <field name="name">Reclamos ciudadanos sin respuesta en plazo (Demo)</field>
         <field name="claimant_id" ref="demo_ip_vecino" />
         <field name="interested_party_id" ref="demo_ip_referente" />
-        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_external_client')])]" />
+        <field
+            name="origin_ids"
+            eval="[(6, 0, [ref('finding_origin_external_client')])]"
+        />
         <field name="process_ids" eval="[(6, 0, [ref('demo_proc_atencion')])]" />
         <field name="audit_id" ref="demo_audit_atencion" />
         <field name="stage_id" ref="finding_stage_pending" />
@@ -443,7 +454,10 @@
         <field name="name">Plan de capacitacion no ejecutado (Demo)</field>
         <field name="claimant_id" ref="demo_ip_carrasco" />
         <field name="interested_party_id" ref="demo_ip_carrasco" />
-        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_internal_audit')])]" />
+        <field
+            name="origin_ids"
+            eval="[(6, 0, [ref('finding_origin_internal_audit')])]"
+        />
         <field name="process_ids" eval="[(6, 0, [ref('demo_proc_capacitacion')])]" />
         <field name="stage_id" ref="finding_stage_analysis" />
         <field
@@ -477,7 +491,10 @@
         <field name="name">Buzon de sugerencias sin seguimiento formal (Demo)</field>
         <field name="claimant_id" ref="demo_ip_vecino" />
         <field name="interested_party_id" ref="demo_ip_referente" />
-        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_command_board')])]" />
+        <field
+            name="origin_ids"
+            eval="[(6, 0, [ref('finding_origin_command_board')])]"
+        />
         <field name="process_ids" eval="[(6, 0, [ref('demo_proc_atencion')])]" />
         <field name="audit_id" ref="demo_audit_atencion" />
         <field name="stage_id" ref="finding_stage_open" />
@@ -494,7 +511,10 @@
         <field name="name">Plantilla de dictamen sin numero de version (Demo)</field>
         <field name="claimant_id" ref="demo_ip_org" />
         <field name="interested_party_id" ref="demo_ip_referente" />
-        <field name="origin_ids" eval="[(6, 0, [ref('finding_origin_internal_audit')])]" />
+        <field
+            name="origin_ids"
+            eval="[(6, 0, [ref('finding_origin_internal_audit')])]"
+        />
         <field name="process_ids" eval="[(6, 0, [ref('demo_proc_dictamen')])]" />
         <field name="audit_id" ref="demo_audit" />
         <field name="stage_id" ref="finding_stage_analysis" />
@@ -623,7 +643,9 @@
         <field name="verification_date">2025-12-01</field>
         <field name="state">closed</field>
         <field name="was_effective" eval="False" />
-        <field name="observations">El circuito se aplica parcialmente; se reitera la accion.</field>
+        <field
+            name="observations"
+        >El circuito se aplica parcialmente; se reitera la accion.</field>
     </record>
     <record id="demo_ec_capac" model="qms.effectiveness_check">
         <field name="action_id" ref="demo_action_capac" />

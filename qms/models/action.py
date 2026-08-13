@@ -1,9 +1,8 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class Action(models.Model):
-
     _name = "qms.action"
     _description = "Action"
 
@@ -42,7 +41,7 @@ class Action(models.Model):
         comodel_name="qms.action.stage",
         copy=False,
         index=True,
-        default=_default_stage,
+        default=lambda self: self._default_stage(),
         group_expand="_stage_groups",
         ondelete="restrict",
     )
@@ -72,13 +71,19 @@ class Action(models.Model):
         required=False,
     )
 
-    observation_id = fields.Many2one(comodel_name="qms.observation", ondelete="set null")
+    observation_id = fields.Many2one(
+        comodel_name="qms.observation", ondelete="set null"
+    )
 
-    non_conformity_id = fields.Many2one(comodel_name="qms.non_conformity", ondelete="set null")
+    non_conformity_id = fields.Many2one(
+        comodel_name="qms.non_conformity", ondelete="set null"
+    )
 
     complaint_id = fields.Many2one(comodel_name="qms.complaint", ondelete="set null")
 
-    opportunity_id = fields.Many2one(comodel_name="qms.opportunity", ondelete="set null")
+    opportunity_id = fields.Many2one(
+        comodel_name="qms.opportunity", ondelete="set null"
+    )
 
     hazard_id = fields.Many2one(comodel_name="qms.hazard", ondelete="set null")
 
@@ -93,10 +98,12 @@ class Action(models.Model):
         seq = self.env["ir.sequence"]
         for vals in vals_list:
             vals["reference"] = seq.next_by_code("qms.action")
-        return super(Action, self).create(vals_list)
+        return super().create(vals_list)
 
     @api.model
     def _stage_groups(self, stages, domain):
+        # group_expand must return every stage so empty kanban columns render.
+        # pylint: disable-next=no-search-all
         return self.env["qms.action.stage"].search([])
 
     @api.constrains("opening_date", "date_closed")
@@ -105,5 +112,5 @@ class Action(models.Model):
             if action.date_closed and action.opening_date:
                 if action.date_closed < action.opening_date:
                     raise ValidationError(
-                        _("Close date must be after opening date")
+                        self.env._("Close date must be after opening date")
                     )

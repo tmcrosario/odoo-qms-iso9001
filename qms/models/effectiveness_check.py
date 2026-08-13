@@ -1,9 +1,8 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class EffectivenessCheck(models.Model):
-
     _name = "qms.effectiveness_check"
     _description = "Effectiveness Check"
 
@@ -13,7 +12,9 @@ class EffectivenessCheck(models.Model):
 
     was_effective = fields.Boolean()
 
-    action_id = fields.Many2one(comodel_name="qms.action", required=True, ondelete="cascade")
+    action_id = fields.Many2one(
+        comodel_name="qms.action", required=True, ondelete="cascade"
+    )
 
     state = fields.Selection(
         selection=[
@@ -33,7 +34,7 @@ class EffectivenessCheck(models.Model):
                 and not effectiveness_check.verification_date
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "A verification date is required to close an "
                         "effectiveness check."
                     )
@@ -45,5 +46,5 @@ class EffectivenessCheck(models.Model):
             if check.verification_date and check.expected_date:
                 if check.verification_date < check.expected_date:
                     raise ValidationError(
-                        _("Verification date must be after expected date")
+                        self.env._("Verification date must be after expected date")
                     )

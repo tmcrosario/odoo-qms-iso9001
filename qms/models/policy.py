@@ -4,7 +4,6 @@ from odoo import api, fields, models
 
 
 class Policy(models.Model):
-
     _name = "qms.policy"
     _description = "Policy"
 
@@ -24,9 +23,7 @@ class Policy(models.Model):
         comodel_name="qms.policy_component", required=True
     )
 
-    review_ids = fields.One2many(
-        comodel_name="qms.review", inverse_name="policy_id"
-    )
+    review_ids = fields.One2many(comodel_name="qms.review", inverse_name="policy_id")
 
     version_ids = fields.One2many(
         comodel_name="qms.version",

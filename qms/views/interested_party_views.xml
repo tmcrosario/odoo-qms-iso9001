@@ -1,7 +1,6 @@
 <odoo>
-
     <!-- TREE VIEW -->
-    <record id="interested_party_organization_view_tree" model="ir.ui.view" >
+    <record id="interested_party_organization_view_tree" model="ir.ui.view">
         <field name="name">qms.interested.party.organization.view.tree</field>
         <field name="model">qms.interested_party</field>
         <field name="arch" type="xml">
@@ -18,7 +17,7 @@
     </record>
 
     <!-- TREE VIEW -->
-    <record id="interested_party_individual_view_tree" model="ir.ui.view" >
+    <record id="interested_party_individual_view_tree" model="ir.ui.view">
         <field name="name">qms.interested.party.individual.view.tree</field>
         <field name="model">qms.interested_party</field>
         <field name="arch" type="xml">
@@ -59,12 +58,18 @@
                         </group>
                     </group>
                     <notebook position="inside">
-                        <page name="requeriments" string="Requeriments Interested Party"
-                            invisible="is_organization == False">
+                        <page
+                            name="requeriments"
+                            string="Requeriments Interested Party"
+                            invisible="is_organization == False"
+                        >
                             <field name="requeriments_interested_party" />
                         </page>
-                        <page name="interest_tmc" string="Interest TMC"
-                            invisible="is_organization == False">
+                        <page
+                            name="interest_tmc"
+                            string="Interest TMC"
+                            invisible="is_organization == False"
+                        >
                             <field name="interest_tmc" />
                         </page>
                         <page string="Reviews" invisible="is_organization == False">
@@ -77,7 +82,10 @@
     </record>
 
     <!-- WINDOW ACTION -->
-    <record id="interested_party_organization_action_view_tree" model="ir.actions.act_window" >
+    <record
+        id="interested_party_organization_action_view_tree"
+        model="ir.actions.act_window"
+    >
         <field name="name">Organizations</field>
         <field name="res_model">qms.interested_party</field>
         <field name="view_mode">list,form</field>
@@ -87,7 +95,10 @@
     </record>
 
     <!-- WINDOW ACTION -->
-    <record id="interested_party_individual_action_view_tree" model="ir.actions.act_window">
+    <record
+        id="interested_party_individual_action_view_tree"
+        model="ir.actions.act_window"
+    >
         <field name="name">Individuals</field>
         <field name="res_model">qms.interested_party</field>
         <field name="view_mode">list,form</field>
@@ -96,10 +107,24 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="interested_party_menu" name="Interested Parties" parent="qms.menu_qms_context" sequence="5" />
-    <menuitem id="interested_party_organizations_menu" name="Organizations" parent="interested_party_menu"
-        action="interested_party_organization_action_view_tree" sequence="5" />
-    <menuitem id="interested_party_individuals_menu" name="Individuals" parent="interested_party_menu"
-        action="interested_party_individual_action_view_tree" sequence="10" />
-
+    <menuitem
+        id="interested_party_menu"
+        name="Interested Parties"
+        parent="qms.menu_qms_context"
+        sequence="5"
+    />
+    <menuitem
+        id="interested_party_organizations_menu"
+        name="Organizations"
+        parent="interested_party_menu"
+        action="interested_party_organization_action_view_tree"
+        sequence="5"
+    />
+    <menuitem
+        id="interested_party_individuals_menu"
+        name="Individuals"
+        parent="interested_party_menu"
+        action="interested_party_individual_action_view_tree"
+        sequence="10"
+    />
 </odoo>

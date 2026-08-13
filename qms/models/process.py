@@ -4,7 +4,6 @@ from odoo import api, fields, models
 
 
 class Process(models.Model):
-
     _name = "qms.process"
     _description = "Process"
 
@@ -14,9 +13,7 @@ class Process(models.Model):
         comodel_name="qms.interested_party", required=True, ondelete="restrict"
     )
 
-    review_ids = fields.One2many(
-        comodel_name="qms.review", inverse_name="process_id"
-    )
+    review_ids = fields.One2many(comodel_name="qms.review", inverse_name="process_id")
 
     resource_ids = fields.Many2many(comodel_name="qms.resource")
 

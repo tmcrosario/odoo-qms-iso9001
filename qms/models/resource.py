@@ -2,7 +2,6 @@ from odoo import fields, models
 
 
 class Resource(models.Model):
-
     _name = "qms.resource"
     _description = "Resource"
 

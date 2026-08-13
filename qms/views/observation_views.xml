@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="observation_view_tree" model="ir.ui.view">
         <field name="name">qms.observation.view.tree</field>
@@ -19,7 +18,10 @@
         <field name="inherit_id" ref="qms.finding_view_form" />
         <field name="arch" type="xml">
             <page name="actions" position="before">
-                <page string="Causes and Analysis" invisible="state in ['draft','cancel']">
+                <page
+                    string="Causes and Analysis"
+                    invisible="state in ['draft','cancel']"
+                >
                     <separator string="Analysis" />
                     <field name="analysis" readonly="state not in ['analysis']" />
                     <separator string="Causes" />
@@ -42,27 +44,27 @@
     </record>
 
     <!-- WINDOW ACTION -->
-    <record id="observation_action_view" model="ir.actions.act_window" >
+    <record id="observation_action_view" model="ir.actions.act_window">
         <field name="name">Observations</field>
         <field name="res_model">qms.observation</field>
         <field name="view_mode">list,kanban,form</field>
     </record>
 
-    <record id="observation_action_view_kanban" model="ir.actions.act_window.view" >
+    <record id="observation_action_view_kanban" model="ir.actions.act_window.view">
         <field name="sequence" eval="1" />
         <field name="view_mode">kanban</field>
         <field name="view_id" ref="observation_view_kanban" />
         <field name="act_window_id" ref="observation_action_view" />
     </record>
 
-    <record id="observation_action_view_tree" model="ir.actions.act_window.view" >
+    <record id="observation_action_view_tree" model="ir.actions.act_window.view">
         <field name="sequence" eval="2" />
         <field name="view_mode">list</field>
         <field name="view_id" ref="observation_view_tree" />
         <field name="act_window_id" ref="observation_action_view" />
     </record>
 
-    <record id="observation_action_view_form" model="ir.actions.act_window.view" >
+    <record id="observation_action_view_form" model="ir.actions.act_window.view">
         <field name="sequence" eval="3" />
         <field name="view_mode">form</field>
         <field name="view_id" ref="observation_view_form" />
@@ -70,7 +72,11 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="observation_menu" name="Observations" parent="qms.finding_menu"
-        action="observation_action_view" sequence="10" />
-
+    <menuitem
+        id="observation_menu"
+        name="Observations"
+        parent="qms.finding_menu"
+        action="observation_action_view"
+        sequence="10"
+    />
 </odoo>

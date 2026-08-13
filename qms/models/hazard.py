@@ -1,10 +1,9 @@
 from datetime import date
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class Hazard(models.Model):
-
     _name = "qms.hazard"
     _description = "Hazard"
 
@@ -127,14 +126,14 @@ class Hazard(models.Model):
             ("high", "High"),
             ("very_high", "Very High"),
         ],
-        compute=_compute_result_and_evaluation,
+        compute="_compute_result_and_evaluation",
         readonly=True,
         store=True,
         compute_sudo=True,
     )
 
     result = fields.Integer(
-        compute=_compute_result_and_evaluation,
+        compute="_compute_result_and_evaluation",
         readonly=True,
         store=True,
         compute_sudo=True,
@@ -146,13 +145,9 @@ class Hazard(models.Model):
         comodel_name="qms.policy_component", required=False
     )
 
-    action_ids = fields.One2many(
-        comodel_name="qms.action", inverse_name="hazard_id"
-    )
+    action_ids = fields.One2many(comodel_name="qms.action", inverse_name="hazard_id")
 
-    review_ids = fields.One2many(
-        comodel_name="qms.review", inverse_name="hazard_id"
-    )
+    review_ids = fields.One2many(comodel_name="qms.review", inverse_name="hazard_id")
 
     last_review_date = fields.Date(compute="_compute_last_review_date", store=True)
 
@@ -172,6 +167,6 @@ class Hazard(models.Model):
         for vals in vals_list:
             if not vals.get("number"):
                 vals["number"] = self.env["ir.sequence"].next_by_code("qms.hazard")
-        return super(Hazard, self).create(vals_list)
+        return super().create(vals_list)
 
     _unique_number = models.Constraint("UNIQUE(number)", "Number must be unique")

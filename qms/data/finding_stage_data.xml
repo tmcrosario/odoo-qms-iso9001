@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="finding_stage_draft" model="qms.finding.stage">
         <field name="name">Draft</field>
         <field name="sequence">0</field>
@@ -36,5 +35,4 @@
         <field name="sequence">250</field>
         <field name="state">cancel</field>
     </record>
-
 </odoo>

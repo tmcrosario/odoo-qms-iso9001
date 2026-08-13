@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="indicator_measurement_view_tree" model="ir.ui.view">
         <field name="name">qms.indicator.measurement.view.tree</field>
@@ -59,6 +58,4 @@
             </form>
         </field>
     </record>
-
-
 </odoo>

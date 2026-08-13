@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="finding_milestone_view_tree" model="ir.ui.view">
         <field name="name">qms.finding.milestone.tree</field>
@@ -41,5 +40,4 @@
             </form>
         </field>
     </record>
-
 </odoo>

@@ -1,27 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <menuitem id="menu_qms_root"
+    <menuitem
+        id="menu_qms_root"
         name="Quality Management System"
         sequence="13"
-        groups="qms.group_user,qms.group_read_only" />
+        groups="qms.group_user,qms.group_read_only"
+    />
 
-    <menuitem id="menu_qms_main" 
+    <menuitem
+        id="menu_qms_main"
         name="ISO 9001:2015"
         parent="menu_qms_root"
-        sequence="5" />
+        sequence="5"
+    />
 
-    <menuitem id="menu_qms_context"
+    <menuitem
+        id="menu_qms_context"
         name="Context"
         parent="qms.menu_qms_root"
         sequence="10"
-        groups="qms.group_manager" />
+        groups="qms.group_manager"
+    />
 
     <!-- Managers only: group_user has write on the stage models below -->
-    <menuitem id="menu_qms_configuration"
+    <menuitem
+        id="menu_qms_configuration"
         name="Configuration"
         parent="qms.menu_qms_root"
         sequence="15"
-        groups="qms.group_manager" />
-
+        groups="qms.group_manager"
+    />
 </odoo>

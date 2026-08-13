@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="hazard_view_tree" model="ir.ui.view">
         <field name="name">qms.hazard.tree.view</field>
@@ -25,7 +24,11 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" options="{'clickable': '1'}" />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        options="{'clickable': '1'}"
+                    />
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -87,6 +90,10 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="menu_open_hazard" parent="qms.menu_qms_main" sequence="25" action="hazard_action_view_tree" />
-
+    <menuitem
+        id="menu_open_hazard"
+        parent="qms.menu_qms_main"
+        sequence="25"
+        action="hazard_action_view_tree"
+    />
 </odoo>

@@ -2,7 +2,6 @@ from odoo import api, fields, models
 
 
 class Observation(models.Model):
-
     _name = "qms.observation"
     _description = "Observation"
 
@@ -24,10 +23,6 @@ class Observation(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             vals.update(
-                {
-                    "reference": self.env["ir.sequence"].next_by_code(
-                        "qms.observation"
-                    )
-                }
+                {"reference": self.env["ir.sequence"].next_by_code("qms.observation")}
             )
-        return super(Observation, self).create(vals_list)
+        return super().create(vals_list)

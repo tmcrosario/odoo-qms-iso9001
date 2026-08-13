@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="effectiveness_check_view_tree" model="ir.ui.view">
         <field name="name">qms.effectiveness.check.view.tree</field>
@@ -22,13 +21,20 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" options='{"clickable": "1"}' />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        options='{"clickable": "1"}'
+                    />
                 </header>
                 <sheet>
                     <group>
                         <group>
                             <field name="expected_date" options="{'numeric': True}" />
-                            <field name="verification_date" options="{'numeric': True}" />
+                            <field
+                                name="verification_date"
+                                options="{'numeric': True}"
+                            />
                         </group>
                         <group>
                             <!-- Required field: without it standalone creation fails -->
@@ -52,7 +58,11 @@
         <field name="model">qms.effectiveness_check</field>
         <field eval="2" name="priority" />
         <field name="arch" type="xml">
-            <calendar color="id" date_start="expected_date" string="Effectiveness Check">
+            <calendar
+                color="id"
+                date_start="expected_date"
+                string="Effectiveness Check"
+            >
                 <field name="state" />
             </calendar>
         </field>
@@ -66,7 +76,10 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="effectiveness_check_menu" parent="qms.menu_qms_main" action="effectiveness_check_action_view_tree" 
-        sequence="45" />
-
+    <menuitem
+        id="effectiveness_check_menu"
+        parent="qms.menu_qms_main"
+        action="effectiveness_check_action_view_tree"
+        sequence="45"
+    />
 </odoo>

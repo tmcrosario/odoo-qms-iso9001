@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- TREE VIEW -->
     <record id="finding_origin_view_tree" model="ir.ui.view">
         <field name="name">qms.finding.origin.view.tree</field>
@@ -46,7 +45,11 @@
     </record>
 
     <!-- MENU -->
-    <menuitem id="finding_origin_menu" name="Origins" parent="finding_menu_config"
-        action="finding_origin_action_view_tree" sequence="10" />
-
+    <menuitem
+        id="finding_origin_menu"
+        name="Origins"
+        parent="finding_menu_config"
+        action="finding_origin_action_view_tree"
+        sequence="10"
+    />
 </odoo>
