@@ -76,9 +76,9 @@ branch); only the residual deprecations below were fixed.
 
 ## Tooling
 
-- Intentionally **not** added this round (operator decision). The other 9 repos in this
-  batch carry the OCA 19.0 pre-commit stack; if consistency is later desired here, it
-  can be added as a separate `[ADD]` commit.
+- Adopted in `6ec186a`: this repo now carries the same OCA 19.0 pre-commit stack as the
+  rest of the fleet (pre-commit, ruff/pylint, prettier/eslint, editorconfig, pyproject),
+  with the module formatted and lint-clean to that baseline.
 
 ## Translations
 
