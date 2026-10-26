@@ -1,10 +1,22 @@
 # Odoo Quality Management System
-Odoo addon for ISO 9001 Quality Management System. This is a simplified and customized version based on some models used in the management system modules by Odoo Community Association available at https://github.com/OCA/management-system/.
 
-## License
+![Odoo 19.0](https://img.shields.io/badge/Odoo-19.0-714B67)
+[![Licencia: AGPL-3](https://img.shields.io/badge/licencia-AGPL--3-blue.svg)](LICENSE)
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+Sistema de gestión de calidad ISO 9001 para Odoo. Versión simplificada y adaptada de algunos modelos de los módulos de gestión de [OCA/management-system](https://github.com/OCA/management-system/).
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+## Módulos
 
-You should have received a copy of the GNU Affero General Public License along with this program. If not, see http://www.gnu.org/licenses/.
+| Módulo        | Versión    | Descripción                            |
+| ------------- | ---------- | -------------------------------------- |
+| [`qms`](qms/) | 19.0.1.0.2 | Sistema de gestión de calidad ISO 9001 |
+
+## Instalación
+
+Dependencias: ninguna.
+
+Agregar a la ruta de addons, actualizar aplicaciones e instalar «Quality Management System».
+
+## Licencia
+
+[AGPL-3](LICENSE). Autores: TMC Rosario, Odoo Community Association (<https://www.tmcrosario.gob.ar>).
